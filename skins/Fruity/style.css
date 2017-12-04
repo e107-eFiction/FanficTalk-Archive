@@ -1,0 +1,447 @@
+/*
+		Skin Name: Fruity (responsive)
+		Skin Download: http://artphilia.de
+		Description: This is a grid based responsive layout.
+		Author: Nadia Volkrodt
+		Author E-Mail: nadia@artphilia.de
+*/
+
+
+/* import fonts */
+@import url(http://fonts.googleapis.com/css?family=Quando|Nixie+One|Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic|Josefin+Slab:400,400italic,600,600italic,700,700italic);
+@import url(http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css); 
+
+/* import basic settings, IE-fixes and grids */
+@import url(base.css);
+
+/*---------------------------------------------------------------------
+   Basic styles
+------------------------------------------------------------------------*/
+html, body { 
+	height: 100%;
+	}            
+
+body { 
+	background-color: #7daa07;
+	background-image: url(images/bg-pattern.png);
+	background-repeat: repeat;
+	text-align: justify;
+	font-family: 'Open Sans', Tahoma, sans-serif;
+	font-size: 10pt;
+	color: #323232;
+	margin: 15px 0;
+	padding: 0;
+	}
+
+table { 
+	text-align: justify;
+	}
+tr:nth-child(odd) {
+	background-color: transparent;
+	padding: 6px;
+	}
+tr:nth-child(even), td:nth-child(even) {
+	background-color: transparent;
+	padding: 6px;
+	}
+
+ul li {
+	list-style-type: none;
+	list-style-position: inside;
+	margin: 10px;
+	}
+ol li {
+	list-style-position: inside;
+	margin: 10px;
+	}
+	
+a, a:active, a:visited {
+	font-weight: normal;
+	text-decoration: none;
+	text-transform: none;
+	color: #7daa07;
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+	}
+a:hover {
+	color: #d7fb51;
+	text-decoration: none;
+	background-color: transparent;
+	}
+	
+h1 {
+  border-bottom: 1px solid #b5e22d;
+  color: #323232;
+	font-family: 'Nixie One', cursive;
+	font-size: 26pt;
+  margin-bottom: 30px;
+  position: relative;
+  text-align: center;
+}
+h1 span {
+  background-color: #fafafa;
+  padding: 0 15px;
+  position: relative;
+  top: 20px;
+}
+h2  {
+	font-family: 'Nixie One', cursive;
+	font-size: 16pt;
+	padding: 5px 0;
+	}
+h2 a {
+	font-weight: bold;
+}
+
+h3 {
+ 	border-left: 5px solid #7daa07;
+	font-family: 'Nixie One', cursive;
+	font-size: 15pt;
+	padding:  10px 0 10px 5px; 
+	text-transform: normal;
+	}
+
+#pagetitle, .sectionheader {
+ 	border-left: 5px solid #7daa07;
+	font-size: 14pt;
+	font-family: 'Nixie One', cursive;
+	font-weight: 700;
+	padding: 10px 0 10px 5px;
+}
+
+h4 {
+	font-size: 14pt;
+	font-family: 'Nixie One', cursive;
+	text-align: center;
+	padding: 10px 0;
+	color: #7daa07;	
+	}
+h5 {
+	font-family: 'Nixie One', cursive;
+	text-align: center;
+	font-size: 12pt;
+	color: #7daa07;
+	margin-bottom: 10px;
+}
+
+.circle {
+	background-color: #7daa07;
+	border-radius: 50%;
+	margin: 0 auto;
+	width: 60px;
+	height: 60px; 
+}
+
+.circle span {
+	color: #fafafa;
+	position: relative;
+	top: 18px;
+	left: 18px;
+}
+		
+/*---------------------------------------------------------------------
+   General page alignment and width
+------------------------------------------------------------------------*/
+
+#header {
+	color: #989898;
+	padding: 10px 0;
+}
+
+.header-img {
+	height: auto; /* Falls Dimensionsangaben im HTML vorhanden sind */
+  max-width: 100%;
+	margin: 0 auto;
+}
+
+.container {
+	background-color: #fafafa;
+	padding: 10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.content {
+	text-align: justify;
+	}
+
+.sidebar {
+	margin: 75px 0 25px 0;
+	font-style: normal;
+	text-align: justify;
+	background-color: #dedede;
+	padding: 10px;
+	-webkit-border-radius: 10px 0 10px 0;
+	-moz-border-radius: 10px 0 10px 0;
+	border-radius: 10px 0 10px 0;
+	}
+
+.footer {
+	text-align: center;
+	margin-top: 20px;
+	padding: 10px;
+	}
+
+/*---------------------------------------------------------------------
+   Various styles
+------------------------------------------------------------------------*/
+
+.label, label {
+	font-weight: bold;
+}
+
+hr {
+  height: 1px;
+  margin: 15px 0;
+  background: -webkit-gradient(linear, 0 0, 100% 0, from(rgba(0,0,0,0)), color-stop(0.5, #e8e8e8), to(rgba(0,0,0,0)));
+  background: -webkit-linear-gradient(left, rgba(0,0,0,0), #e8e8e8, rgba(0,0,0,0));
+  background: -moz-linear-gradient(left, rgba(0,0,0,0), #e8e8e8, rgba(0,0,0,0));
+  background: -o-linear-gradient(left, rgba(0,0,0,0), #e8e8e8, rgba(0,0,0,0));
+  background: linear-gradient(left, rgba(0,0,0,0), #e8e8e8, rgba(0,0,0,0));
+  border: 0;
+}
+hr:after { 
+  display: block; 
+  content:'';
+  height: 30px;
+  background-image: -webkit-gradient(radial, 50% 0%, 0, 50% 0%, 116, color-stop(0%, #dcdcdc), color-stop(100%, rgba(255, 255, 255, 0)));
+  background-image: -webkit-radial-gradient(center top, farthest-side, #dcdcdc 0%, rgba(255, 255, 255, 0) 100%);
+  background-image: -moz-radial-gradient(center top, farthest-side, #dcdcdc 0%, rgba(255, 255, 255, 0) 100%);
+  background-image: -o-radial-gradient(center top, farthest-side, #dcdcdc 0%, rgba(255, 255, 255, 0) 100%);
+  background-image: radial-gradient(farthest-side at center top, #dcdcdc 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+input, textarea, select {
+	background-color: #f0f0f0;
+	border: 1px solid #cbcbcb;
+	font-family: 'Open Sans', Tahoma, sans-serif;
+	font-size: 10pt;
+	margin: 2px;
+	padding: 2px 6px;
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	border-radius: 1px;
+}
+.button, .button a {
+	margin: 0 auto;
+	text-align: center;
+	text-transform: none;
+	margin: 2px;
+	padding: 2px 6px;
+	cursor: pointer;
+	background-color: #f0f0f0;
+	border: 1px solid #cbcbcb;
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	border-radius: 1px;
+}
+
+blockquote {
+	margin: 10px auto;
+	padding: 15px;
+	width: 90%;
+	background-color: #000;
+	border: 1px solid #7daa07;
+	color: #fafafa;
+	font-size: 9pt;
+	line-height: 10px;
+}
+
+.review-headline, .info-headline {
+	background-color: #000;
+	padding: 4px 8px;
+	color: #fafafa;
+}
+.review, .info {
+	padding: 4px 8px;	
+}
+
+
+/*---------------------------------------------------------------------
+  Style of story list
+------------------------------------------------------------------------*/
+.even, .odd, .comment {
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+	padding: 5px;
+}
+.even:hover, .odd:hover {
+	background-color: transparent;
+}
+
+/*---------------------------------------------------------------------
+   News
+------------------------------------------------------------------------*/
+#newsarchive, #sortform, .respond {
+	text-align: center;
+	}
+#newsbox {
+	background-position: top left;
+	background-image: url();
+	background-repeat: no-repeat;
+	margin: 0 auto;
+	padding: 20px;
+	}
+.newscom {
+	background-color: transparent;
+	font-weight: normal;
+  text-align: right;
+  font-family: 'Open Sans', Tahoma, sans-serif;
+  font-size: 20px;
+	padding: 0;
+	margin: 0;
+	}
+.newssig {
+	font-family: 'Open Sans', Tahoma, sans-serif;
+	font-size: 8pt;
+	text-align: center;
+	margin-bottom: 15px;
+	}
+
+/*---------------------------------------------------------------------
+   Categories
+------------------------------------------------------------------------*/	
+.category {
+	text-align: left;
+	width: 75%;
+	margin: 0 auto;
+	}
+.catimg {
+	float: left;
+	padding: 3px 6px 3px 0;
+	}
+.cat_description { 
+	padding: 5px;
+	text-align: left;
+	}
+	
+	
+/*---------------------------------------------------------------------
+  Page links
+------------------------------------------------------------------------*/
+#pagelinks {
+	width: 100%;
+	text-align: center;
+	padding: 1em;
+	font-family: 'Nixie One', cursive;
+	font-size: 16pt;
+	}
+#pagelinks a {
+	font-weight: normal;
+	text-decoration: none;
+	text-transform: none;
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+	}
+#pagelinks a:hover {
+	text-decoration: none;
+	background-color: transparent;
+	}
+a#currentpage {
+	color: #123456;
+	background-color: transparent;
+	}
+/*---------------------------------------------------------------------
+   Misc Styles, used in multiple places throughout the page
+------------------------------------------------------------------------*/		
+#alphabet { 
+	text-align: center; 
+	padding: 5px; 
+	font-family: 'Nixie One', cursive;
+	font-size: 16pt;
+	}
+#jumpmenu {
+	text-align: right;
+	}
+#story {
+	font-size: 11pt;
+	padding: 50px 10px;
+	line-height: 1.5em;
+	text-align: justify;
+	}
+#login {
+	margin: 0;
+	}
+#columncontainer {
+	width: 90%;
+	text-align: justify;
+}
+.column, #columncontainer a {
+	font-family: 'Open Sans', Tahoma, sans-serif;
+	font-size: 12pt;
+	}
+.copyright {
+	padding: 5px 0;
+	text-transform: uppercase;
+	font-size: 9pt;
+}
+
+/*---------------------------------------------------------------------
+  MENU
+------------------------------------------------------------------------*/
+#menu { 
+	width: 100%;
+	}
+#menu ul {
+	background-color: #000000;
+	text-align: center;
+
+	}
+#menu li {
+	display: inline-block;
+	padding: 8px 16px;
+	margin: 1px;
+}
+#menu li:hover {
+
+}
+#menu a {
+	font-family: 'Open Sans', Tahoma, sans-serif;
+	font-size: 11pt;
+	font-style: normal;
+	letter-spacing: 1px;
+	text-align: justify;
+	text-transform: none;
+	color: #7daa07;
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+}
+#menu a:hover {
+	color: #fafafa;
+}
+
+/*---------------------------------------------------------------------
+  SITE NAME / SLOGAN
+------------------------------------------------------------------------*/
+#headline {
+    background-color: #000000;
+    position: absolute;
+    margin: 70px 0 0 0;
+    overflow: hidden;
+    padding: 10px;
+    z-index: 15;
+}
+#sitename {
+	color: #7daa07;
+	font-family: 'Nixie One', cursive;
+	font-size: 22pt;
+	text-shadow: 0 0 2px #222;
+	text-align: center;
+}
+#slogan {
+	color: #dedede;
+	font-family: 'Open Sans', Tahoma, sans-serif;
+	font-size: 10pt;
+	text-transform: none;
+	font-style: italic;
+	margin: -10px 0 0 50px;
+	text-align: center;
+	padding-bottom: 20px;
+}

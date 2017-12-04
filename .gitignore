@@ -1,0 +1,5 @@
+*.sql
+*.zip
+config.php*
+favicon.ico
+stories/

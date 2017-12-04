@@ -1,0 +1,355 @@
+/*
+		Skin Name: Autumn Days (responsive)
+		Skin Download: http://artphilia.de
+		Description: This is a grid based responsive layout.
+		Author: Nadia Volkrodt
+		Author E-Mail: nadia@artphilia.de
+*/
+
+
+/* import fonts */
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,700,300|Bitter:400,700,400italic);
+@import url(http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css); 
+
+/* import basic settings, IE-fixes and grids */
+@import url(base.css);
+
+/*---------------------------------------------------------------------
+   Basic styles
+------------------------------------------------------------------------*/
+html, body { 
+	height: 100%;
+	}            
+
+body { 
+	background-color: #c4c462;
+	text-align: justify;
+	font-family: 'Raleway', Tahoma, sans-serif;
+	font-size: 11pt;
+	color: #2D3238;
+	margin: 15px 0;
+	padding: 0;
+	}
+
+table { 
+	text-align: justify;
+	}
+tr:nth-child(odd) {
+	background-color: transparent;
+	padding: 6px;
+	}
+tr:nth-child(even), td:nth-child(even) {
+	background-color: transparent;
+	padding: 6px;
+	}
+
+ul li {
+	list-style-type: none;
+	}
+a, a:active, a:visited {
+	font-weight: normal;
+	text-decoration: none;
+	text-transform: none;
+	color: #f6560a;
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+	}
+a:hover {
+	color: #5e4f4a;
+	text-decoration: none;
+	background-color: transparent;
+	}
+
+h1 {
+	color: #fdc202;
+	background-color: transparent;
+	margin: 0 0 8px 0;
+	font-family: 'Bitter', sans-serif;
+	font-size: 26pt;
+	text-transform: none;
+	font-style: normal;
+	font-weight: normal;
+	}
+h2, #pagetitle, .sectionheader {
+	font-family: 'Bitter', sans-serif;
+	font-size: 22pt;
+	font-weight: normal;
+	color: #ff9b09;
+	}
+h3 {
+	background-color: transparent;
+	font-family: 'Bitter', sans-serif;
+	font-size: 18pt;
+	text-align: center;
+	margin: 0;
+	padding: 10px 0 0 0; 
+	color: #ff9b09;
+	font-weight: normal;
+	text-transform: normal;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	}
+h4 {
+	font-size: 16pt;
+	font-family: 'Bitter', sans-serif;
+	font-weight: normal;
+	padding: 10px 0; 
+	color: #ff9b09;
+}
+		
+/*---------------------------------------------------------------------
+   General page alignment and width
+------------------------------------------------------------------------*/
+
+.container {
+	background-color: #edefbe;
+	padding: 10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.content {
+	text-align: justify;
+	font-style: normal;
+	border-top: 1px dashed #c4c462;
+	}
+
+.sidebar {
+	font-style: normal;
+	text-align: justify;
+	background-color: transparent;
+	border-left: 1px dashed #c4c462;
+	padding: 10px;
+	}
+
+.footer {
+	border-top: 1px dashed #c4c462;
+	text-align: center;
+	margin-top: 20px;
+	padding: 10px;
+	}
+
+/*---------------------------------------------------------------------
+   General page alignment and width
+------------------------------------------------------------------------*/
+
+
+.label, label {
+	color: #2D3238;
+	font-weight: bold;
+}
+
+hr {
+	border-width: 1px 0 0 0;
+	border-style: dashed;
+	border-color: #faf2db;
+	padding: 4px;
+	height: 1px;
+}
+
+input, textarea, select, option {
+	background-color: #fff;
+	border: 1px solid #c4c462;
+	font-family: 'Raleway', tahoma, sans-serif;
+	font-size: 10pt;
+	color: #2D3238;
+	margin: 2px;
+	padding: 2px 6px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+.button, .button a {
+	margin: 0 auto;
+	text-align: center;
+	text-transform: none;
+	margin: 2px;
+	padding: 2px 6px;
+	cursor: pointer;
+	background-color: #acac57;
+	border: 1px solid #c4c462;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	color: #edefbe;
+}
+
+blockquote {
+	margin: 0 auto;
+	padding: 15px;
+	width: 75%;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	background-color: #e0e2b3;
+}
+
+/*---------------------------------------------------------------------
+  Style of story list
+------------------------------------------------------------------------*/
+.even, .odd, .comment {
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+	padding: 5px;
+}
+.even:hover, .odd:hover {
+	background-color: transparent;
+}
+
+/*---------------------------------------------------------------------
+   News
+------------------------------------------------------------------------*/
+#newsarchive, #sortform, .respond {
+	text-align: center;
+	}
+#newsbox {
+	background-position: top left;
+	background-image: url();
+	background-repeat: no-repeat;
+	margin: 0 auto;
+	padding: 20px;
+	}
+.newscom {
+	background-color: transparent;
+	font-weight: normal;
+  text-align: right;
+  font-family: 'Raleway',sans-serif;
+  font-size: 20px;
+	padding: 0;
+	margin: 0;
+	}
+.newssig {
+	font-family: calibri,verdana,sans-serif;
+	font-style: italic;
+	font-size: 9pt;
+	}
+
+/*---------------------------------------------------------------------
+   Categories
+------------------------------------------------------------------------*/	
+.category {
+	text-align: left;
+	width: 75%;
+	margin: 0 auto;
+	}
+.catimg {
+	float: left;
+	padding: 3px 6px 3px 0;
+	}
+.cat_description { 
+	padding: 5px;
+	text-align: left;
+	}
+	
+/*---------------------------------------------------------------------
+  Page links
+------------------------------------------------------------------------*/
+#pagelinks {
+	width: 100%;
+	text-align: center;
+	padding: 1em;
+	font-family: 'Bitter', serif;
+	font-size: 14pt;
+	}
+#pagelinks a {
+	font-weight: normal;
+	text-decoration: none;
+	text-transform: none;
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+	}
+#pagelinks a:hover {
+	text-decoration: none;
+	background-color: transparent;
+	}
+a#currentpage {
+	color: #acac57;
+	background-color: transparent;
+	}
+/*---------------------------------------------------------------------
+   Misc Styles, used in multiple places throughout the page
+------------------------------------------------------------------------*/		
+#alphabet { 
+	text-align: center; 
+	padding: 5px; 
+	font-family: 'Raleway', 'Trebuchet Ms', Verdana, Tahoma, sans-serif;
+	font-size: 20px;
+	}
+#jumpmenu {
+	text-align: right;
+	}
+#story {
+	padding: 50px 10px;
+	text-align: justify;
+	}
+#login {
+	margin: 0;
+	}
+#columncontainer {
+	width: 90%;
+	text-align: justify;
+}
+.column, #columncontainer a {
+	font-family: 'Raleway', 'Trebuchet Ms', Verdana, Tahoma, sans-serif;
+	font-size: 18px;
+	}
+.copyright {
+	padding: 5px 0;
+	text-transform: uppercase;
+	font-size: 9pt;
+}
+
+/*---------------------------------------------------------------------
+  MENU
+------------------------------------------------------------------------*/
+#menu { 
+	width: 100%;
+	}
+#menu ul {
+	background: transparent;
+	margin: 10px 0;
+	}
+#menu li {
+	display: inline;
+	padding: 2px 6px;
+}
+#menu a {
+	font-family: 'Raleway', sans-serif;
+	font-size: 11pt;
+	font-style: normal;
+	text-align: justify;
+	text-transform: uppercase;
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+}
+#menu a:hover {
+
+}
+
+/*---------------------------------------------------------------------
+  SITE NAME / SLOGAN
+------------------------------------------------------------------------*/
+#sitename {
+	color: #fdc202;
+	font-family: 'Bitter',sans-serif;
+	font-size: 32pt;
+	text-shadow: 0 0 2px #F1BBBA;
+	padding-top: 20px;
+}
+#slogan {
+	color: #c4c462;
+	font-family: 'Raleway',sans-serif;
+	font-size: 10pt;
+	text-transform: uppercase;
+	font-style: italic;
+	margin-top: -10px;
+	padding-bottom: 20px;
+}

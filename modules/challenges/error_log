@@ -1,4 +1,0 @@
-[24-Sep-2016 20:55:06 America/Chicago] PHP Notice:  Undefined property: mysqli::$mysqli_errno in /home/hungerzz/public_html/archive/includes/mysqli_functions.php on line 19
-[24-Sep-2016 20:55:06 America/Chicago] PHP Notice:  Undefined property: mysqli::$mysqli_error in /home/hungerzz/public_html/archive/includes/mysqli_functions.php on line 19
-[24-Sep-2016 21:33:45 America/Chicago] PHP Notice:  Undefined property: mysqli::$mysqli_errno in /home/hungerzz/public_html/archive/includes/mysqli_functions.php on line 19
-[24-Sep-2016 21:33:45 America/Chicago] PHP Notice:  Undefined property: mysqli::$mysqli_error in /home/hungerzz/public_html/archive/includes/mysqli_functions.php on line 19

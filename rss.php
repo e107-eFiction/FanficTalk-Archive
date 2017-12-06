@@ -75,7 +75,7 @@ while($story = dbassoc($results)) {
 	    $hashtags = dbquery("SELECT hashtag FROM ".TABLEPREFIX."fanfiction_categories WHERE catid = '". $c ."'");
 		$h = dbassoc($hashtags);
 		if (strlen(trim($h['hashtag']))) {
-		    $story['hashtags'] .= $h['hashtag'] . " "
+		    $story['hashtags'] .= $h['hashtag'] . " ";
 	    }
 	}
     $rss.= "<item>

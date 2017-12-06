@@ -211,6 +211,8 @@ function relevelcategory($cat, $leveldown) {
 				<INPUT type='checkbox' class='checkbox' name='locked'".(!$new && $cat1['locked'] == 1 ? "checked" : "")."> <A HREF=\"#\" class=\"pophelp\">[?]<span>"._HELP_LOCKED."</span></A></div>
 				<div><label for='image'>"._IMAGE.": </label>
 				<INPUT  type='text' class='textbox='  name='image'".(!$new && $cat1['image'] != "" ? "value='$cat1[image]'": "")."> <A HREF=\"#\" class=\"pophelp\">[?]<span>"._HELP_CATIMAGE."</span></A></div>
+				<div><label for='hashtag'>Hashtag: </label>
+				<INPUT  type='text' class='textbox='  name='hashtag'".(!$new && $cat1['hashtag'] != "" ? "value='$cat1[hashtag]'": "")."> </div>
 				<INPUT type='submit' class='button' id='submit' value='"._SUBMIT."' name='submit'>
 				</form></div><div style='clear: both;'>&nbsp;</div></div>";
 		}

@@ -57,7 +57,7 @@ while($rate = dbassoc($ratlist)) {
   $rss.="<webMaster>$siteemail</webMaster>\n"; 
   $rss.="<language>$language</language>\n"; 
 
-$query = _STORYQUERY." ORDER BY updated DESC LIMIT 20";
+$query = SELECT stories.*, "._PENNAMEFIELD." as penname, UNIX_TIMESTAMP(stories.date) as date, UNIX_TIMESTAMP(stories.updated) as updated, stories.catid as category FROM ("._AUTHORTABLE.", ".TABLEPREFIX."fanfiction_stories as stories) WHERE "._UIDFIELD." = stories.uid AND stories.validated > 0 ORDER BY updated DESC LIMIT 20";
 $results = dbquery($query);
 while($story = dbassoc($results)) {
     $story['authors'][] = $story['penname'];
@@ -70,8 +70,16 @@ while($story = dbassoc($results)) {
     foreach($story['authors'] AS $k => $v) {
 	$story['authors'][$k] = strip_tags(xmlentities( $v));
     }
+	$story['hashtags'] = "";
+	foreach(explode(',', $story['category']) as $c) {
+	    $hashtags = dbquery("SELECT hashtag FROM ".TABLEPREFIX."fanfiction_categories WHERE catid = '". $c ."'");
+		$h = dbassoc($hashtags);
+		if (strlen(trim($h['hashtag']))) {
+		    $story['hashtags'] .= $h['hashtag'] . " "
+	    }
+	}
     $rss.= "<item>
-	<title>".strip_tags(xmlentities($story['title']))." "._BY." ".implode(", ", $story['authors'])." [".$ratings[$story['rid']]."]</title>
+	<title>".strip_tags(xmlentities($story['title']))." "._BY." ".implode(", ", $story['authors'])." [".$ratings[$story['rid']]."] ".$story['hashtags']."</title>
 	<link>$url/viewstory.php?sid=".$story['sid']."</link>
 	<description>".strip_tags(xmlentities($story['summary']))."</description>
 	<pubDate>".date("r",$story['updated'])."</pubDate>

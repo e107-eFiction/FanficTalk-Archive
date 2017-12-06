@@ -260,6 +260,7 @@ else {
 		$titletext = $title;
 		$title = "<a href=\"series.php?seriesid=$item\">".stripslashes($title)."</a>";
 	}
+	else if ($type == "ALL") {$title = "All Stories";}
 	else { 
 		$titlequery = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_codeblocks WHERE code_type = 'revtitle'");
 		while($code = dbassoc($titlequery)) {
@@ -343,6 +344,10 @@ else {
 		$jumpmenu .= "</select></form>";
 
 		$tpl->assign("jumpmenu", $jumpmenu );
+	}
+	else if ($type == "ALL") {
+	$query = "SELECT review.reviewid, review.respond, review.review, review.uid, review.reviewer, review.rating, UNIX_TIMESTAMP(review.date) as date, chapter.title as title, chapter.inorder as inorder, INET_NTOA(review.review_IP) as review_ip FROM ".TABLEPREFIX."fanfiction_reviews as review, ".TABLEPREFIX."fanfiction_chapters as chapter WHERE chapter.uid = '".USERUID."' AND chapter.chapid = review.chapid AND review.review != 'No Review' AND review.type = 'ST'"; 
+	$count = "SELECT count(review.reviewid) FROM ".TABLEPREFIX."fanfiction_reviews as review, ".TABLEPREFIX."fanfiction_chapters as chapter WHERE chapter.uid = '".USERUID."' AND chapter.chapid = review.chapid AND review.review != 'No Review' AND review.type = 'ST'";
 	}
 	else {
 		$reviewquery = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_codeblocks WHERE code_type = 'revqueries'");

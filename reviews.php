@@ -260,7 +260,9 @@ else {
 		$titletext = $title;
 		$title = "<a href=\"series.php?seriesid=$item\">".stripslashes($title)."</a>";
 	}
-	else if ($type == "ALL") {$title = "All Stories";}
+	else if ($type == "ALL") {$title = "All Stories";
+	$authoruid = USERUID;
+	}
 	else { 
 		$titlequery = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_codeblocks WHERE code_type = 'revtitle'");
 		while($code = dbassoc($titlequery)) {

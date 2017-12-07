@@ -46,8 +46,9 @@ while($rate = dbassoc($ratlist)) {
 }
 
   $rss="<?xml version=\"1.0\" encoding=\""._CHARSET."\"?>\n"; 
-  $rss.="<rss version=\"2.0\">\n"; 
+  $rss.="<rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n"; 
   $rss.="<channel>\n"; 
+  $rss.="<atom:link href=\"".$url."/rss.php\" rel=\"self\" type=\"application/rss+xml\" />";
   $rss.="<copyright>Copyright ".date("Y")."</copyright>\n"; 
   $rss.="<lastBuildDate>".date("r")."</lastBuildDate>\n"; 
   $rss.="<description>".xmlentities($slogan)."</description>\n"; 
@@ -81,6 +82,7 @@ while($story = dbassoc($results)) {
     $rss.= "<item>
 	<title>".strip_tags(xmlentities($story['title']))." "._BY." ".implode(", ", $story['authors'])." [".$ratings[$story['rid']]."] ".$story['hashtags']."</title>
 	<link>$url/viewstory.php?sid=".$story['sid']."</link>
+	<guid>$url/viewstory.php?sid=".$story['sid']."</guid>
 	<description>".strip_tags(xmlentities($story['summary']))."</description>
 	<pubDate>".date("r",$story['updated'])."</pubDate>
      </item>\n";  

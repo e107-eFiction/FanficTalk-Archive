@@ -8,6 +8,7 @@
 <span class="label">Story:</span>{storytitle}
 <span class="label">Chapter: </span>{chapter}
 <p>{review}</p>
+{jumpmenu}
 {adminoptions}
 </div>
 </div>

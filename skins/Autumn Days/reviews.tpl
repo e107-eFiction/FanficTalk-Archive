@@ -10,7 +10,7 @@
 <b>Chapter:</b> {chapter}
 <blockquote>{review}</blockquote>
 <div align="right">{adminoptions}</div>
-
+{jumpmenu}
 <br /><br />
 
 <!-- END BLOCK : reviewsblock -->

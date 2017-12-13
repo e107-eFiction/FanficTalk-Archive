@@ -4,7 +4,7 @@
 <span class="label">Reviewer: </span>{reviewer} <span class="label">{member}</span> {rating} {reportthis}<br />
 <span class="label">Date: </span>{reviewdate}
 <span class="label">Story:</span>{storytitle}
-<span class="label">Chapter Title: </span>{chapter}
+<span class="label">Chapter: </span>{chapter}
 <p>{review}</p>
 {adminoptions}
 </div>

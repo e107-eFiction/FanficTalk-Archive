@@ -8,6 +8,8 @@
 <span class="classification">Reviewer: </span>{reviewer} 
 <span style="font-size:xx-small">({member})</span> &middot; 
 <span class="classification">Date: </span>{reviewdate} &middot; 
+{rating} 
+{reportthis}<br /> 
 <span class="label">Story:</span>{storytitle}
 <span class="classification">Chapter:</span> {chapter}
 <p><blockquote>{review}</blockquote></p>

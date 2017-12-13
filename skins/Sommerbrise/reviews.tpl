@@ -4,7 +4,8 @@
 <!-- START BLOCK : reviewsblock -->
 
 
-<b>Name:</b> {reviewer} ({member}) &middot; <b>Date:</b> {reviewdate} &middot; <b>Chapter:</b> {chapter}
+<b>Name:</b> {reviewer} ({member}) &middot; <b>Date:</b> {reviewdate} &middot; {rating} 
+{reportthis}<br /> <span class="label">Story:</span>{storytitle} <b>Chapter:</b> {chapter}
 <blockquote>{review}</blockquote>
 <div align="right">{adminoptions}</div>
 

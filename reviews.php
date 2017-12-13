@@ -348,7 +348,7 @@ else {
 		$tpl->assign("jumpmenu", $jumpmenu );
 	}
 	else if ($type == "ALL") {
-	$query = "SELECT review.reviewid, review.respond, review.review, review.uid, review.reviewer, review.rating, UNIX_TIMESTAMP(review.date) as date, chapter.title as title, chapter.inorder as inorder, INET_NTOA(review.review_IP) as review_ip FROM ".TABLEPREFIX."fanfiction_reviews as review, ".TABLEPREFIX."fanfiction_chapters as chapter WHERE chapter.uid = '".USERUID."' AND chapter.chapid = review.chapid AND review.review != 'No Review' AND review.type = 'ST'"; 
+	$query = "SELECT review.reviewid, review.respond, review.review, review.uid, review.reviewer, review.rating, UNIX_TIMESTAMP(review.date) as date, chapter.title as title, chapter.inorder as inorder, INET_NTOA(review.review_IP) as review_ip, story.title FROM ".TABLEPREFIX."fanfiction_reviews as review, ".TABLEPREFIX."fanfiction_chapters as chapter, ".TABLEPREFIX."fanfiction_stories as story WHERE chapter.uid = '".USERUID."' AND chapter.chapid = review.chapid AND chapter.sid = story.sid AND review.review != 'No Review' AND review.type = 'ST'"; 
 	$count = "SELECT count(review.reviewid) FROM ".TABLEPREFIX."fanfiction_reviews as review, ".TABLEPREFIX."fanfiction_chapters as chapter WHERE chapter.uid = '".USERUID."' AND chapter.chapid = review.chapid AND review.review != 'No Review' AND review.type = 'ST'";
 	}
 	else {
@@ -390,6 +390,7 @@ else {
 		if(empty($reviews['respond']) && (USERUID == $authoruid || (isset($coauthors) && in_array(USERUID, $coauthors)))) $adminlink .= " [<a href=\"user.php?action=revres&amp;reviewid=".$reviews['reviewid']."\">"._RESPOND."</a>]";
 		$tpl->newBlock("reviewsblock");
 		$tpl->assign("reviewer"   , $reviewer );
+		$tpl->assign("storytitle" , $review ['story.title']);
 		$tpl->assign("reportthis", "[<a href=\""._BASEDIR."contact.php?action=report&amp;url=reviews.php?reviewid=".$reviews['reviewid']."\">"._REPORTTHIS."</a>]");
 		$tpl->assign("review"   , stripslashes($reviews['review']));
 		$tpl->assign("reviewdate", date("$dateformat $timeformat", $reviews['date']) );

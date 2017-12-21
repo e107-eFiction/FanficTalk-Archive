@@ -58,7 +58,7 @@ while($rate = dbassoc($ratlist)) {
   $rss.="<webMaster>$siteemail</webMaster>\n"; 
   $rss.="<language>$language</language>\n"; 
 
-$query = "SELECT stories.*, "._PENNAMEFIELD." as penname, UNIX_TIMESTAMP(stories.date) as date, UNIX_TIMESTAMP(stories.updated) as updated, stories.catid as category FROM ("._AUTHORTABLE.", ".TABLEPREFIX."fanfiction_stories as stories) WHERE "._UIDFIELD." = stories.uid AND stories.validated > 0 ORDER BY updated DESC LIMIT 20";
+$query = "SELECT stories.*, "._PENNAMEFIELD." as penname, UNIX_TIMESTAMP(stories.date) as date, UNIX_TIMESTAMP(stories.updated) as updated, stories.catid as category FROM ("._AUTHORTABLE.", ".TABLEPREFIX."fanfiction_stories as stories) WHERE "._UIDFIELD." = stories.uid AND stories.validated > 0  AND DATEDIFF(day, updated, SYSDATETIMEOFFSET()) > 1 ORDER BY updated DESC LIMIT 20";
 $results = dbquery($query);
 while($story = dbassoc($results)) {
     $story['authors'][] = $story['penname'];

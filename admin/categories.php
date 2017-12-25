@@ -114,7 +114,7 @@ function relevelcategory($cat, $leveldown) {
 		$displayorder = (isNumber($_POST['orderafter']) ? $_POST['orderafter'] : 0) + 1;
 		if($_GET["cat"] == "new") { 
 			$query = dbquery("UPDATE ".TABLEPREFIX."fanfiction_categories SET displayorder = (displayorder + 1) WHERE displayorder > '".$_POST['orderafter']."' AND leveldown = '$leveldown' AND parentcatid ='".$_POST['parentcatid']."'");
-			$catresult = dbquery("INSERT INTO ".TABLEPREFIX."fanfiction_categories (category, parentcatid, description, locked, image, leveldown, displayorder, hashtag) VALUES ('".addslashes(descript(strip_tags(trim($_POST['category']))))."', '".$_POST['parentcatid']."', '".addslashes(descript($_POST['description']))."', '$locked', '".$_POST['image']."''".$_POST['hashtag']."', '$leveldown', '$displayorder')");
+			$catresult = dbquery("INSERT INTO ".TABLEPREFIX."fanfiction_categories (category, parentcatid, description, locked, image, leveldown, displayorder, hashtag) VALUES ('".addslashes(descript(strip_tags(trim($_POST['category']))))."', '".$_POST['parentcatid']."', '".addslashes(descript($_POST['description']))."', '$locked', '".$_POST['image']."','".$_POST['hashtag']."', '$leveldown', '$displayorder')");
 		}
 		else {
 			$oldinfo = dbquery("SELECT displayorder, parentcatid, leveldown FROM ".TABLEPREFIX."fanfiction_categories WHERE catid = '$_GET[cat]' LIMIT 1");

@@ -113,7 +113,7 @@ if($action == "delete") {
 }
 else if($action == "edit" || $action == "add") {
 	if(isset($_GET['next']) && isNumber($_GET['next'])) $nextchapter = $_GET['next'];
-	if(!isMEMBER && !$anonreviews) accessDenied( );
+	if((!isMEMBER && !$anonreviews) || (uLEVEL ==-1)) accessDenied( ); 
 	if(!isset($chapid) && $type == "ST") { 
 		$chapquery = dbquery("SELECT chapid FROM ".TABLEPREFIX."fanfiction_chapters WHERE sid = '$item' AND inorder = '1' LIMIT 1");
 		list($chapid) = dbrow($chapquery);

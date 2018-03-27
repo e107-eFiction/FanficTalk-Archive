@@ -7,3 +7,6 @@ allow from all
 deny from 156.67.106.92
 deny from 46.29.19.49
 deny from 172.104.73.176
+deny from 198.13.56.24
+deny from 172.105.204.124
+deny from 192.162.164.21

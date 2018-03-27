@@ -31,10 +31,12 @@ $blocks["menu"]["content"] = array (
   2 => 	'catslink',
   3 => 	'authors',
   4 => 	'browse',
-  5 =>  'featured',
-  6 =>  'toptens',
-  7 => 	'siteguidelines',
-  8 =>  'Forums');
+  5 =>  'search',
+  6 =>  'featured',
+  7 =>  'toptens',
+  8 =>  'FROGS_link',
+  9 => 	'siteguidelines',
+  10 =>  'Forums');
 $blocks["menu"]["style"] = 0;
 
 

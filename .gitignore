@@ -4,3 +4,4 @@ config.php*
 favicon.ico
 stories/
 error_log
+.htaccess

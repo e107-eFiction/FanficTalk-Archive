@@ -10,3 +10,4 @@ deny from 172.104.73.176
 deny from 198.13.56.24
 deny from 172.105.204.124
 deny from 192.162.164.21
+deny from 192.162.167.196

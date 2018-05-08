@@ -589,7 +589,7 @@ if(($autovalidate && !isADMIN) || $user['validated'] || $storyvalid == 2) $valid
 				$count =  dbquery("SELECT SUM(wordcount) as totalcount FROM ".TABLEPREFIX."fanfiction_chapters WHERE sid = '$sid'");
 				list($totalcount) = dbrow($count);
 				if($totalcount) {
-					dbquery("UPDATE ".TABLEPREFIX."fanfiction_stories SET wordcount = '$totalcount', updated = now()  WHERE sid = '$sid'");
+					dbquery("UPDATE ".TABLEPREFIX."fanfiction_stories SET wordcount = '$totalcount', updated = now() WHERE sid = '$sid'");
 				}
 			}
 			$codequery = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_codeblocks WHERE code_type = 'editchapter'");

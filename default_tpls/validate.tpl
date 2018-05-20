@@ -1,5 +1,6 @@
 <!-- INCLUDE BLOCK : header -->
 <div id="pagetitle">{title} by {author}</div>
+<div class = "label">{rating}</div>
 <div class="storyinfo"> [{reviews} - {numreviews}]<br />
 {toc} {reportthis}<br />
 {printicon} <br />

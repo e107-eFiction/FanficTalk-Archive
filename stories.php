@@ -453,7 +453,7 @@ if($date) $output .=write_message(sprintf("The oldest chapter in the queue is fr
 	$sresult = dbquery("SELECT stories.sid, title, reviews, rating, completed, validated, featured, count FROM ".TABLEPREFIX."fanfiction_stories AS stories LEFT JOIN ".TABLEPREFIX."fanfiction_coauthors AS coauth ON stories.sid = coauth.sid WHERE stories.uid = '".USERUID."' OR coauth.uid = '".USERUID."' ORDER BY title");
 	$stories = dbnumrows($sresult);
 	while($story = dbassoc($sresult)) {
-		$query2 = dbquery("SELECT chapid, title, inorder, rating, reviews, validated, count FROM ".TABLEPREFIX."fanfiction_chapters WHERE sid = '".$story['sid']."' ORDER BY inorder"); 
+		$query2 = dbquery("SELECT chapid, title, inorder, rating, reviews, validated, count, submittime FROM ".TABLEPREFIX."fanfiction_chapters WHERE sid = '".$story['sid']."' ORDER BY inorder"); 
 		$chapters =  dbnumrows($query2);
 		$output .= "<tr><td class=\"tblborder\"><a href=\"viewstory.php?sid=".$story['sid']."\">".stripslashes($story['title'])."</a> ".ratingpics($story['rating'])." <strong>"._COMPLETE.":</strong> <a href=\"stories.php?action=viewstories&amp;sid=".$story['sid']."&amp;com=".$story['completed']."\"><a href=\"stories.php?action=viewstories&amp;sid=".$story['sid']."&amp;com=".($story['completed'] == 1 ? "no\">"._YES : "yes\">"._NO)."</a></td>
 			<td class=\"tblborder\" colspan=\"3\"><a href=\"stories.php?action=editstory&amp;sid=".$story['sid']."\">"._EDIT."</a> - <a href=\"stories.php?action=delete&amp;sid=".$story['sid']."\">"._DELETE."</a> - <a href=\"stories.php?action=newchapter&amp;sid=".$story['sid']."&amp;inorder=$chapters\">"._ADDNEWCHAPTER."</a></td>
@@ -483,6 +483,7 @@ if ($story['validated'] != "H" && $story['validated'] != "I") {
 				if($reviewsallowed) $output .= ($chapter['reviews'] ? "<a href=\"reviews.php?type=ST&amp;item=".$story['sid']."&amp;chapid=".$chapter['chapid']."\">".$chapter['reviews']."</a>" : "0");
 				if(!$autovalidate) $output .= "</td><td class=\"tblborder\" align=\"center\">".($chapter['validated'] > 0 ? _YES : _NO);
 				$output .= "<td class=\"tblborder\" align=\"center\">".$chapter['count']."</td></tr>";
+				$output .= "<td class=\"tblborder\" align=\"center\">".$chapter['submittime']."</td></tr>";
 			}
 		}
 	}

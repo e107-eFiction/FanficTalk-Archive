@@ -63,7 +63,7 @@ $result = dbquery("SELECT story.title as storytitle, chapter.uid, chapter.sid, s
 
 if(dbnumrows($result)) {
 	$output .="<h2>New Submission</h2>";
-	$output .= "<table class=\"tblborder\" cellspacing=\"0\" cellpadding=\"0\" style=\"margin: 0 auto; width: 90%; border: .5px solid black;\"><tr class=\"tblborder\"><th style = \"border: .5px solid black;\">"._EDIT."</th><th style = \"border: .5px solid black;\">"._TITLE."</th><th style = \"border: .5px solid black;\">".Rating."</th><th style = \"border: .5px solid black;\">"._WORDCOUNT."</th><th style = \"border: .5px solid black;\">".Submitted."</th><th style = \"border: .5px solid black;\">"._AUTHOR."</th><th style = \"border: .5px solid black;\">"._CATEGORY."</th><th style = \"border: .5px solid black;\">"._OPTIONS."</th><th style = \"border: .5px solid black;\">".Validator."</th></tr>";
+	$output .= "<table class=\"tblborder\" cellspacing=\"0\" cellpadding=\"0\" style=\"margin: 0 auto; width: 90%; border: .5px solid black;\"><tr class=\"tblborder\"><th style = \"border: .5px solid black;\">"._EDIT."</th><th style = \"border: .5px solid black;\">"._TITLE."</th><th style = \"border: .5px solid black;\">Rating</th><th style = \"border: .5px solid black;\">"._WORDCOUNT."</th><th style = \"border: .5px solid black;\">".Submitted."</th><th style = \"border: .5px solid black;\">"._AUTHOR."</th><th style = \"border: .5px solid black;\">"._CATEGORY."</th><th style = \"border: .5px solid black;\">"._OPTIONS."</th><th style = \"border: .5px solid black;\">".Validator."</th></tr>";
 $array = explode(",", $admincats);
 	while ($story = dbassoc($result)) {
 		if(!$admincats || $_GET['view'] == "all" || sizeof(array_intersect(explode(",", $story['catid']), explode(",", $admincats)))) {

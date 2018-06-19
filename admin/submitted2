@@ -70,7 +70,7 @@ $array = explode(",", $admincats);
 			if($story['edited'] == 3){$friendly = "Rejected";}
 			else $friendly = "New";
 			$output .= "<td class=\"tblborder\" style = \"border: .5px solid black;\">".$friendly."</td>";
-			$output .= "<td class=\"tblborder\"style = \"border: .5px solid black;\"><a href=\"viewuser.php?uid=$story[uid]\">$story[penname]</a></td>";
+			$output .= "<td class=\"tblborder\"style = \"border: .5px solid black;\"><b><a href=\"viewuser.php?uid=$story[uid]\">$story[penname]</a></b></td>";
 			$output .= "<td class=\"tblborder\"style = \"border: .5px solid black;\"><a href=\"viewstory.php?sid=$story[sid]\">".stripslashes($story['storytitle'])."</a>";
 			if(isset($story['title'])) $output .= " <b>:</b> <a href=\"viewstory.php?sid=$story[sid]&amp;chapter=$story[inorder]\">".stripslashes($story['title'])."</a>";
 			$output .= "<td class=\"tblborder\"style = \"border: .5px solid black;\">".$story['rating']."</td>";
@@ -84,5 +84,6 @@ $array = explode(",", $admincats);
 	$output .= "</table>";
 }
 else $output .= write_message(_NORESULTS);
+echo "Hi! Have a great day";
 
 ?>

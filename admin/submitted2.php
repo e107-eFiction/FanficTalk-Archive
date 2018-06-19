@@ -24,7 +24,6 @@
 // ----------------------------------------------------------------------
 
 if(!defined("_CHARSET")) exit( );
-echo "test" ;
 
 
 $output .= "<div id=\"pagetitle\">"._SUBMITTED."</div>";

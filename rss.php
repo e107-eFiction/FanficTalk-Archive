@@ -81,7 +81,7 @@ while($story = dbassoc($results)) {
 	}
 	$story['house'] = "";
 	foreach(explode(',', $story['class']) as $m) {
-	    $house = dbquery("SELECT class_name FROM ".TABLEPREFIX."fanfiction_classes WHERE class_id = '". $m ."'" and (class_id = 464 or class_id = 465 or class_id = 466 or class_id = 467);
+	    $house = dbquery("SELECT class_name FROM ".TABLEPREFIX."fanfiction_classes WHERE class_id = '". $m ."'" and (class_id = 464 or class_id = 465 or class_id = 466 or class_id = 467));
 		$s = dbassoc($house);
 		if (strlen(trim($s['house']))) {
 		    $story['house'] .= $s['house'] . " ";

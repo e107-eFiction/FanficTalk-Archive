@@ -58,7 +58,7 @@ while($rate = dbassoc($ratlist)) {
   $rss.="<webMaster>$siteemail</webMaster>\n"; 
   $rss.="<language>$language</language>\n"; 
 
-$query = "SELECT stories.*, "._PENNAMEFIELD." as penname, UNIX_TIMESTAMP(stories.date) as date, UNIX_TIMESTAMP(stories.updated) as updated, stories.catid as category FROM ("._AUTHORTABLE.", ".TABLEPREFIX."fanfiction_stories as stories) WHERE "._UIDFIELD." = stories.uid AND stories.validated > 0  AND DATEDIFF(current_date, updated) < 2 ORDER BY updated DESC";
+$query = "SELECT stories.*, "._PENNAMEFIELD." as penname, UNIX_TIMESTAMP(stories.date) as date, UNIX_TIMESTAMP(stories.updated) as updated, stories.catid as category, stories.classes as class FROM ("._AUTHORTABLE.", ".TABLEPREFIX."fanfiction_stories as stories) WHERE "._UIDFIELD." = stories.uid AND stories.validated > 0  AND DATEDIFF(current_date, updated) < 2 ORDER BY updated DESC";
 $results = dbquery($query);
 while($story = dbassoc($results)) {
     $story['authors'][] = $story['penname'];
@@ -79,8 +79,16 @@ while($story = dbassoc($results)) {
 		    $story['hashtags'] .= $h['hashtag'] . " ";
 	    }
 	}
+	$story['house'] = "";
+	foreach(explode(',', $story['class']) as $c) {
+	    $house = dbquery("SELECT house FROM ".TABLEPREFIX."fanfiction_categories WHERE class_id = '". $c ."'" and (class_id = 464 or class_id = 465 or class_id = 466 or class_id = 467);
+		$s = dbassoc($house);
+		if (strlen(trim($s['house']))) {
+		    $story['house'] .= $s['house'] . " ";
+	    }
+	}
     $rss.= "<item>
-	<title>".strip_tags(xmlentities($story['title']))." "._BY." ".implode(", ", $story['authors'])." [".$ratings[$story['rid']]."] ".$story['hashtags']."</title>
+	<title>".strip_tags(xmlentities($story['title']))." "._BY." ".implode(", ", $story['authors'])." [".$ratings[$story['rid']]."] ".$story['hashtags']." ".$story['house']."</title>
 	<link>$url/viewstory.php?sid=".$story['sid']."</link>
 	<guid>$url/viewstory.php?sid=".$story['sid']."</guid>
 	<description>".strip_tags(xmlentities($story['summary']))."</description>

@@ -84,11 +84,11 @@ while($story = dbassoc($results)) {
 	    $house = dbquery("SELECT class_name FROM ".TABLEPREFIX."fanfiction_classes WHERE class_id = '". $m ."' and class_type = 14");
 		$s = dbassoc($class_name);
 		if (strlen(trim($s['class_name']))) {
-		    $story['house'] .= $s['house'] . " ";
+		    $story['house'] .= $s['class_name'] . " ";
 	    }
 	}
     $rss.= "<item>
-	<title>".strip_tags(xmlentities($story['title']))." "._BY." ".implode(", ", $story['authors'])." [".$ratings[$story['rid']]."] ".$story['hashtags']." ".$story['house']." </title>
+	<title>".strip_tags(xmlentities($story['title']))." "._BY." ".implode(", ", $story['authors'])." [".$ratings[$story['rid']]."] ".$story['hashtags']." #".$story['house']." </title>
 	<link>$url/viewstory.php?sid=".$story['sid']."</link>
 	<guid>$url/viewstory.php?sid=".$story['sid']."</guid>
 	<description>".strip_tags(xmlentities($story['summary']))."</description>

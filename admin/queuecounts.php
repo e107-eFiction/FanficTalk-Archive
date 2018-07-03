@@ -4,7 +4,7 @@
 $current="30 Day Queue Count";
 $output .= "<p>This table shows validator counts for the last 30 calendar days.</p><br>";
 
-$query  = "Select COUNT(log_ID) as Total, log_type, penname FROM `fanfiction_log` join fanfiction_authors on log_uid = uid  WHERE `log_uid` IN (SELECT fanfiction_authorprefs.uid FROM `fanfiction_authorprefs` join fanfiction_authors on fanfiction_authorprefs.uid = fanfiction_authors.uid WHERE (level = 1 or level = 3)) and log_timestamp BETWEEN (NOW() - INTERVAL 30 DAY) AND NOW() and (log_type = \"VS\" OR log_type= \"RJ\" OR log_type = \"ED\") group by log_type, penname order by penname, log_type ASC";
+$query  = "Select COUNT(log_ID) as Total, log_type, penname FROM `fanfiction_log` join fanfiction_authors on log_uid = uid  WHERE `log_uid` IN (SELECT fanfiction_authorprefs.uid FROM `fanfiction_authorprefs` join fanfiction_authors on fanfiction_authorprefs.uid = fanfiction_authors.uid WHERE (level = 1 or level = 3 or leve = 2)) and log_timestamp BETWEEN (NOW() - INTERVAL 30 DAY) AND NOW() and (log_type = \"VS\" OR log_type= \"RJ\" OR log_type = \"ED\") group by log_type, penname order by penname, log_type ASC";
 
 $result = dbquery($query);
 if (!$result) {

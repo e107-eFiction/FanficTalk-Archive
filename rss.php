@@ -81,14 +81,14 @@ while($story = dbassoc($results)) {
 	}
 	$story['house'] = "";
 	foreach(explode(',', $story['class']) as $m) {
-	    $house = dbquery("SELECT class_name FROM ".TABLEPREFIX."fanfiction_classes WHERE class_id = '". $m ."'" and (class_id = 464 or class_id = 465 or class_id = 466 or class_id = 467));
-		$s = dbassoc($house);
-		if (strlen(trim($s['house']))) {
+	    $house = dbquery("SELECT class_name FROM ".TABLEPREFIX."fanfiction_classes WHERE class_id = '". $m ."' and class_type = 14");
+		$s = dbassoc($class_name);
+		if (strlen(trim($s['class_name']))) {
 		    $story['house'] .= $s['house'] . " ";
 	    }
 	}
     $rss.= "<item>
-	<title>".strip_tags(xmlentities($story['title']))." "._BY." ".implode(", ", $story['authors'])." [".$ratings[$story['rid']]."] ".$story['hashtags']." ".$story['house']."</title>
+	<title>".strip_tags(xmlentities($story['title']))." "._BY." ".implode(", ", $story['authors'])." [".$ratings[$story['rid']]."] ".$story['hashtags']." #".$story['house']." </title>
 	<link>$url/viewstory.php?sid=".$story['sid']."</link>
 	<guid>$url/viewstory.php?sid=".$story['sid']."</guid>
 	<description>".strip_tags(xmlentities($story['summary']))."</description>

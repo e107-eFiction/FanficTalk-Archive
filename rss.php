@@ -37,7 +37,7 @@ define("SITEKEY", $sitekey);
 
 function xmlentities ( $string )
 {
-   return str_replace ( array ( '&', '"', "'", '<', '>' ), array ( '&amp;' , '&quot;', '&apos;' , '&lt;' , '&gt;' ), $string );
+   return str_replace ( array ( '&', '"', "'", '<', '>','#' ), array ( '&amp;' , '&quot;', '&apos;' , '&lt;' , '&gt;' ,'&#35;'), $string );
 }
 
 $ratlist = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_ratings");

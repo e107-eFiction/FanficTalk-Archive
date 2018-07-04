@@ -88,7 +88,7 @@ while($story = dbassoc($results)) {
 	    }
 	}
     $rss.= "<item>
-	<title>".strip_tags(xmlentities($story['title']))." "._BY." ".implode(", ", $story['authors'])." [".$ratings[$story['rid']]."] ".$story['hashtags']." #".$story['house']." </title>
+	<title>".strip_tags(xmlentities($story['title']))." "._BY." ".implode(", ", $story['authors'])." [".$ratings[$story['rid']]."] ".$story['hashtags']." ".$story['house']."</title>
 	<link>$url/viewstory.php?sid=".$story['sid']."</link>
 	<guid>$url/viewstory.php?sid=".$story['sid']."</guid>
 	<description>".strip_tags(xmlentities($story['summary']))."</description>

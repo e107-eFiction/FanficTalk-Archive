@@ -22,7 +22,7 @@
 				<div id="sitename">{sitename}</div>
 				<div id="slogan">{slogan}</div>
 			</div>
-				<a href="/"><img class="header-img" src="http://efic3x.artphilia.de/skins/Fruity/images/header.jpg" height="150px"></a>
+				<a href="/"><img class="header-img" src="//efic3x.artphilia.de/skins/Fruity/images/header.jpg" height="150px"></a>
 			<div id="menu">{menu_content}</div>					
 				</div>
 			</div>

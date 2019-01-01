@@ -101,7 +101,7 @@ while($story = dbassoc($results)) {
 
   header("Content-type: application/rss+xml"); 
   header("Cache-Control: must-revalidate"); 
-  header("Expires: ".gmdate("D, d M Y H:i:s", time() + 3600) . " GMT"); 
+  header("Expires: ".gmdate("D, d M Y H:i:s", time() + 3600) . " GMT");  
 
   echo $rss; 
 

@@ -1,4 +1,5 @@
 
+
 <Files 403.shtml>
 order allow,deny
 allow from all
@@ -11,3 +12,20 @@ deny from 198.13.56.24
 deny from 172.105.204.124
 deny from 192.162.164.21
 deny from 192.162.167.196
+
+RewriteEngine On 
+RewriteCond %{SERVER_PORT} 80 
+RewriteRule ^(.*)$ https://hpfanfictalk.com/archive/$1 [R,L]
+
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php5_module>
+
+</IfModule>
+# END cPanel-generated php ini directives, do not edit
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# This domain inherits the “PHP” package.
+# php -- END cPanel-generated handler, do not edit

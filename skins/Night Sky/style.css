@@ -8,8 +8,8 @@
 
 
 /* import fonts */
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,700,300|Crushed:400);
-@import url(http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css); 
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,700,300|Crushed:400");
+@import url("https://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css"); 
 
 /* import basic settings, IE-fixes and grids */
 @import url(base.css);

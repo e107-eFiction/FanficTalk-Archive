@@ -8,8 +8,8 @@
 
 
 /* import fonts */
-@import url(http://fonts.googleapis.com/css?family=Quando|Nixie+One|Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic|Josefin+Slab:400,400italic,600,600italic,700,700italic);
-@import url(http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css); 
+@import url("https://fonts.googleapis.com/css?family=Quando|Nixie+One|Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic|Josefin+Slab:400,400italic,600,600italic,700,700italic");
+@import url("https://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css"); 
 
 /* import basic settings, IE-fixes and grids */
 @import url(base.css);

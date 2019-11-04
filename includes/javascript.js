@@ -170,6 +170,17 @@ function buildCharacters(cats) {
 
 }
 
+function buildCharactersFromAutocomplete($elem) {
+  return function() {
+    if (document.form.formname.value == "admins") return;
+    var cats = $elem.val();
+    var serverPage = basedir + "includes/characterlist.php";
+    myRequest = new ajaxObject(serverPage, buildCharactersResponse);
+    val = "catid="+(cats === "" ? "-1" : cats+",-1");
+    myRequest.update(val);
+  }
+}
+
 String.prototype.replaceAll = function(pcFrom, pcTo){
 	var i = this.indexOf(pcFrom);
 	var c = this;
@@ -307,3 +318,25 @@ function displayTypeOpts() {
 	if(window.tinyMCE) tinyMCE.execCommand('mceResetDesignMode'); 
 }
 
+function get_token_input_options(self) {
+  var onAdd = eval(self.attr('autocomplete_on_add'));
+  var onDelete = eval(self.attr('autocomplete_on_delete'));
+  return {
+    searchingText: self.attr('autocomplete_searching_text'),
+    hintText: self.attr('autocomplete_hint_text'),
+    noResultsText: self.attr('autocomplete_no_results_text'),
+    minChars: self.attr('autocomplete_min_chars'),
+    queryParam: "autocomplete",
+    preventDuplicates: true,
+    onAdd: onAdd ? onAdd(self) : null,
+    onDelete: onDelete ? onDelete(self) : null,
+  };
+}
+
+function buildCharacterQuery(id) {
+  return function() {
+    var cats = $('#'+id).val();
+    cats = (!cats ? "-1" : cats + ",-1");
+    return "includes/characterlist.php?catid="+cats;
+  }
+}

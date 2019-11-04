@@ -1,4 +1,6 @@
 <!-- START BLOCK : profile -->
+<div align="center">{otherap} {forum} {journal} {blog} {podfics}</div>
+
 <div id="profile">
 <div id="bio">
 	<div id="biotitle"><span class="label">Penname: </span>{userpenname} <span class="label">Real name: </span>{realname}</div>

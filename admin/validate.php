@@ -38,6 +38,7 @@ function preview_story($stories) {
 		$adminlinks = "<div class=\"adminoptions\"><span class='label'>"._ADMINOPTIONS.":</span> <a href=\"javascript:pop('admin.php?action=yesletter&amp;uid=$stories[uid]&amp;chapid=$stories[chapid]', 400, 350, 'yes')\">"._VALIDATE."</a> "._OR." <a href=\"javascript:pop('admin.php?action=noletter&amp;uid=$stories[uid]&amp;chapid=$stories[chapid]',400, 350, 'yes')\">"._REJECT."</a>| "._EDIT." - <a href=\"stories.php?action=editstory&amp;sid=$stories[sid]&amp;admin=1\">"._STORY."</a> "._OR." <a href=\"stories.php?action=editchapter&amp;chapid=$stories[chapid]&amp;admin=1\">"._CHAPTER."</a> | "._DELETE." - <a href=\"stories.php?action=delete&amp;sid=$stories[sid]\">"._STORY."</a> "._OR." <a href=\"stories.php?action=delete&amp;chapid=$stories[chapid]&amp;sid=$stories[sid]&amp;admin=1&amp;uid=$stories[uid]\">"._CHAPTER."</a> </div>";
 		$tpl->assign("adminlinks", $adminlinks);
 		//classes code
+		
 		$storyclasses = array( );
 	if($stories['classes']) {
 		foreach(explode(",", $stories['classes']) as $c) {
@@ -93,6 +94,7 @@ function preview_story($stories) {
 		$tpl->assign( "story", "<span style=\"font-size: ".(100 + ($textsize * 20))."%;\">$storytext</span>" );
 		return $tpl->getOutputContent( );
 }
+
 
 	$output .= "<div id='pagetitle'>"._VIEWSUBMITTED."</div>";
 

@@ -113,7 +113,7 @@ if($action == "delete") {
 }
 else if($action == "edit" || $action == "add") {
 	if(isset($_GET['next']) && isNumber($_GET['next'])) $nextchapter = $_GET['next'];
-	if(!isMEMBER && !$anonreviews) accessDenied( );
+	if((!isMEMBER && !$anonreviews) || (uLEVEL ==-1)) accessDenied( ); 
 	if(!isset($chapid) && $type == "ST") { 
 		$chapquery = dbquery("SELECT chapid FROM ".TABLEPREFIX."fanfiction_chapters WHERE sid = '$item' AND inorder = '1' LIMIT 1");
 		list($chapid) = dbrow($chapquery);
@@ -260,6 +260,9 @@ else {
 		$titletext = $title;
 		$title = "<a href=\"series.php?seriesid=$item\">".stripslashes($title)."</a>";
 	}
+	else if ($type == "ALL") {$title = "All Stories";
+	$authoruid = USERUID;
+	}
 	else { 
 		$titlequery = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_codeblocks WHERE code_type = 'revtitle'");
 		while($code = dbassoc($titlequery)) {
@@ -318,11 +321,11 @@ else {
 	}
 	else if($type == "ST") {
 		if(isset($chapid))  {
-			$query = "SELECT review.reviewid, review.respond, review.review, review.uid, review.reviewer, review.rating, UNIX_TIMESTAMP(date) as date, chapter.title as title, chapter.inorder as inorder, INET_NTOA(review.review_IP) as review_ip FROM ".TABLEPREFIX."fanfiction_reviews as review, ".TABLEPREFIX."fanfiction_chapters as chapter WHERE chapter.chapid = '$chapid' AND chapter.chapid = review.chapid AND review.review != 'No Review' ";
+			$query = "SELECT review.reviewid, review.respond, review.review, review.uid, review.reviewer, review.rating, UNIX_TIMESTAMP(review.date) as date, chapter.title as title, chapter.inorder as inorder, INET_NTOA(review.review_IP) as review_ip, story.title as storytitle FROM ".TABLEPREFIX."fanfiction_reviews as review, ".TABLEPREFIX."fanfiction_chapters as chapter, ".TABLEPREFIX."fanfiction_stories as story WHERE chapter.chapid = '$chapid' AND chapter.chapid = review.chapid AND  chapter.sid = story.sid AND review.review != 'No Review' ";
 			$count =  "SELECT count(reviewid) FROM ".TABLEPREFIX."fanfiction_reviews as review WHERE chapid = '$chapid' AND review != 'No Review'";
 		}
 		else  {
-			$query = "SELECT review.reviewid, review.respond, review.review, review.uid, review.reviewer, review.rating, UNIX_TIMESTAMP(review.date) as date, chapter.title as title, chapter.inorder as inorder, INET_NTOA(review.review_IP) as review_ip FROM ".TABLEPREFIX."fanfiction_reviews as review, ".TABLEPREFIX."fanfiction_chapters as chapter WHERE chapter.sid = '$item' AND chapter.chapid = review.chapid AND review.review != 'No Review' AND review.type = 'ST'";
+			$query = "SELECT review.reviewid, review.respond, review.review, review.uid, review.reviewer, review.rating, UNIX_TIMESTAMP(review.date) as date, chapter.title as title, chapter.inorder as inorder, INET_NTOA(review.review_IP) as review_ip, story.title as storytitle FROM ".TABLEPREFIX."fanfiction_reviews as review, ".TABLEPREFIX."fanfiction_chapters as chapter, ".TABLEPREFIX."fanfiction_stories as story WHERE chapter.sid = '$item' AND chapter.chapid = review.chapid  AND chapter.sid = story.sid AND review.review != 'No Review' AND review.type = 'ST'";
 			$count = "SELECT count(reviewid) FROM ".TABLEPREFIX."fanfiction_reviews as review WHERE item = '$item' AND review != 'No Review' AND type = 'ST'";
 		}
 		$jumpmenu = "<form name=\"jump\" action=\"\">";
@@ -343,6 +346,10 @@ else {
 		$jumpmenu .= "</select></form>";
 
 		$tpl->assign("jumpmenu", $jumpmenu );
+	}
+	else if ($type == "ALL") {
+	$query = "SELECT review.reviewid, review.respond, review.review, review.uid, review.reviewer, review.rating, UNIX_TIMESTAMP(review.date) as date, chapter.title as title, chapter.inorder as inorder, INET_NTOA(review.review_IP) as review_ip, story.title as storytitle FROM ".TABLEPREFIX."fanfiction_reviews as review, ".TABLEPREFIX."fanfiction_chapters as chapter, ".TABLEPREFIX."fanfiction_stories as story WHERE chapter.uid = '".USERUID."' AND chapter.chapid = review.chapid AND chapter.sid = story.sid AND review.review != 'No Review' AND review.type = 'ST'"; 
+	$count = "SELECT count(review.reviewid) FROM ".TABLEPREFIX."fanfiction_reviews as review, ".TABLEPREFIX."fanfiction_chapters as chapter WHERE chapter.uid = '".USERUID."' AND chapter.chapid = review.chapid AND review.review != 'No Review' AND review.type = 'ST'";
 	}
 	else {
 		$reviewquery = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_codeblocks WHERE code_type = 'revqueries'");
@@ -383,6 +390,7 @@ else {
 		if(empty($reviews['respond']) && (USERUID == $authoruid || (isset($coauthors) && in_array(USERUID, $coauthors)))) $adminlink .= " [<a href=\"user.php?action=revres&amp;reviewid=".$reviews['reviewid']."\">"._RESPOND."</a>]";
 		$tpl->newBlock("reviewsblock");
 		$tpl->assign("reviewer"   , $reviewer );
+		$tpl->assign("storytitle" , $reviews['storytitle']);
 		$tpl->assign("reportthis", "[<a href=\""._BASEDIR."contact.php?action=report&amp;url=reviews.php?reviewid=".$reviews['reviewid']."\">"._REPORTTHIS."</a>]");
 		$tpl->assign("review"   , stripslashes($reviews['review']));
 		$tpl->assign("reviewdate", date("$dateformat $timeformat", $reviews['date']) );

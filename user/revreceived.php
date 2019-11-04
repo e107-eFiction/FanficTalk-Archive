@@ -43,10 +43,14 @@ if(!defined("_CHARSET")) exit( );
 		if($x == 0) $output .= "<tr><td class=\"tblborder\" colspan=\"3\" align=\"center\">"._NORESULTS."</td></tr>";
 		$output .= "<tr><th>"._STORIES."</th><th>"._REVIEWS."</th><th>"._UNRESPONDED."</th></tr>";
 		$x = 0;
+		$totalReviews = 0;
+		$totalUnresponded = 0;
 		if($numrows > 0) {
 			$query = dbquery("SELECT story.sid, story.title, story.reviews, sum(reviews.respond) as respond FROM ".TABLEPREFIX."fanfiction_stories as story JOIN ".TABLEPREFIX."fanfiction_reviews as reviews ON story.sid = reviews.item AND reviews.type = 'ST' LEFT JOIN ".TABLEPREFIX."fanfiction_coauthors AS c ON c.sid = story.sid WHERE (story.uid = '".USERUID."' OR c.uid = '".USERUID."') GROUP BY reviews.item ORDER BY story.title");
 			while($story = dbassoc($query)) {
 				if($story['reviews'] > 0) {
+				        $totalReviews += $story['reviews'];
+						$totalUnresponded += $story['reviews'] - $story['respond'];
 				        $output .= "<tr><td class=\"tblborder\">".$story['title']."</td><td class=\"tblborder\" align=\"center\"><a href=\"reviews.php?type=ST&amp;item="
 			                  .$story['sid']."\">".$story['reviews']."</a></td><td class=\"tblborder\" align=\"center\"><a href=\"reviews.php?type=ST&amp;item="
 			                  .$story['sid']."&amp;unresponded=1\">".($story['reviews'] - $story['respond'])."</a></td></tr>";
@@ -55,7 +59,12 @@ if(!defined("_CHARSET")) exit( );
 				}
 			}
 		}
-		if($x == 0) $output .= "<tr><td class=\"tblborder\" colspan=\"3\" align=\"center\">"._NORESULTS."</td></tr>";
+		if($x == 0) {
+		    $output .= "<tr><td class=\"tblborder\" colspan=\"3\" align=\"center\">"._NORESULTS."</td></tr>";
+		} else {
+			$output .= "<tr><td class=\"tblborder\"><b>Total</b></td><td class=\"tblborder\" align=\"center\"><a href=\"reviews.php?type=ALL\">".$totalReviews."</a></td>"
+			        .  "<td class=\"tblborder\" align=\"center\"><a href=\"reviews.php?type=ALL&amp;unresponded=1\">".$totalUnresponded."</a></td></tr>";
+		}
 		// For other items that might receive reviews such as fan art.
 		$code = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_codeblocks WHERE code_type = 'revreceived'");
 		while($c = dbassoc($code)) {

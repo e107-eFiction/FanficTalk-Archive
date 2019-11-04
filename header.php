@@ -303,6 +303,24 @@ $x = 0;
 */
 echo "</script>";
 }
+if (isset($tokeninput) && $tokeninput == 1) {
+  echo "<script type=\"text/javascript\" src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js\"></script>";
+  echo "<script type=\"text/javascript\" src=\"tokeninput/jquery.tokeninput.js\"></script>";
+  echo "<script type=\"text/javascript\">";
+  echo "$(document).ready(function () {
+          $(\"input.autocomplete\").each(function (idx, elem) {
+            var jqElem = $(elem);
+            var tokenInputOptions = get_token_input_options(jqElem);
+            var url = jqElem.attr('autocomplete_url');
+            var dynamicUrl = jqElem.attr('autocomplete_dynamic_url');
+            if (dynamicUrl) {
+              url = eval(dynamicUrl);
+            }
+            jqElem.tokenInput(url, tokenInputOptions);
+          });
+        });";
+  echo "</script>";
+}
 if(file_exists("extra_header.php")) include_once("extra_header.php");
 if(file_exists("$skindir/extra_header.php")) include_once("$skindir/extra_header.php");
 if(!$displaycolumns) $displaycolumns = 1;

@@ -15,6 +15,21 @@ function isNumber($num) {
 
 $catid = isset($_GET['catid']) ? explode(",", $_GET['catid']) : array(-1);
 $catid = array_filter($catid, "isNumber");
+if (isset($_GET['autocomplete'])) {
+$searchterm = $_GET['autocomplete'];
+$characters = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_characters WHERE ".(count($catid) > 1 ? "FIND_IN_SET(catid, '".implode(",", $catid)."') > 0" : "catid = '".$catid[0]."'")." AND charname LIKE \"%".$searchterm."%\" ORDER BY charname");
+$firstitem = true;
+echo "[";
+while ($char = dbassoc($characters)) {
+  if (!$firstitem) {
+    echo ",";
+  } else {
+    $firstitem = false;
+  }
+  echo "{\"id\":".$char['charid'].",\"name\":\"".stripslashes($char['charname'])."\"}";
+}
+echo "]";
+} else {
 $characters = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_characters WHERE ".(count($catid) > 1 ? "FIND_IN_SET(catid, '".implode(",", $catid)."') > 0" : "catid = '".$catid[0]."'")." ORDER BY charname");
 echo "var element = '".$_GET['element']."';\n";
 $x = 0;
@@ -23,5 +38,6 @@ $replace = array ('\"', "-", "\"", "\"", "'");
 while($char = dbassoc($characters)) {
 	echo "characters[$x] = new Array(".$char['charid'].", \"".urlencode(str_replace($find, $replace, stripslashes($char['charname'])))."\");\r\n";
 	$x++;
+}
 }
 ?>

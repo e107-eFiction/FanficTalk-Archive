@@ -27,6 +27,19 @@ if(!defined("_CHARSET")) exit( );
 
 if(!isset($catid)) $catid = array( );
 
+if (isset($tokeninput) && $tokeninput == 1) {
+  $output .= "<div style='width: 99.9%; float: left;'>\r\n
+                  <div style='width: 40%; float: left;'><label for='catid'>"._SELECTCATS."</label> <br />
+                  <input type='text' id='catid' name='catid'
+                         class='autocomplete'
+                         autocomplete_url='includes/categorylist.php'
+                   />
+                  </div>
+              </div>";
+/*
+		<input type='hidden' name='catid' id='catid' value='".(isset($cats) ? implode(",", $cats) : "")."'>
+*/
+} else {
 $output .= "<div style='width: 99.9%; float: left;'>\r\n
 		<div style='width: 40%; float: left;'><label for='catoptions'>"._CATOPTIONS."</label> <br />
 		<select name='catoptions' id='catoptions' multiple='multiple' size='8' onchange='resetCats(\"catoptions\");' style='width: 100%;'>";
@@ -51,4 +64,5 @@ $output .= "</select></div>
 			(!empty($selectedCats) ? $selectedCats : "")."</select></div>
 		</div>
 		<input type='hidden' name='catid' id='catid' value='".(isset($cats) ? implode(",", $cats) : "")."'>";
+}
 ?>

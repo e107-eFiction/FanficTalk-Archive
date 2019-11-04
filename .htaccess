@@ -15,7 +15,7 @@ deny from 192.162.167.196
 
 RewriteEngine On 
 RewriteCond %{SERVER_PORT} 80 
-RewriteRule ^(.*)$ https://hpfanfictalk.com/archive/$1 [R,L]
+# RewriteRule ^(.*)$ https://hpfanfictalk.com/archive/$1 [R,L]
 
 # BEGIN cPanel-generated php ini directives, do not edit
 # Manual editing of this file may result in unexpected behavior.

@@ -468,16 +468,9 @@ function ratingpics($rating) {
 			$ratingpics = ($dislike ? $dislike :"<img src=\""._BASEDIR."images/dislike.gif\" alt=\""._DISLIKED."\">");
 		else $ratingpics = "";
 	}
-	if($ratings == "1") {
-		global $star, $halfstar;
-		if($rating > 0) {
-			for($x = 0; $x < ($rating / 2) - .5; $x++) {
-				$ratingpics .= ($star ? $star  : "<img src=\""._BASEDIR."images/star.gif\" alt=\"star\">");
-			}
-			if($rating % 2 != 0) $ratingpics .= ($halfstar ? $halfstar  : "<img src=\""._BASEDIR."images/starhalf.gif\" alt=\"half-star\">");
-		}
+	if($rating >= 0)
+		$ratingpics = "<span title=\"number of likes\"><b>".$rating."</b></span>";
 		else $ratingpics = "";
-	}
 	if(!empty($ratingpics)) return "<span style='white-space: nowrap;'>$ratingpics</span>"; // the no-wrap style will keep the stars together
 	else return;
 }

@@ -1,9 +1,15 @@
 <!-- INCLUDE BLOCK : header -->
-{pagetitle}
-<div class="respond">{reviewslink}</div>
-<div class="jumpmenu">{jumpmenu}</div>
+{pagetitle}<br /><br />
 {output}
-<!-- INCLUDE BLOCK : reviewsblock -->
+<!-- START BLOCK : reviewsblock -->
+
+<b>Name:</b> {reviewer} ({member}) &middot; <b>Date:</b> {reviewdate} &middot; <b>For:</b> {chapter}
+<blockquote>{review}</blockquote>
+<div align="right">{adminoptions}</div>
+
+<br /><br />
+
+<!-- END BLOCK : reviewsblock -->
 {reviewpagelinks}
-{reviewform}
+{reviewslink}
 <!-- INCLUDE BLOCK : footer -->

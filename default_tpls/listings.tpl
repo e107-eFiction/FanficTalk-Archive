@@ -1,35 +1,90 @@
 <!-- START BLOCK : listings -->
 {seriesheader}
 <!-- START BLOCK : seriesblock -->
-<div class="listbox {oddeven}">
-<div class="title">{title} by {author}{score} [{reviews} - {numreviews}]</div>
-<div class="content"><span class="label">Summary: </span>{summary}<br />
-<span class="label">Parent Series:</span> {parentseries}<br />
-<span class="label">Categories:</span> {category}<br />
- <span class="label">Characters: </span>{characters}<br />
-{classifications}
-<span class="label">Stories:</span> {numstories}<br />
-<span class="label">Open:</span> {open} {addtofaves} {reportthis}
-{adminoptions}</div>
-</div>
-{comment}
+<div class="listbox {oddeven}  clearfix">
+  <div class="gb-full">
+    <hr class="style3">
+    <br/>
+    <h3>{title} {new} by {author}</h3>
+    <div align="center">
+      {numreviews} {reviews} &middot {score} likes
+    </div><br/>
+    <div align="center">{summary}</div><br/><br/>
+  </div>
+  <div class="gb-50">
+    <b>Fandoms:</b> {category}</span><br/>
+    <hr class="style2">
+    <span class label="Characters"><b>Characters:</b> {Characters}</span><br/>
+    <hr class="style2">
+    <span class label="Pairings"><b>Pairings:</b> {Pairings}</span><br/>
+  </div>
+  <div class="gb-50">
+    <span class label="Genre"><b>Genre:</b> {Genre}</span><br/>
+    <hr class="style2">
+    <span class label="Themes"><b>Themes:</b> {Themes}</span><br/>
+    <hr class="style2">
+    <span class label="Inclusivity"><b>Inclusivity:</b> {Inclusivity}</span><br/>
+  </div>
+  <div class="gb-full">
+    <br/>
+    <div align="center"><b>Series Type:</b> {open} {comment} {roundrobin}<br />{adminoptions}</div>
+      <div align="center">{adminlinks}</div><br/>
+      <hr class="style2">
+    	<br/><br/>
+  </div>
+</div><br/><br/>
 <!-- END BLOCK : seriesblock -->
+
 {stories}
 <!-- START BLOCK : storyblock -->
-<div class="listbox {oddeven}">
-<div class="title">{title} by {author} <span class="label">Rated:</span> {rating} {roundrobin} {score} [{reviews} - {numreviews}] {new} </div>
-<div class="content"><span class="label">Summary: </span>{featuredstory}{summary}<br />
-<span class="label">Categories:</span> {category} <br />
-<span class="label">Characters: </span> {characters}<br />
-{classifications}
-<span class="label">Series:</span> {serieslinks}<br />
-<span class="label">Chapters: </span> {numchapters} {toc}<br />
-<span class="label">Completed:</span> {completed}  
-<span class="label">Word count:</span> {wordcount} <span class="label">Read Count:</span> {count}
-{adminlinks}</div>
-<div class="tail"><span class="label">{addtofaves} {reportthis} Published: </span>{published} <span class="label">Updated:</span> {updated}</div>
+<div class="listbox {oddeven} clearfix">
+  <hr class="style3">
+  <div class="gb-full">
+    <h3>{featuredstory} {title} by {author}</h3>
+  	<div align="right">{print} {printepub}</div>
+  	<div id="output">
+  		<div class="jumpmenu">{jumpmenu}</div>
+  		<div class="listbox">
+  			<div align="center">
+  				<h7><b>Fandom: {category}</b> &middot	<b>Rating:</b> {rating} &middot {completed} <span class label="Story_Type">{Story_Type}</span><br/>
+  				{numreviews} {reviews} &middot {score} likes &middot {count} reads</h7>
+  			</div><br/><br/>
+  		<blockquote2>{summary}</blockquote2><br/><br/>
+      </div>
+  	</div>
+  </div>
+  <div class="gb-50">
+  	<span class label="Characters"><b>Characters:</b> {Characters}</span><br/>
+  	<hr class="style2">
+  	<span class label="Pairings"><b>Pairings:</b> {Pairings}</span><br/>
+  	<hr class="style2">
+  	<b>Story Length:</b> {numchapters} chapters ({wordcount} words)<br/>
+  	<hr class="style2">
+  	<span class label="Forum_House"><b>HPFT Forum House:</b> {Forum_House}</span><br/>
+    <hr class="style2">
+  </div>
+  <div class="gb-50">
+  	<span class label="Genre"><b>Genre:</b> {Genre}</span><br/>
+  	<hr class="style2">
+  	<span class label="Themes"><b>Themes:</b> {Themes}</span><br/>
+  	<hr class="style2">
+  	<span class label="Inclusivity"><b>Inclusivity:</b> {Inclusivity}</span><br/>
+  	<hr class="style2">
+  	<span class label="Advisories"><b>Advisories:</b> {Advisories}</span>
+    <hr class="style2">
+  </div>
+  <div class="gb-full">
+  		<div align="center"><span class label="Series"><b>Series:</b> {serieslinks}</span></div>
+      <br/>
+  		<div align="center"><b>Published:</b> {published} &middot; <b>Updated:</b> {updated}</div>
+      <div align="center"><h7>{last_read}</h7></div>
+      <div align="center"><h7>{addtofaves}</h7> &middot; <h7>{tracker}</h7></div>
+      <div align="center">{adminlinks}</div>
+      <br/>
+      <hr class="style2">
+  </div>
+  <br/>
 </div>
-{comment}
 <!-- END BLOCK : storyblock -->
 {pagelinks}
 <!-- END BLOCK : listings -->

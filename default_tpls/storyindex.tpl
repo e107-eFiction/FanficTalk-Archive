@@ -1,30 +1,55 @@
 <!-- INCLUDE BLOCK : header -->
-<div id="pagetitle">{title} by {author}</div>
-<div id="sort"> [{reviews} - {numreviews}] {score}{printicon}</div>
-<div id="output">
-<div class="jumpmenu">{jumpmenu}</div>
-<div class="listbox">
-<div class="content">{featuredstory}<span class="label">Summary: </span>{summary}<br />
-<span class="label">Rated:</span> {rating}<br />
-<span class="label">Categories:</span> {category} <span class="label">Characters: </span> {characters}<br />
-{classifications}
-<span class="label">Challenges:</span> {challengelinks}<br /> <span class="label">Series:</span> {serieslinks}<br />
-<span class="label">Chapters: </span> {numchapters} <span class="label">Completed:</span> {completed} <br /> 
-<span class="label">Word count:</span> {wordcount} <span class="label">Read:</span> {count}<br />
-<span class="label"> Published: </span>{published} <span class="label">Updated:</span> {updated} </div>
-{adminlinks}
+<div class="gb-full"><br/>
+	<h3>{featuredstory} {title} by {author}</h3>
+	<div align="right">{printicon} {printepub}</div>
+	<div id="output">
+		<div class="jumpmenu">{jumpmenu}</div>
+		<div class="listbox">
+			<div align="center">
+				<b>Fandom: {category}</b> &middot	<b>Rating:</b> {rating} &middot {completed} <span class label="Story_Type">{Story_Type}</span><br/>
+				{numreviews} {reviews} &middot {score} likes &middot {count} reads
+			</div><br/><br/>
+		<blockquote2>{summary}</blockquote2><br/><br/></div>
+	</div>
+<div class="gb-50">
+	<span class label="Characters"><b>Characters:</b> {Characters}</span><br/>
+	<hr class="style2">
+	<span class label="Pairings"><b>Pairings:</b> {Pairings}</span><br/>
+	<hr class="style2">
+	<b>Story Length:</b> {numchapters} chapters ({wordcount} words)<br/>
+	<hr class="style2">
+	<span class label="Forum_House"><b>HPFT Forum House:</b> {Forum_House}</span><br/>
 </div>
-<div style='text-align: center;'>{addtofaves}</div>
-<!-- START BLOCK : storynotes -->
-<div class='notes'><div class='title'><span class='label'>Story Notes:</span></div><div class='noteinfo'>{storynotes}</div></div>
-<!-- END BLOCK : storynotes -->
-<!-- START BLOCK : storyindexblock -->
-      <p><b>{chapternumber}. {title} </b>by {author} [{reviews} - {numreviews}] {ratingpics} ({wordcount} words)<br />
-	{chapternotes}{adminoptions}</p>
-<!-- END BLOCK : storyindexblock -->
-{storyend}{last_read}
-<div id="pagelinks"><div class="jumpmenu">{jumpmenu2}</div></div>
-<div class="respond">{roundrobin}</div>
-{reviewform}
+<div class="gb-50">
+	<span class label="Genre"><b>Genre:</b> {Genre}</span><br/>
+	<hr class="style2">
+	<span class label="Themes"><b>Themes:</b> {Themes}</span><br/>
+	<hr class="style2">
+	<span class label="Inclusivity"><b>Inclusivity:</b> {Inclusivity}</span><br/>
+	<hr class="style2">
+	<span class label="Advisories"><b>Advisories:</b> {Advisories}</span>
 </div>
+<div class="gb-full">
+		<div align="center"><span class label="Series"><b>Series:</b> {serieslinks}</span></div>
+		<div align="center">	<b>Published:</b> {published} &middot; <b>Updated:</b> {updated}</div>
+		<div align="center">{addtofaves} &middot; {tracker} {last_read}<br/></div>
+		<div align="center">{adminlinks}</div>
+	<!-- START BLOCK : storynotes -->
+	<blockquote>{storynotes}</blockquote>
+	<br/>
+	<!-- END BLOCK : storynotes -->
+	<hr class="style2">
+	<br/>
+
+	<!-- START BLOCK : storyindexblock -->
+	<b>{chapternumber}.</b> {title} by {author} ({wordcount} words) &middot {numreviews} {reviews} &middot {ratingpics} likes
+	<br/>
+	<i>{chapternotes}</i>
+	<br/>{adminoptions}
+	<!-- END BLOCK : storyindexblock -->
+	<div id="pagelinks"><div class="jumpmenu">{jumpmenu2}</div></div>
+	<div class="respond">{roundrobin}</div>
+	{reviewform}
+	<div align="center">{storyend}</div>
+</div></div>
 <!-- INCLUDE BLOCK : footer -->

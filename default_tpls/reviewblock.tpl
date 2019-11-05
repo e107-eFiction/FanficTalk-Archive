@@ -1,12 +1,6 @@
 <!-- START BLOCK : reviewsblock -->
-<div class="listbox">
-<div class="content{oddeven}">
-<span class="label">Reviewer: </span>{reviewer} <span class="label">{member}</span> {rating} {reportthis}<br />
-<span class="label">Date: </span>{reviewdate}
-<span class="label">Story:</span>{storytitle}
-<span class="label">Chapter: </span>{chapter}
-<p>{review}</p>
-{adminoptions}
-</div>
-</div>
+<span class="label">Reviewer: </span>{reviewer} <span class="label">{member}</span> {reportthis}<br />
+<span class="label">Date: </span>{reviewdate} &middot; <span class="label">Title: </span>{chapter}
+<blockquote><p><br/>{review}</p></blockquote>
+<br/><div align="center">{adminoptions}</div><br/>
 <!-- END BLOCK : reviewsblock -->

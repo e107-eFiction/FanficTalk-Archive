@@ -6,13 +6,15 @@
 		<div class="jumpmenu">{jumpmenu}</div>
 		<div class="listbox">
 			<div align="center">
-				<b>Fandom: {category}</b> &middot	<b>Rating:</b> {rating} &middot {completed} <span class label="Story_Type">{Story_Type}</span><br/>
-				{numreviews} {reviews} &middot {score} likes &middot {count} reads
+				<b>Fandom: {category}</b>
+				<br/>
+				<b>Rating:</b> {rating} &middot; {completed} <span class label="Story_Type">{Story_Type}</span><br/>
+				{numreviews} {reviews} &middot; {score} likes &middot; {count} reads
 			</div><br/><br/>
 		<blockquote2>{summary}</blockquote2><br/><br/></div>
 	</div>
 <div class="gb-50">
-	<span class label="Characters"><b>Characters:</b> {Characters}</span><br/>
+	<span class label="Characters"><b>Characters:</b> {characters}</span><br/>
 	<hr class="style2">
 	<span class label="Pairings"><b>Pairings:</b> {Pairings}</span><br/>
 	<hr class="style2">
@@ -23,9 +25,9 @@
 <div class="gb-50">
 	<span class label="Genre"><b>Genre:</b> {Genre}</span><br/>
 	<hr class="style2">
-	<span class label="Themes"><b>Themes:</b> {Themes}</span><br/>
+	<span class label="Themes"><b>Themes:</b> {themes}</span><br/>
 	<hr class="style2">
-	<span class label="Inclusivity"><b>Inclusivity:</b> {Inclusivity}</span><br/>
+	<span class label="Inclusivity"><b>Inclusivity:</b> {inclusivity}</span><br/>
 	<hr class="style2">
 	<span class label="Advisories"><b>Advisories:</b> {Advisories}</span>
 </div>

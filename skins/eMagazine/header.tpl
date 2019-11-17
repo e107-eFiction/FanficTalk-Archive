@@ -7,34 +7,34 @@
 								<li><a href="index.php"><h6>Archive</h6></a></li>
 								<li><a href="https://www.hpfanfictalk.com/forums"><h6>Forums</h6></a></li>
 								<li>
-										<label for="drop-1" class="toggle"><h5>Find Stories  <img src="images/arrow-red.png"></h5></label>
-										<h5>Find Stories <img src="images/arrow-red.png"></h5>
-										<input type="checkbox" id="drop-1"/>
-										<ul>
-												<li><a href="browse.php?type=recent" title="Recent" id="current"><h8><h8>Recent</h8></a></li>
-												<li><a href="browse.php?type=categories" title: "Fandoms" id="current"><h8>Fandoms</h8></a></li>
-												<li><a href="browse.php" title="Browse" id="current"><h8>Browse</h8></a></li>
-												<li><a href="search.php" title="Search" id="current"><h8>Search</h8></a></li>
-												<li><a href="authors.php?list=authors" title: "Authors" id="current"><h8>Authors</h8></a></li>
-										</ul>
-								</li>
-								<li>
-										<label for="drop-2" class="toggle"><h5>Write Stories  <img src="images/arrow-red.png"></h5></label>
-										<h5>Write Stories <img src="images/arrow-red.png"></h5>
+										<label for="drop-2" class="toggle"><h5>Account  <img src="images/arrow-red.png"></h5></label>
+										<a href=""><h5>Account <img src="images/arrow-red.png"></h5></a>
 										<input type="checkbox" id="drop-2"/>
 										<ul>
-												<li><h8>{login}</h8></li>
-												<li><h8>{register}{logout}</h8></li>
-												<li><a href="https://hpfanfictalk.com/blogs/entry/213-get-feedback/" title="Get Feedback" id="current"><h8>Get Feedback</h8></a></li>
+												<li><h6>{login}</h6></li>
+												<li><h6>{register}{logout}</h6></li>
 										</ul>
 								</li>
 								<li>
-										<label for="drop-3" class="toggle"><h5>Explore Podfics  <img src="images/arrow-red.png"></h5></label>
-										<h5>Explore Podfics <img src="images/arrow-red.png"></h5></a>
+										<label for="drop-1" class="toggle"><h5>Read  <img src="images/arrow-red.png"></h5></label>
+										<a href=""><h5>Read <img src="images/arrow-red.png"></h5></a>
+										<input type="checkbox" id="drop-1"/>
+										<ul>
+												<li><a href="browse.php?type=recent" title="Recent" id="current"><h6>Recent</h6></a></li>
+												<li><a href="browse.php?type=categories" title: "Fandoms" id="current"><h6>Fandoms</h6></a></li>
+												<li><a href="browse.php" title="Browse" id="current"><h6>Browse</h6></a></li>
+												<li><a href="search.php" title="Search" id="current"><h6>Search</h6></a></li>
+												<li><a href="authors.php?list=authors" title: "Authors" id="current"><h6>Authors</h6></a></li>
+										</ul>
+								</li>
+								<li>
+
+										<label for="drop-3" class="toggle"><h5>Podfics  <img src="images/arrow-red.png"></h5></label>
+										<a href=""><h5>Podfics <img src="images/arrow-red.png"></h5></a>
 										<input type="checkbox" id="drop-3"/>
 										<ul>
-												<li><a href="https://hpft-wirelesswizardingnetwork.tumblr.com/tagged/podfic" title="Listen" id="current"><h8>Listen</h8></a></li>
-												<li><a href="https://hpfanfictalk.com/forum/304-wireless-wizarding-network/" title="Request" id="current"><h8>Request a Podfic</h8></a></li>
+												<li><a href="https://hpfanfictalk.com/topic/5844-published-podfics/" title="Listen" id="current"><h6>Listen</h6></a></li>
+												<li><a href="https://hpfanfictalk.com/forum/304-wireless-wizarding-network/" title="Request" id="current"><h6>Request a Podfic</h6></a></li>
 										</ul>
 								</li>
 								<li>

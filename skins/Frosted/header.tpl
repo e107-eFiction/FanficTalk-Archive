@@ -20,7 +20,7 @@
 				<ul>
 					<li><a href="browse.php?type=recent" title="Recent" id="current"><h6>Recent</h6></a></li>
 					<li><a href="browse.php?type=categories" title: "Fandoms" id="current"><h6>Fandoms</h6></a></li>
-					<li><a href="" title: "Authors" id="current"><h6>Authors</h6></a></li>
+					<li><a href="authors.php?list=authors" title: "Authors" id="current"><h6>Authors</h6></a></li>
 				</ul>
 			</li>
 			<li><label for="drop-3" class="toggle"><h5>Podfics  <img src="images/arrow-red.png"></h5></label>

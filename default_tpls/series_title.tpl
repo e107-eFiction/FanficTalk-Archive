@@ -10,7 +10,7 @@
 <div class="gb-50">
   <b>Fandoms:</b> {category}</span><br/>
   <hr class="style2">
-  <span class label="Characters"><b>Characters:</b> {Characters}</span><br/>
+  <span class label="Characters"><b>Characters:</b> {characters}</span><br/>
   <hr class="style2">
   <span class label="Pairings"><b>Pairings:</b> {Pairings}</span><br/>
 </div>

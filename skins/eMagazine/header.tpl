@@ -22,8 +22,8 @@
 										<ul>
 												<li><a href="browse.php?type=recent" title="Recent" id="current"><h6>Recent</h6></a></li>
 												<li><a href="browse.php?type=categories" title: "Fandoms" id="current"><h6>Fandoms</h6></a></li>
-												<li><a href="browse.php" title: "Browse" id="current"><h6>Browse</h6></a></li>
-												<li><a href="search.php" title: "Search" id="current"><h6>Search</h6></a></li>
+												<li><a href="browse.php" title="Browse" id="current"><h6>Browse</h6></a></li>
+												<li><a href="search.php" title="Search" id="current"><h6>Search</h6></a></li>
 												<li><a href="authors.php?list=authors" title: "Authors" id="current"><h6>Authors</h6></a></li>
 										</ul>
 								</li>
@@ -33,7 +33,7 @@
 										<a href=""><h5>Podfics <img src="images/arrow-red.png"></h5></a>
 										<input type="checkbox" id="drop-3"/>
 										<ul>
-												<li><a href="https://hpft-wirelesswizardingnetwork.tumblr.com/tagged/podfic" title="Listen" id="current"><h6>Listen</h6></a></li>
+												<li><a href="https://hpfanfictalk.com/topic/5844-published-podfics/" title="Listen" id="current"><h6>Listen</h6></a></li>
 												<li><a href="https://hpfanfictalk.com/forum/304-wireless-wizarding-network/" title="Request" id="current"><h6>Request a Podfic</h6></a></li>
 										</ul>
 								</li>

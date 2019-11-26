@@ -6,8 +6,10 @@
 		<div class="jumpmenu">{jumpmenu}</div>
 		<div class="listbox">
 			<div align="center">
-				<b>Fandom: {category}</b> &middot	<b>Rating:</b> {rating} &middot {completed} <span class label="Story_Type">{story_type}</span><br/>
-				{numreviews} {reviews} &middot {score} likes &middot {count} reads
+				<b>Fandom: {category}</b>
+				<br/>
+				<b>Rating:</b> {rating} &middot; {completed} <span class label="Story_Type">{Story_Type}</span><br/>
+				{numreviews} {reviews} &middot; {score} likes &middot; {count} reads
 			</div><br/><br/>
 		<blockquote2>{summary}</blockquote2><br/><br/></div>
 	</div>

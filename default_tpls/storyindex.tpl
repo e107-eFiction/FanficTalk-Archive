@@ -16,20 +16,20 @@
 <div class="gb-50">
 	<span class label="Characters"><b>Characters:</b> {characters}</span><br/>
 	<hr class="style2">
-	<span class label="Pairings"><b>Pairings:</b> {Pairings}</span><br/>
+	<span class label="Pairings"><b>Pairings:</b> {pairings}</span><br/>
 	<hr class="style2">
 	<b>Story Length:</b> {numchapters} chapters ({wordcount} words)<br/>
 	<hr class="style2">
-	<span class label="Forum_House"><b>HPFT Forum House:</b> {Forum_House}</span><br/>
+	<span class label="Forum_House"><b>HPFT Forum House:</b> {forum_house}</span><br/>
 </div>
 <div class="gb-50">
-	<span class label="Genre"><b>Genre:</b> {Genre}</span><br/>
+	<span class label="Genre"><b>Genre:</b> {genre}</span><br/>
 	<hr class="style2">
 	<span class label="Themes"><b>Themes:</b> {themes}</span><br/>
 	<hr class="style2">
 	<span class label="Inclusivity"><b>Inclusivity:</b> {inclusivity}</span><br/>
 	<hr class="style2">
-	<span class label="Advisories"><b>Advisories:</b> {Advisories}</span>
+	<span class label="Advisories"><b>Advisories:</b> {advisories}</span>
 </div>
 <div class="gb-full">
 		<div align="center"><span class label="Series"><b>Series:</b> {serieslinks}</span></div>

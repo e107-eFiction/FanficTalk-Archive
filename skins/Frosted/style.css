@@ -648,6 +648,11 @@ li > a:only-child:after { content: ''; }
 
 	@media all and (max-width : 800px) {
 
+		body {
+			margin-left: 5%;
+			margin-right: 5%;
+		}
+
 		nav {
 			margin: 0;
 		}

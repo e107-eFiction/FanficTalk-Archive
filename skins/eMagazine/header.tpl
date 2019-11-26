@@ -1,11 +1,11 @@
 <!-- START BLOCK : header -->
 <body>
 	<nav>
-				<label for="drop" class="toggle"><div align="center"><h6>Menu</h6></div></label>
+				<label for="drop" class="toggle"><div align="center"><h5>Menu</h5></div></label>
 				<input type="checkbox" id="drop" />
 						<ul class="menu">
-								<li><a href="index.php"><h6>Archive</h6></a></li>
-								<li><a href="https://www.hpfanfictalk.com/forums"><h6>Forums</h6></a></li>
+								<li><a href="index.php"><h5>Archive</h5></a></li>
+								<li><a href="https://www.hpfanfictalk.com/forums"><h5>Forums</h5></a></li>
 								<li>
 										<label for="drop-2" class="toggle"><h5>Account  <img src="images/arrow-red.png"></h5></label>
 										<a href=""><h5>Account <img src="images/arrow-red.png"></h5></a>
@@ -39,27 +39,27 @@
 								</li>
 								<li>
 									<label for="drop-4" class="toggle"><h5>Hall of Fame  <img src="images/arrow-red.png"></h5></label>
-									<h5>Hall of Fame <img src="images/arrow-red.png"></h5>
+									<a href=""><h5>Hall of Fame <img src="images/arrow-red.png"></h5></a>
 									<input type="checkbox" id="drop-4"/>
 									<ul>
-											<li><a href="viewpage.php?page=FROGS" title="FROGS" id="current"><h8>FROGS Awards</h8></a></li>
-											<li><a href="viewseries.php?seriesid=113" title="Pride of Gryffindor Awards" id="current"><h8>Gryffindor Awards</h8></a></li>
-											<li><a href="viewseries.php?seriesid=116" title="Golden Chalice Awards" id="current"><h8>Hufflepuff Awards</h8></a></li>
-											<li><a href="viewseries.php?seriesid=117" title="Nargles Awards" id="current"><h8>Ravenclaw Awards</h8></a></li>
-											<li><a href="viewseries.php?seriesid=118" title="Slytherin MFWHATA Awards" id="current"><h8>Slytherin Awards</h8></a></li>
-											<li><a href="browse.php?type=featured" title="Featured Stories" id="current"><h8>Featured Stories</h8></a></li>
-											<li><a href="toplists.php" title="Top Tens" id="current"><h8>Ten Tens</h8></a></li>
+											<li><a href="viewseries.php?seriesid=193" title="FROGS" id="current"><h6>FROGS Awards</h6></a</li>
+											<li><a href="viewseries.php?seriesid=113" title="Pride of Gryffindor Awards" id="current"><h6>Gryffindor Awards</h6></a></li>
+											<li><a href="viewseries.php?seriesid=116" title="Golden Chalice Awards" id="current"><h6>Hufflepuff Awards</h6></a></li>
+											<li><a href="viewseries.php?seriesid=117" title="Nargles Awards" id="current"><h6>Ravenclaw Awards</h6></a></li>
+											<li><a href="viewseries.php?seriesid=118" title="Slytherin MFWHATA Awards" id="current"><h6>Slytherin Awards</h6></a></li>
+											<li><a href="browse.php?type=featured" title="Featured Stories" id="current"><h6>Featured Stories</h6></a></li>
+											<li><a href="toplists.php" title="Top Tens" id="current"><h6>Top Tens</h6></a></li>
 									</ul>
 								</li>
 								<li>
 									<label for="drop-5" class="toggle"><h5>Help  <img src="images/arrow-red.png"></h5></label>
-									<h5>Help <img src="images/arrow-red.png"></h5>
+									<a href=""><h5>Help <img src="images/arrow-red.png"></h5></a>
 									<input type="checkbox" id="drop-5"/>
 									<ul>
-										<li><a href="viewpage.php?page=faq" title="Frequently Asked Questions" id="current"><h8>FAQ</h8></a></li>
-										<li><a href="viewpage.php?page=siteguidelines" title="Site Guidelines" id="current"><h8>Guidelines</h8></a></li>
-								    <li><a href="viewseries.php?seriesid=3" title="Staff Tutorials" id="current"><h8>Tutorials</h8></a></li>
-										<li><a href="https://hpfanfictalk.com/staff/" title="Staff" id="current"><h8>Staff</h8></a></li>
+										<li><a href="https://hpfanfictalk.com/blogs/entry/213-archive-faq/" title="FAQ" id="current"><h6>FAQ</h6></a></li>
+										<li><a href="https://hpfanfictalk.com/guidelines/" title="Site Guidelines" id="current"><h6>Guidelines</h6></a></li>
+								    <li><a href="viewseries.php?seriesid=3" title="Staff Tutorials" id="current"><h6>Tutorials</h6></a></li>
+										<li><a href="https://hpfanfictalk.com/staff/" title="Staff" id="current"><h6>Staff</h6></a></li>
 									</ul>
 								</li>
 								{adminarea}

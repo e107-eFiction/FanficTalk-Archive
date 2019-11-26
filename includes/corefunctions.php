@@ -462,6 +462,12 @@ function ratingpics($rating) {
 	global $ratings, $like, $dislike, $star, $halfstar;
 	$ratingpics = "";
 	if($ratings == "2") {
+		if($rating >= 0.5)
+			$ratingpics = ($like ? $like : "<img src=\""._BASEDIR."images/like.gif\" alt=\""._LIKED."\">");
+		else if(($rating < 0.5) && ($rating > 0))
+			$ratingpics = ($dislike ? $dislike :"<img src=\""._BASEDIR."images/dislike.gif\" alt=\""._DISLIKED."\">");
+		else $ratingpics = "";
+	}
 	if($rating >= 0)
 		$ratingpics = "<span title=\"number of likes\"><b>".$rating."</b></span>";
 		else $ratingpics = "";

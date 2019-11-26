@@ -22,6 +22,8 @@
 										<ul>
 												<li><a href="browse.php?type=recent" title="Recent" id="current"><h6>Recent</h6></a></li>
 												<li><a href="browse.php?type=categories" title: "Fandoms" id="current"><h6>Fandoms</h6></a></li>
+												<li><a href="browse.php" title: "Browse" id="current"><h6>Browse</h6></a></li>
+												<li><a href="search.php" title: "Search" id="current"><h6>Search</h6></a></li>
 												<li><a href="authors.php?list=authors" title: "Authors" id="current"><h6>Authors</h6></a></li>
 										</ul>
 								</li>

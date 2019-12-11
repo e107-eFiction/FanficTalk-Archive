@@ -22,7 +22,7 @@
 // To read the license please visit http://www.gnu.org/copyleft/gpl.html
 // ----------------------------------------------------------------------
 
-if(!defined("_CHARSET")) exit( );
+if(!defined("_CHARSET")) exit( ); 
 
 	if(isset($_GET['do'])) $do = $_GET["do"];
 	else $do = false;
@@ -37,7 +37,7 @@ if(!defined("_CHARSET")) exit( );
 					$output .= write_error(_ERROR." "._TRYAGAIN);
 				}
 			}
-			else 
+			else
 			$output .= write_message(_ACTIONCANCELLED);
 		}
 		else {
@@ -71,7 +71,7 @@ if(!defined("_CHARSET")) exit( );
 				$output .= "<select name=\"uid\">";
 				while($users = dbassoc($query)) {
 					if(!$users['level']) $output .= "<option value=\"".$users['uid']."\"".($uid == $users['uid'] ? " selected" : "").">".$users['penname']."</option>";
-				}	
+				}
 				$output .= "</select></div>";
 			}
 			else if($do == "edit" && !empty($uid)) {

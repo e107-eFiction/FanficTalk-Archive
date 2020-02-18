@@ -40,7 +40,7 @@
 <div class="listbox {oddeven} clearfix">
   <hr class="style3">
   <div class="gb-full">
-    <h3>{featuredstory} {title} by {author}</h3>
+    <h3>{featuredstory} {haspodfic} {title} by {author}</h3>
   	<div align="right">{print} {printepub}</div>
   	<div id="output">
   		<div class="jumpmenu">{jumpmenu}</div>

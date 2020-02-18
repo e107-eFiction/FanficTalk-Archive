@@ -37,8 +37,8 @@ include("includes/pagesetup.php");
 include("includes/storyform.php");
 
 
-// before doing anything else check if the visitor is logged in.  If they are, check if they're an admin.  If not, check that they're 
-// trying to edit/delete/etc. their own stuff then get the penname 
+// before doing anything else check if the visitor is logged in.  If they are, check if they're an admin.  If not, check that they're
+// trying to edit/delete/etc. their own stuff then get the penname
 	if(!isMEMBER || ($submissionsoff && !isADMIN) || (!isADMIN && isset($uid))) accessDenied( );
 	if(!isADMIN || uLEVEL > 3) {
 		if(isset($chapid)) {
@@ -85,16 +85,17 @@ function preview_story($stories) {
 		$text .= "<br /><br />";
 		if(isset($_GET['textsize'])) $textsize = $_GET['textsize'];
 		else $textsize = 0;
-		
+
 		if(file_exists("./$skindir/viewstory.tpl")) $tpl = new TemplatePower("./$skindir/viewstory.tpl");
 		else $tpl = new TemplatePower(_BASEDIR."default_tpls/viewstory.tpl");
-		$tpl->prepare( );			
+		$tpl->prepare( );
 		include("includes/storyblock.php");
 		$tpl->assign("adminlinks", $adminlinks);
 		if($stories['inorder'] == 1 && !empty($stories['storynotes'])) {
 			$tpl->gotoBlock("_ROOT");
 			$tpl->newBlock("storynotes");
 			$tpl->assign( "storynotes", stripslashes($stories['storynotes']));
+			$tpl->assign("podficlink")
 			$tpl->gotoBlock("_ROOT");
 		}
 		if(!empty($stories['notes'])) {
@@ -174,7 +175,7 @@ function newstory( ) {
 	$pattern = "/[^(\w|\d|\'|\"|\.|\!|\?|;|,|\\|\/|\-\-|:|\&|@)]+/";
 	$words_to_count = preg_replace ($pattern, " ", $words_to_count);
 	$words_to_count = trim($words_to_count);
-	$wordcount = count(explode(" ",$words_to_count)); 
+	$wordcount = count(explode(" ",$words_to_count));
 	$au[] = $uid;
 	if(count($coauthors)) {
 		$au = array_merge($au, $coauthors);
@@ -206,7 +207,7 @@ function newstory( ) {
 		}
 	}
 //end error checking
-	if(isset($_POST['submit']) && $_POST['submit'] == _ADDSTORY && !isset($submit)) 
+	if(isset($_POST['submit']) && $_POST['submit'] == _ADDSTORY && !isset($submit))
 	{
 
 		$result = dbquery("SELECT "._UIDFIELD." as uid, "._PENNAMEFIELD." as penname, "._EMAILFIELD." as email, validated FROM "._AUTHORTABLE.", ".TABLEPREFIX."fanfiction_authorprefs as ap WHERE "._UIDFIELD." = '$uid' AND ap.uid = "._UIDFIELD." LIMIT 1");
@@ -302,9 +303,9 @@ function newstory( ) {
 					$subject = _NEWSTORYAT.$sitename;
 					$mailtext = sprintf(_AUTHORALERTNOTE, $title, implode(", ", $pennames), $summary, $sid);
 					$favorites = dbquery("SELECT "._UIDFIELD." as uid, "._EMAILFIELD." as email, "._PENNAMEFIELD." as penname, alertson FROM ".TABLEPREFIX."fanfiction_favorites as fav, ".TABLEPREFIX."fanfiction_authorprefs as ap, "._AUTHORTABLE." WHERE FIND_IN_SET(fav.item,'".implode(",", $au)."') > 0 AND fav.type = 'AU' AND fav.uid = "._UIDFIELD." AND ap.uid = "._UIDFIELD." AND ap.alertson = '1'");
-					while($favuser = dbassoc($favorites)) { 
+					while($favuser = dbassoc($favorites)) {
 						sendemail($favuser['penname'], $favuser['email'], $sitename, $siteemail, $subject, $mailtext, "html");
-					}				
+					}
 				}
 				dbquery("UPDATE ".TABLEPREFIX."fanfiction_stats SET stories = stories + 1");
 				dbquery("UPDATE ".TABLEPREFIX."fanfiction_authorprefs SET stories = stories + 1 WHERE FIND_IN_SET(uid, '".implode(",", $au)."') > 0");
@@ -320,7 +321,7 @@ function newstory( ) {
 				$subject = _STORYALERT;
 				$mailtext = sprintf(_STORYALERTNOTE, $title, implode(", ", $pennames), $sid, $inorder);
 				$favorites = dbquery("SELECT "._UIDFIELD." as uid, "._EMAILFIELD." as email, "._PENNAMEFIELD." as penname, alertson FROM ".TABLEPREFIX."fanfiction_favorites as fav, ".TABLEPREFIX."fanfiction_authorprefs as ap, "._AUTHORTABLE." WHERE fav.item = '$sid' AND fav.type = 'ST' AND fav.uid = "._UIDFIELD." AND ap.uid = "._UIDFIELD." AND ap.alertson = '1'");
-				while($favuser = dbassoc($favorites)) { 
+				while($favuser = dbassoc($favorites)) {
 					sendemail($favuser['penname'], $favuser['email'], $sitename, $siteemail, $subject, $mailtext, "html");
 				}
 			}
@@ -343,9 +344,9 @@ function newstory( ) {
 				if($admins['contact'] == 1) {
 					if(!$admins['categories']) {
 						$subject = _NEWSTORYAT.$sitename;
-						$mailtext = sprintf(_NEWSTORYAT2, $storytitle, $authorpenname, $summary)."\n <a href='$url/admin.php?action=submitted'>$url/admin.php?action=submitted</a>";							
+						$mailtext = sprintf(_NEWSTORYAT2, $storytitle, $authorpenname, $summary)."\n <a href='$url/admin.php?action=submitted'>$url/admin.php?action=submitted</a>";
 						$mailresult = sendemail($admins['penname'], $admins['email'], $sitename, $siteemail, $subject, $mailtext, "html");
-					}	
+					}
 					else {
 						if(count(array_intersect($catid, explode(",", $admins['categories'])))) {
 							$subject = _NEWSTORYAT.$sitename;
@@ -393,7 +394,7 @@ function newstory( ) {
 		$rquery = dbquery("SELECT message_title, message_text FROM ".TABLEPREFIX."fanfiction_messages WHERE message_name = 'rules' LIMIT 1");
 		list($ruletitle, $ruletext) = dbrow($rquery);
 		$output .= "<div class=\"sectionheader\">$ruletitle</div>$ruletext";
-	}	
+	}
 	if($storytext){
 		$stories['storytext'] = $storytext;
 		$stories['chaptertitle'] = $chaptertitle;
@@ -415,7 +416,7 @@ function newstory( ) {
 	<form METHOD=\"POST\" name=\"form\" enctype=\"multipart/form-data\" action='stories.php?action=$action".($newchapter ? "&amp;sid=$sid&amp;inorder=$inorder" : "").($admin == 1 ? "&amp;admin=1&amp;uid=$uid" : "")."'>";
 	if(!$newchapter) $output .= storyform($stories, $submit);
 	$output .= chapterform($inorder, $notes, $endnotes, $storytext, $chaptertitle, $uid);
-	$output .= "<div style=\"text-align: center;\"><input type=\"submit\" class=\"button\" value=\""._PREVIEW."\" name=\"submit\">&nbsp; <input type=\"submit\" class=\"button\" 
+	$output .= "<div style=\"text-align: center;\"><input type=\"submit\" class=\"button\" value=\""._PREVIEW."\" name=\"submit\">&nbsp; <input type=\"submit\" class=\"button\"
                  value=\""._ADDSTORY."\" name=\"submit\"></div></form></div>";
 	return $output;
 }
@@ -444,16 +445,16 @@ if($date) $output .=write_message(sprintf("The oldest chapter in the queue is fr
 			if($go == "up") $oneabove = $inorder - 1;
 			else $oneabove = $inorder + 1;
 			dbquery("UPDATE ".TABLEPREFIX."fanfiction_chapters SET inorder = '$inorder' WHERE sid = '$sid' and inorder = '$oneabove'");
-			dbquery("UPDATE ".TABLEPREFIX."fanfiction_chapters SET inorder = '$oneabove' WHERE chapid = '$chapid'");	
+			dbquery("UPDATE ".TABLEPREFIX."fanfiction_chapters SET inorder = '$oneabove' WHERE chapid = '$chapid'");
 		}
 		if($com)  dbquery("UPDATE ".TABLEPREFIX."fanfiction_stories SET completed = ".($com == "yes" ? "1" : "0")." WHERE sid = '$sid'");
 	}
 	$output .= "<p style=\"text-align: right; margin: 1em;\"><a href=\"stories.php?action=viewstories&amp;chapters=".($hidechapters != "view" ? "view\">"._VIEWCHAPTERS : "hide\">"._HIDECHAPTERS)."</a></p>
 		<div style=\"width: 90%; margin: 0 auto;\"><table cellpadding=\"3\" cellspacing=\"0\" width=\"100%\" class=\"tblborder\"><tr><th class=\"tblborder\">"._STORIES."</th><th colspan=\"3\" class=\"tblborder\">"._OPTIONS."</th><th colspan=\"1\" class=\"tblborder\">"._HIDE."</th>".($reviewsallowed ? "<th class=\"tblborder\">"._REVIEWS."</th>" : "").($autovalidate ? "" : "<th class=\"tblborder\">"._VALIDATED."</th>")."<th class=\"tblborder\">"._READS."</th><th class=\"tblborder\">Submit Time</th></tr>";
 	$sresult = dbquery("SELECT stories.sid, title, reviews, rating, completed, validated, featured, count FROM ".TABLEPREFIX."fanfiction_stories AS stories LEFT JOIN ".TABLEPREFIX."fanfiction_coauthors AS coauth ON stories.sid = coauth.sid WHERE stories.uid = '".USERUID."' OR coauth.uid = '".USERUID."' ORDER BY title");
-	$stories = dbnumrows($sresult);	
+	$stories = dbnumrows($sresult);
 	while($story = dbassoc($sresult)) {
-		$query2 = dbquery("SELECT chapid, title, inorder, rating, reviews, validated, count, submittime FROM ".TABLEPREFIX."fanfiction_chapters WHERE sid = '".$story['sid']."' ORDER BY inorder"); 
+		$query2 = dbquery("SELECT chapid, title, inorder, rating, reviews, validated, count, submittime FROM ".TABLEPREFIX."fanfiction_chapters WHERE sid = '".$story['sid']."' ORDER BY inorder");
 		$chapters =  dbnumrows($query2);
 		$output .= "<tr><td class=\"tblborder\"><a href=\"viewstory.php?sid=".$story['sid']."\">".stripslashes($story['title'])."</a> ".ratingpics($story['rating'])." <strong>"._COMPLETE.":</strong> <a href=\"stories.php?action=viewstories&amp;sid=".$story['sid']."&amp;com=".$story['completed']."\"><a href=\"stories.php?action=viewstories&amp;sid=".$story['sid']."&amp;com=".($story['completed'] == 1 ? "no\">"._YES : "yes\">"._NO)."</a></td>
 			<td class=\"tblborder\" colspan=\"3\"><a href=\"stories.php?action=editstory&amp;sid=".$story['sid']."\">"._EDIT."</a> - <a href=\"stories.php?action=delete&amp;sid=".$story['sid']."\">"._DELETE."</a> - <a href=\"stories.php?action=newchapter&amp;sid=".$story['sid']."&amp;inorder=$chapters\">"._ADDNEWCHAPTER."</a></td>
@@ -492,7 +493,7 @@ if ($story['validated'] != "H" && $story['validated'] != "I") {
 	$output .= write_message("<a href='stories.php?action=newstory'>"._ADDNEWSTORY."</a>");
 	return $output;
 }
-// end viewstories 
+// end viewstories
 
 
 function editchapter( $chapid ) {
@@ -524,7 +525,7 @@ function editchapter( $chapid ) {
 		$pattern = "/[^(\w|\d|\'|\"|\.|\!|\?|;|,|\\|\/|\-\-|:|\&|@)]+/";
 		$words_to_count = preg_replace ($pattern, " ", $words_to_count);
 		$words_to_count = trim($words_to_count);
-		$wordcount = count(explode(" ",$words_to_count)); 
+		$wordcount = count(explode(" ",$words_to_count));
 	}
 	else {
 	}
@@ -556,9 +557,9 @@ $result3 = dbquery("SELECT edited, validated FROM ".TABLEPREFIX."fanfiction_chap
 list($edited, $validated) = dbrow($result3);
 if($validated == 1 && $edited == 0){
 		$edited = 1;}
-			
-				
-		
+
+
+
 if(($autovalidate && !isADMIN) || $user['validated'] || $storyvalid == 2) $validated = 1;
 		else $validated = 0;
 
@@ -656,7 +657,7 @@ function editstory($sid) {
 		$authorvalid = 1; // It's an admin edit so it's valid.
 		list($penname) = dbrow($author);
 	}
-	else {  
+	else {
 		$valid = dbquery("SELECT validated FROM ".TABLEPREFIX."fanfiction_authorprefs WHERE uid = '".USERUID."' LIMIT 1");
 		list($authorvalid) = dbrow($valid);
 		$uid = USERUID;
@@ -717,7 +718,7 @@ function editstory($sid) {
 								$storytext .= fgets($out, 10000);
 							}
 							fclose($out);
-							unlink(STORIESPATH."/$olduid/$chapid.txt"); 
+							unlink(STORIESPATH."/$olduid/$chapid.txt");
 							if($storytext) {
 								if( !file_exists( STORIESPATH."/$uid/" ) ) {
 									mkdir(STORIESPATH."/$uid", 0755);
@@ -763,9 +764,9 @@ function editstory($sid) {
 							$subject = _NEWSTORYAT;
 							$mailtext = sprintf(_AUTHORALERTNOTE, $title, implode(", ", $pennames), $summary, $sid);
 							$favorites = dbquery("SELECT "._UIDFIELD." as uid, "._EMAILFIELD." as email, "._PENNAMEFIELD." as penname, alertson FROM ".TABLEPREFIX."fanfiction_favorites as fav, ".TABLEPREFIX."fanfiction_authorprefs as ap, "._AUTHORTABLE." WHERE fav.item = $uid AND fav.type = 'AU' AND fav.uid = "._UIDFIELD." AND ap.uid = "._UIDFIELD." AND ap.alertson = '1'");
-							while($favuser = dbassoc($favorites)) { 
+							while($favuser = dbassoc($favorites)) {
 								sendemail($favuser['penname'], $favuser['email'], $sitename, $siteemail, $subject, $mailtext, "html");
-							}				
+							}
 						}
 					}
 					else if($alertson && $newchapter) {
@@ -780,7 +781,7 @@ function editstory($sid) {
 						$subject = _STORYALERT;
 						$mailtext = sprintf(_STORYALERTNOTE, $storytitle, implode(", ", $pennames), $sid, $inorder);
 						$favorites = dbquery("SELECT "._UIDFIELD." as uid, "._EMAILFIELD." as email, "._PENNAMEFIELD." as penname, alertson FROM ".TABLEPREFIX."fanfiction_favorites as fav, ".TABLEPREFIX."fanfiction_authorprefs as ap, "._AUTHORTABLE." WHERE fav.item = '$sid' AND fav.type = 'ST' AND fav.uid = "._UIDFIELD." AND ap.uid = "._UIDFIELD." AND ap.alertson = '1'");
-						while($favuser = dbassoc($favorites)) { 
+						while($favuser = dbassoc($favorites)) {
 							sendemail($favuser['penname'], $favuser['email'], $sitename, $siteemail, $subject, $mailtext, "html");
 						}
 					}
@@ -850,7 +851,7 @@ function editstory($sid) {
 				if(!in_array($c, $au)) {
 					dbquery("UPDATE ".TABLEPREFIX."fanfiction_authorprefs SET stories = stories - 1 WHERE uid = '$c'");
 					dbquery("DELETE FROM ".TABLEPREFIX."fanfiction_coauthors WHERE sid = '$sid' AND uid = '$c'");
-				}		
+				}
 			}
 			$codequery = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_codeblocks WHERE code_type = 'editstory'");
 			while($code = dbassoc($codequery)) {
@@ -900,7 +901,7 @@ function editstory($sid) {
 			$stories['storynotes'] = stripslashes($storynotes);
 			$stories['catid'] = isset($catid) ? is_array($catid) ? implode(",", $catid) : $catid : "";
 			$stories['classes'] = isset($classes) && is_array($classes) ? implode(",", $classes) : $classes;
-			$stories['charid'] = isset($charid) ? is_array($charid) ? implode(",", $charid) : $charid : "";		
+			$stories['charid'] = isset($charid) ? is_array($charid) ? implode(",", $charid) : $charid : "";
 			$stories['coauthors'] = $au;
 			$stories['featured'] = $feat;
 			$stories['completed'] = $complete;
@@ -961,8 +962,8 @@ function delete( ) {
 			list($valid) = dbrow(dbquery("SELECT validated FROM ".TABLEPREFIX."fanfiction_chapters where chapid = '$chapid' LIMIT 1"));
 			dbquery("DELETE FROM ".TABLEPREFIX."fanfiction_chapters WHERE chapid = '$chapid' LIMIT 1");
 			if($valid) dbquery("UPDATE ".TABLEPREFIX."fanfiction_stats SET chapters = chapters - 1");
-			if($store == "files") unlink(STORIESPATH."/$uid/".$chapid.".txt"); 
-			if($inorder < $chapters) 
+			if($store == "files") unlink(STORIESPATH."/$uid/".$chapid.".txt");
+			if($inorder < $chapters)
 				dbquery("UPDATE ".TABLEPREFIX."fanfiction_chapters SET inorder = (inorder - 1) WHERE sid = '$sid' AND inorder > $inorder");
 			$codequery = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_codeblocks WHERE code_type = 'delchapter'");
 			while($code = dbassoc($codequery)) {
@@ -980,17 +981,17 @@ function delete( ) {
 			include("includes/deletefunctions.php");
 			deleteStory($story);
 		}
-		$output = write_message(_ACTIONSUCCESSFUL."  ".($admin ? _BACK2ADMIN : viewstories( )));	
+		$output = write_message(_ACTIONSUCCESSFUL."  ".($admin ? _BACK2ADMIN : viewstories( )));
 	}
 	else {
 		if($chapid) {
 			$output .= write_message(_CONFIRMDELETE."<BR><BR>
-[ <a href=\"stories.php?action=delete&amp;confirmed=yes&amp;chapid=$chapid&amp;sid=$sid".(!empty($admin) ? "&amp;admin=1&amp;uid=".$uid : "")."\">"._YES."</a> | 
+[ <a href=\"stories.php?action=delete&amp;confirmed=yes&amp;chapid=$chapid&amp;sid=$sid".(!empty($admin) ? "&amp;admin=1&amp;uid=".$uid : "")."\">"._YES."</a> |
 				<a href=\"stories.php?action=delete&amp;confirmed=no\">"._NO."</a> ]");
 		}
 		else {
 			$output .= write_message(_DELETESTORY."<BR><BR>
-[ <a href=\"stories.php?action=delete&amp;confirmed=yes&amp;sid=$sid".(!empty($admin) ? "&amp;admin=1&amp;uid=".$uid : "")."\">"._YES."</a> | 
+[ <a href=\"stories.php?action=delete&amp;confirmed=yes&amp;sid=$sid".(!empty($admin) ? "&amp;admin=1&amp;uid=".$uid : "")."\">"._YES."</a> |
 				<a href=\"stories.php?action=delete&amp;confirmed=no\">"._NO."</a> ]");
 		}
 	}
@@ -1012,7 +1013,7 @@ function hide() {
 	return "<center>"._ACTIONSUCCESSFUL."</center><a href=\"stories.php?action=viewstories\">return</a>";
 }
 // end hide
- 
+
 function unhide() {
 	global $tableprefix, $tpl, $store, $storiespath, $useruid, $admin, $sid, $chapid, $logging;
 	// Unhide functionality
@@ -1028,7 +1029,7 @@ function unhide() {
 	return "<center>"._ACTIONSUCCESSFUL."</center><a href=\"stories.php?action=viewstories\">return</a>";
 }
 // end unhide
-	
+
 switch($action) {
 	case "newstory":
 		$output .= newstory( );
@@ -1037,7 +1038,7 @@ switch($action) {
 		$output .= newstory( );
 		break;
 	case "editchapter":
-		$output .= editchapter($chapid);			
+		$output .= editchapter($chapid);
 		break;
 	case "editstory":
 		$output .= editstory($sid);

@@ -61,6 +61,8 @@ define ("_FATALERROR", "<b>A fatal MySQL error was encountered.</b><br />");
 define ("_FSTORY", "Feature");
 define ("_GO", "Go");
 define ("_HALFSTAR", "half-star");
+define ("_HASPODFIC", "Has Podfic");
+define ("_PSTORY", "Podfic");
 define ("_HIDE", "Hide");
 define ("_JAVASCRIPTOFF", "You must have javascript enabled for this form to work properly."); // Modified for version 3.0
 define ("_LIKE", "like");
@@ -71,8 +73,8 @@ define ("_MEMBERS", "Members");
 define ("_MOSTRECENT", "Most Recent");
 define ("_MOVE", "Move");
 define ("_MOVETOP", "Move to Top"); // Really only used in the admin files, but we need it in the header.
-define ("_MULTIPLECATEGORIES", 
-"<span style=\"text-decoration: underline; font-weight: bold;\">Note:</span> You may select multiple categories.  
+define ("_MULTIPLECATEGORIES",
+"<span style=\"text-decoration: underline; font-weight: bold;\">Note:</span> You may select multiple categories.
 <u>Please be aware that when you select a category in the drop-down menu below, the options in the list will change to display that category's sub-categories.</u>
  Press the 'Select >' button to add it to your choices. You may clear your selections at any time using the 'Clear' button.");
 define ("_MULTIPLESELECT", "Hold the CTRL key to make multiple selections.");
@@ -114,7 +116,7 @@ define ("_SELECT", "Select");
 define ("_SELECTCATS", "Selected Categories");
 define ("_SERIES", "Series");
 define ("_SORT", "Sort");
-define ("_STAR", "star"); 
+define ("_STAR", "star");
 define ("_STORIES", "Stories");
 define ("_STORY", "Story");
 define ("_SUBMIT", "Submit");
@@ -213,8 +215,8 @@ define ("_EDITSERIES", "Edit Series");
 define ("_MANAGESERIES", "Manage Series");
 define ("_MODERATED", "Moderated"); // Added 02-10-07
 define ("_OPEN", "Open");
-define ("_OPENNOTE", "<span style=\"font-weight: bold; text-decoration: underline;\">Note:</span>  An open series is a shared universe (sometimes called a sandbox) in which other authors may add to the series.  
-By marking your series as open, <u>other authors will be able to add to the series.</u>  A moderated series will allow other authors to add to the series, but those entries must be approved by the series owner. 
+define ("_OPENNOTE", "<span style=\"font-weight: bold; text-decoration: underline;\">Note:</span>  An open series is a shared universe (sometimes called a sandbox) in which other authors may add to the series.
+By marking your series as open, <u>other authors will be able to add to the series.</u>  A moderated series will allow other authors to add to the series, but those entries must be approved by the series owner.
 Only the series owner (and the site admins) may add to a closed series.");
 define ("_REMOVEFROM", "Remove From Series");
 define ("_SERIESNOTE", "<span style=\"font-weight: bold; text-decoration: underline;\">Note:</span>  You will choose the stories to add to your series on the next page.");
@@ -410,7 +412,7 @@ define ("_SUBJECT", "Subject");
 define ("_UNLOCKMEM", "Unlock Account");
 define ("_VALIDATE", "Validate");
 
-// Tooltip help for various items.  
+// Tooltip help for various items.
 define ("_HELP_NEWREV", "Check this box if you wish to receive an e-mail notice each time you get a new review.");
 define ("_HELP_NEWRESP", "Check this box if you wish to receive an e-mail notice each time an author resonds to your review.");
 define ("_HELP_FAVALERT", "Check this box if you wish to receive an e-mail notice each time one of your favorite stories is updated or when one of your favorites author's publishes a new story.");

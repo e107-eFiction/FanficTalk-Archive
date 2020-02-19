@@ -105,8 +105,8 @@ if(!defined("_CHARSET")) exit( );
 //podfic part in the story block
 	global $podfic;
 		if($stories['haspodfic'] == 1) {
-			$tpl->assign("haspodifc", (isset($podfic) ? $podfic : "<img src=\""._BASEDIR."images/podfic.png\" class=\"podfic\" alt=\""._PSTORY."\">"));
-			$tpl->assign("podfictext", _PSTORY);
+			$tpl->assign("haspodfic", (isset($podfic) ? $podfic : "<img src=\""._BASEDIR."images/podfic.png\" class=\"podfic\" alt=\""._PDSTORY."\">"));
+			$tpl->assign("podfictext", _PDSTORY);
 			}
 	global $featured;
 	if($stories['featured'] == 1) {

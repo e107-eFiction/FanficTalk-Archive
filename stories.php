@@ -154,6 +154,7 @@ function newstory( ) {
 	$validated = isset($_POST['validated']) && isNumber($_POST['validated']) ? $_POST['validated'] : 0;
 	$chaptertitle = isset($_POST['chaptertitle']) ? descript(strip_tags($_POST['chaptertitle'], $allowed_tags)) : "";
 	$notes = isset($_POST['notes']) ? strip_tags(descript($_POST['notes']), $allowed_tags) : "";
+	$podficlink = isset($_POST['podficlink']) ? strip_tags(descript($_POST['podficlink']), $allowed_tags) : "";
 	$endnotes = isset($_POST['endnotes']) ? strip_tags(descript($_POST['endnotes']), $allowed_tags) : "";
 	$story = "";
 	if(isset($_FILES['storyfile']['name']) && $_FILES['storyfile']['name']) {

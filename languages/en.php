@@ -48,7 +48,7 @@ define ("_CHAPTERS", "Chapters");
 define ("_CHARACTERS", "Characters");
 define ("_CHOOSECAT", "Choose a Category");
 define ("_CONFIRMDELETE", "Are you sure you want to delete this?");
-define ("_COAUTHORSEARCH", "Type in the first few letters of the person's penname.  The first ten matches will appear in a list.  Click on the person's name to select them as a co-author.");
+define ("_COAUTHORSEARCH", "Type in the first few letters of the person's penname.  The first ten matches will appear in a list.  Click on the person's name to select them.");
 define ("_DELETE", "Delete");
 define ("_DISLIKE", "dislike");
 define ("_DOWN", "down arrow");
@@ -237,6 +237,7 @@ on $sitename, and edit your profile.");  // Modified 2-3-10 to add reminder for 
 define ("_CHAPTERNOTES", "Chapter Notes");
 define ("_CHAPTERTITLE", "Chapter Title");
 define ("_PODFICLINK", "Podfic Link");
+define ("_PODFICAUTHOR", "Podfic Author");
 define ("_COAUTHORS", "Co-Authors");
 define ("_COMPLETE", "Complete");
 define ("_CURRENT", "Current");

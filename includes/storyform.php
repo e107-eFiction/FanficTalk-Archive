@@ -162,57 +162,28 @@ function chapterform($inorder, $notes, $endnotes, $storytext, $chaptertitle,$pod
 		<div><label for=\"notes\">"._CHAPTERNOTES.":</label><br /><textarea class=\"textbox\" rows=\"5\" id=\"notes\" name=\"notes\" cols=\"58\">$notes</textarea></div>";
 	if($tinyMCE)
 		$output .= "<div class='tinytoggle'><input type='checkbox' name='toggle' onclick=\"toogleEditorMode('notes');\" checked><label for='toggle'>"._TINYMCETOGGLE."</label></div>";
+
 	$output .= "<p><label for=\"podficlink\">"._PODFICLINK.":</label> <input type=\"text\" class=\"textbox\" id=\"podficlink\" maxlength=\"2000\" name=\"podficlink\" size=\"50\" value=\"".htmlentities($default)."\"> </p>";
 
-	// start of podfic author lookup query
-	$link = mysqli_connect("localhost", "root", "", "demo");
 
-	// Check connection
-	if($link === false){
-	    die("ERROR: Could not connect. " . mysqli_connect_error());
+	$output .= "<script language=\"javascript\" type=\"text/javascript\" src=\""._BASEDIR."includes/userselect.js\"></script>
+		<script language=\"javascript\" type=\"text/javascript\" src=\""._BASEDIR."includes/xmlhttp.js\"></script><div style=\"text-align: center;\">"._COAUTHORSEARCH."</div>";
+	$output .= "<label for='podficauthorSelect'>"._SEARCH.": <input name='podficauthorSelect' id='podficauthorSelect' size='20' type='text' class='userSelect' onkeyup='setUserSearch(\"podficauthor\");' autocomplete='off'></label><br />
+<div id='podficauthorDiv' name='podficauthorDiv' style='visibility: hidden;'></div>
+<iframe id='podficauthorshim' scr='' scrolling='no' frameborder='0' class='shim'></iframe>
+<div><label for='podficauthorSelected'>"._PODFICAUTHOR": <br /><select name='podficauthorSelected' id='podficauthorSelected' size='8' multiple='multiple' class='multiSelect' onclick='javascript: removeMember(\"podficauthor\");'>";
+	$pduids = array() ;
+	if(is_array($stories['coauthors']) && count($stories['coauthors'])) {
+		$pdauths = dbquery("SELECT "._PENNAMEFIELD." as penname, "._UIDFIELD." as uid FROM "._AUTHORTABLE." WHERE FIND_IN_SET("._UIDFIELD.", '".implode(",", $podfic['podficauthor'])."') > 0");
+		while($c = dbassoc($pdauths)) {
+			$output .= "<option label='".$c['penname']."' value='".$c['uid']."'>".$c['penname']."</option>";
+			$pduids[] = $c['uid'];
+		}
+		$pduids = implode(",", $pduids);
 	}
+	$output .= "</select></label>
+		<input type='hidden' name='podficauthor' id='podficauthor' value='$pduids'></div>";
 
-	if(isset($_REQUEST["term"])){
-	    // Prepare a select statement
-	    $sql = "SELECT * FROM countries WHERE name LIKE ?";
-
-	    if($stmt = mysqli_prepare($link, $sql)){
-	        // Bind variables to the prepared statement as parameters
-	        mysqli_stmt_bind_param($stmt, "s", $param_term);
-
-	        // Set parameters
-	        $param_term = $_REQUEST["term"] . '%';
-
-	        // Attempt to execute the prepared statement
-	        if(mysqli_stmt_execute($stmt)){
-	            $result = mysqli_stmt_get_result($stmt);
-
-	            // Check number of rows in the result set
-	            if(mysqli_num_rows($result) > 0){
-	                // Fetch result rows as an associative array
-	                while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-	                    echo "<p>" . $row["name"] . "</p>";
-	                }
-	            } else{
-	                echo "<p>No matches found</p>";
-	            }
-	        } else{
-	            echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
-	        }
-	    }
-
-	    // Close statement
-	    mysqli_stmt_close($stmt);
-	}
-
-	// close connection
-	mysqli_close($link);
-	?>
-
-	//author lookup form
-	$output .=  " <div class=\"search-box\">\n";
-	$output .= "        <input type=\"text\" autocomplete=\"off\" placeholder=\"Podfic Recorder\" />\n";
-	$output .= "        <div class=\"result\"></div>\n";
 
 	//end of author lookup
 	$output .= "<div><label for=\"storytext\">"._STORYTEXTTEXT.":</label>".(!$storytext ? "<span style=\"font-weight: bold; color: red\">*</span>" : "")."<br><textarea class=\"textbox\" rows=\"15\" id=\"storytext\" name=\"storytext\" cols=\"58\">".$storytext."</textarea></div>";

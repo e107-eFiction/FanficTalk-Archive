@@ -222,10 +222,13 @@ function newstory( ) {
 				return $output;
 			}
 		}
+
+
+
 		if($store == "mysql")
 		{
 			if(!$newchapter) {
-				$insert = dbquery("INSERT INTO ".TABLEPREFIX."fanfiction_stories (title, summary, storynotes, catid, classes, charid,  rid, date, updated, uid, validated, rr, completed, wordcount, featured, coauthors) VALUES ('".addslashes($title)."', '".addslashes(format_story($summary))."', '".addslashes(format_story($storynotes))."', '".($catid ? implode(",", $catid) : "")."', '".($classes? implode(",", $classes) : "")."', '".($charid ? implode(",", $charid) : "")."', '$rid', now(), now(), '$uid', '$validated', '$rr', '$complete', '$wordcount', '$feat', '$coauthors')");
+				$insert = dbquery("INSERT INTO ".TABLEPREFIX."fanfiction_stories (title, summary, storynotes, catid, classes, charid,  rid, date, updated, uid, validated, rr, completed, wordcount, featured, coauthors, haspodfic) VALUES ('".addslashes($title)."', '".addslashes(format_story($summary))."', '".addslashes(format_story($storynotes))."', '".($catid ? implode(",", $catid) : "")."', '".($classes? implode(",", $classes) : "")."', '".($charid ? implode(",", $charid) : "")."', '$rid', now(), now(), '$uid', '$validated', '$rr', '$complete', '$wordcount', '$feat', '$coauthors', '$haspodfic')");
 				$sid = dbinsertid( );
 				$inorder = 1;
 			}
@@ -239,7 +242,7 @@ function newstory( ) {
 		else if ($store == "files")
 		{
 			if(!$newchapter) {
-				$insertstory = dbquery("INSERT INTO ".TABLEPREFIX."fanfiction_stories (title, summary, storynotes, catid, classes, charid, rid, date, updated, uid, validated, rr, completed, wordcount, featured, coauthors) VALUES ('".addslashes($title)."', '".addslashes(format_story($summary))."', '".addslashes(format_story($storynotes))."', '".($catid ? implode(",", $catid) : "")."', '".($classes ? implode(",", $classes) : "")."', '".($charid ? implode(",", $charid) : "")."', '$rid', now(), now(), '$uid', '$validated', '$rr', '$complete', '$wordcount', '$feat', '$coauthors')");
+				$insertstory = dbquery("INSERT INTO ".TABLEPREFIX."fanfiction_stories (title, summary, storynotes, catid, classes, charid, rid, date, updated, uid, validated, rr, completed, wordcount, featured, coauthors, haspodfic) VALUES ('".addslashes($title)."', '".addslashes(format_story($summary))."', '".addslashes(format_story($storynotes))."', '".($catid ? implode(",", $catid) : "")."', '".($classes ? implode(",", $classes) : "")."', '".($charid ? implode(",", $charid) : "")."', '$rid', now(), now(), '$uid', '$validated', '$rr', '$complete', '$wordcount', '$feat', '$coauthors', '$haspodfic')");
 				$sid = dbinsertid( );
 				$inorder = 1;
 			}

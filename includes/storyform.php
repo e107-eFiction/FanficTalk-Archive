@@ -162,10 +162,54 @@ function chapterform($inorder, $notes, $endnotes, $storytext, $chaptertitle,$pod
 		<div><label for=\"notes\">"._CHAPTERNOTES.":</label><br /><textarea class=\"textbox\" rows=\"5\" id=\"notes\" name=\"notes\" cols=\"58\">$notes</textarea></div>";
 	if($tinyMCE)
 		$output .= "<div class='tinytoggle'><input type='checkbox' name='toggle' onclick=\"toogleEditorMode('notes');\" checked><label for='toggle'>"._TINYMCETOGGLE."</label></div>";
-	$output .= "<p><label for=\"podficlink\">"._PODFICLINK.":</label> <input type=\"text\" class=\"textbox\" id=\"podficlink\" maxlength=\"2000\" name=\"podficlink\" size=\"50\" value=\"".htmlentities($default)."\"> </p>
-			<p>"._ALLOWEDTAGS."</p>
+	$output .= "<p><label for=\"podficlink\">"._PODFICLINK.":</label> <input type=\"text\" class=\"textbox\" id=\"podficlink\" maxlength=\"2000\" name=\"podficlink\" size=\"50\" value=\"".htmlentities($default)."\"> </p>";
 
-	// start of podfic author lookup
+	// start of podfic author lookup query
+	$link = mysqli_connect("localhost", "root", "", "demo");
+
+	// Check connection
+	if($link === false){
+	    die("ERROR: Could not connect. " . mysqli_connect_error());
+	}
+
+	if(isset($_REQUEST["term"])){
+	    // Prepare a select statement
+	    $sql = "SELECT * FROM countries WHERE name LIKE ?";
+
+	    if($stmt = mysqli_prepare($link, $sql)){
+	        // Bind variables to the prepared statement as parameters
+	        mysqli_stmt_bind_param($stmt, "s", $param_term);
+
+	        // Set parameters
+	        $param_term = $_REQUEST["term"] . '%';
+
+	        // Attempt to execute the prepared statement
+	        if(mysqli_stmt_execute($stmt)){
+	            $result = mysqli_stmt_get_result($stmt);
+
+	            // Check number of rows in the result set
+	            if(mysqli_num_rows($result) > 0){
+	                // Fetch result rows as an associative array
+	                while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+	                    echo "<p>" . $row["name"] . "</p>";
+	                }
+	            } else{
+	                echo "<p>No matches found</p>";
+	            }
+	        } else{
+	            echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+	        }
+	    }
+
+	    // Close statement
+	    mysqli_stmt_close($stmt);
+	}
+
+	// close connection
+	mysqli_close($link);
+	?>
+
+	//author lookup form
 	$output .=  " <div class=\"search-box\">\n";
 	$output .= "        <input type=\"text\" autocomplete=\"off\" placeholder=\"Podfic Recorder\" />\n";
 	$output .= "        <div class=\"result\"></div>\n";

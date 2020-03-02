@@ -509,6 +509,7 @@ function editchapter( $chapid ) {
 		$chaptertitle = strip_tags(descript($_POST["chaptertitle"]), $allowed_tags);
 		$notes = strip_tags(descript($_POST["notes"]), $allowed_tags);
 		$endnotes = strip_tags(descript($_POST["endnotes"]), $allowed_tags);
+		$podficlink = isset($_POST['podficlink']) ? strip_tags(descript($_POST['podficlink']), $allowed_tags) : "";
 		if(!empty($_FILES['storyfile']['name'])) {
 			if ($_FILES['storyfile']['type'] != 'text/html' && $_FILES['storyfile']['type'] != 'text/plain') {
  				 $failed = _INVALIDUPLOAD;
@@ -569,10 +570,10 @@ if(($autovalidate && !isADMIN) || $user['validated'] || $storyvalid == 2) $valid
 
 
 			if($store == "mysql") {
-				dbquery("UPDATE ".TABLEPREFIX."fanfiction_chapters SET uid = '$uid', title = '".addslashes($chaptertitle)."', notes = '".addslashes($notes)."', endnotes = '".addslashes($endnotes)."', wordcount = '$wordcount', storytext = '".addslashes($storytext)."', validated = '$validated', submittime = now(), edited = '$edited' WHERE chapid = '$chapid' LIMIT 1");
+				dbquery("UPDATE ".TABLEPREFIX."fanfiction_chapters SET uid = '$uid', title = '".addslashes($chaptertitle)."', notes = '".addslashes($notes)."', endnotes = '".addslashes($endnotes)."', wordcount = '$wordcount', storytext = '".addslashes($storytext)."', validated = '$validated', submittime = now(), edited = '$edited', podficlink = '$podficlink' WHERE chapid = '$chapid' LIMIT 1");
 			}
 			else if($store == "files"){
-				$updatequery = dbquery("UPDATE ".TABLEPREFIX."fanfiction_chapters SET uid = '$uid', title = '".addslashes($chaptertitle)."', notes = '".addslashes($notes)."', endnotes = '".addslashes($endnotes)."', wordcount = '$wordcount', validated = '$validated', submittime = now(), edited = '$edited' WHERE chapid = '$chapid' LIMIT 1");
+				$updatequery = dbquery("UPDATE ".TABLEPREFIX."fanfiction_chapters SET uid = '$uid', title = '".addslashes($chaptertitle)."', notes = '".addslashes($notes)."', endnotes = '".addslashes($endnotes)."', wordcount = '$wordcount', validated = '$validated', submittime = now(), edited = '$edited', podficlink = '$podficlink' WHERE chapid = '$chapid' LIMIT 1");
 				if( !file_exists( STORIESPATH."/$uid/" ) )
 				{
 					mkdir(STORIESPATH."/$uid", 0755);
@@ -591,6 +592,9 @@ if(($autovalidate && !isADMIN) || $user['validated'] || $storyvalid == 2) $valid
 			//  Check that the chapter has been validated before updating the word count of the story.
 			$validquery = dbquery("SELECT validated, sid FROM ".TABLEPREFIX."fanfiction_chapters WHERE chapid = '$chapid' LIMIT 1");
 			list($valid, $sid) = dbrow($validquery);
+			if (!empty($podficlink)) {
+				dbquery("UPDATE ".TABLEPREFIX."fanfiction_stories SET haspodfic = true WHERE sid = '$sid'");
+			}
 			if($valid) {
 				$count =  dbquery("SELECT SUM(wordcount) as totalcount FROM ".TABLEPREFIX."fanfiction_chapters WHERE sid = '$sid'");
 				list($totalcount) = dbrow($count);

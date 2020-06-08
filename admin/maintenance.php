@@ -31,7 +31,7 @@ if($maint == "update") {
 }
 if($maint == "reviews") {
 	dbquery("UPDATE ".TABLEPREFIX."fanfiction_stories SET rating = '0', reviews = '0'"); // Set them all to 0 before we re-insert.
-	$stories = dbquery("SELECT AVG(rating) as average, item FROM ".TABLEPREFIX."fanfiction_reviews WHERE type = 'ST' AND rating != '-1' GROUP BY item");
+	$stories = dbquery("SELECT COUNT(rating) as average, item FROM ".TABLEPREFIX."fanfiction_reviews WHERE type = 'ST' AND rating != '-1' GROUP BY item");
 	while($s = dbassoc($stories)) {
 		dbquery("UPDATE ".TABLEPREFIX."fanfiction_stories SET rating = '".round($s['average'])."' WHERE sid = '".$s['item']."'");
 	}
@@ -40,7 +40,7 @@ if($maint == "reviews") {
 		dbquery("UPDATE ".TABLEPREFIX."fanfiction_stories SET reviews = '".$s['count']."' WHERE sid = '".$s['item']."'");
 	}
 	dbquery("UPDATE ".TABLEPREFIX."fanfiction_chapters SET rating = '0', reviews = '0'");
-	$chapters = dbquery("SELECT AVG(rating) as average, chapid FROM ".TABLEPREFIX."fanfiction_reviews WHERE type = 'ST' AND rating != '-1' GROUP BY chapid");
+	$chapters = dbquery("SELECT COUNT(rating) as average, chapid FROM ".TABLEPREFIX."fanfiction_reviews WHERE type = 'ST' AND rating != '-1' GROUP BY chapid");
 	while($c = dbassoc($chapters)) {
 		dbquery("UPDATE ".TABLEPREFIX."fanfiction_chapters SET rating = '".round($c['average'])."' WHERE chapid = '".$c['chapid']."'");
 	}

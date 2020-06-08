@@ -748,3 +748,95 @@ li > a:only-child:after { content: ''; }
 		}
 
 	}
+	@media screen and ( max-width: 825px )  {
+
+	body {
+		font-size: 13pt;
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+
+	nav {
+		margin: 0;
+	}
+
+	hr.style4 {
+		border: 0;
+		height: 2px;
+		background: -webkit-gradient(linear, 0 0, 100% 0, from(rgba(0,0,0,0)), color-stop(0.5, #d4303c), to(rgba(0,0,0,0)));
+		background: -webkit-linear-gradient(left, rgba(0,0,0,0), #d4303c, rgba(0,0,0,0));
+		background: -moz-linear-gradient(left, rgba(0,0,0,0), #d4303c, rgba(0,0,0,0));
+		background: -o-linear-gradient(left, rgba(0,0,0,0), #d4303c, rgba(0,0,0,0));
+		background: linear-gradient(left, rgba(0,0,0,0), #d4303c, rgba(0,0,0,0));
+	}
+
+	hr.style5 {
+		border: 0;
+		height: 0px;
+	}
+
+	.toggle + a,
+	.menu {
+		display: none;
+	}
+
+		.toggle {
+			background-color: #1e1f22;
+			border:none;
+			color: #bfbcbc;
+			display: block;
+			font-size:10px;
+			padding:8px 16px;
+			text-decoration:none;
+			}
+
+		.toggle:hover {
+			background-color: #18191D;
+			}
+
+		[id^=drop]:checked + ul {
+			display: block;
+		}
+
+		nav ul li {
+			display: block;
+			width: 100%;
+			}
+
+		nav ul ul .toggle,
+		nav ul ul a {
+			padding: 0 10px;
+		}
+
+		nav a:hover {
+			background-color: #18191D;
+		}
+
+		nav ul li ul li .toggle,
+		nav ul ul a {
+			color:#bfbcbc;
+			font-weight: 500;
+			padding:14px 20px;
+		}
+
+
+		nav ul li ul li .toggle,
+		nav ul ul a {
+			background-color: #18191D;
+		}
+
+		nav ul ul {
+			color: #18191D;
+			float: none;
+			position:static;
+		}
+
+		nav ul ul li:hover > ul,
+		nav ul li:hover > ul {
+			display: none;
+		}
+
+		nav ul ul li {
+			display: block;
+			width: 100%;
+		}

@@ -75,5 +75,4 @@
 			</div>
 		</div>
 		<hr class="style1">
-		<div class="gb-80 content">
 <!-- END BLOCK : header -->

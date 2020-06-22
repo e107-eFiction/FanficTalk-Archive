@@ -162,28 +162,13 @@ function chapterform($inorder, $notes, $endnotes, $storytext, $chaptertitle,$pod
 		<div><label for=\"notes\">"._CHAPTERNOTES.":</label><br /><textarea class=\"textbox\" rows=\"5\" id=\"notes\" name=\"notes\" cols=\"58\">$notes</textarea></div>";
 	if($tinyMCE)
 		$output .= "<div class='tinytoggle'><input type='checkbox' name='toggle' onclick=\"toogleEditorMode('notes');\" checked><label for='toggle'>"._TINYMCETOGGLE."</label></div>";
+	$output .= "<p><label for=\"podficlink\">"._PODFICLINK.":</label> <input type=\"text\" class=\"textbox\" id=\"podficlink\" maxlength=\"2000\" name=\"podficlink\" size=\"50\" value=\"".htmlentities($default)."\"> </p>
+			<p>"._ALLOWEDTAGS."</p>
 
-	$output .= "<p><label for=\"podficlink\">"._PODFICLINK.":</label> <input type=\"text\" class=\"textbox\" id=\"podficlink\" maxlength=\"2000\" name=\"podficlink\" size=\"50\" value=\"".htmlentities($default)."\"> </p>";
-
-
-	$output .= "<script language=\"javascript\" type=\"text/javascript\" src=\""._BASEDIR."includes/userselect.js\"></script>
-		<script language=\"javascript\" type=\"text/javascript\" src=\""._BASEDIR."includes/xmlhttp.js\"></script><div style=\"text-align: center;\">"._COAUTHORSEARCH."</div>";
-	$output .= "<label for='podficauthorSelect'>"._SEARCH.": <input name='podficauthorSelect' id='podficauthorSelect' size='20' type='text' class='userSelect' onkeyup='setUserSearch(\"podficauthor\");' autocomplete='off'></label><br />
-<div id='podficauthorDiv' name='podficauthorDiv' style='visibility: hidden;'></div>
-<iframe id='podficauthorshim' scr='' scrolling='no' frameborder='0' class='shim'></iframe>
-<div><label for='podficauthorSelected'>"._PODFICAUTHOR": <br /><select name='podficauthorSelected' id='podficauthorSelected' size='8' multiple='multiple' class='multiSelect' onclick='javascript: removeMember(\"podficauthor\");'>";
-	$pduids = array() ;
-	if(is_array($stories['coauthors']) && count($stories['coauthors'])) {
-		$pdauths = dbquery("SELECT "._PENNAMEFIELD." as penname, "._UIDFIELD." as uid FROM "._AUTHORTABLE." WHERE FIND_IN_SET("._UIDFIELD.", '".implode(",", $podfic['podficauthor'])."') > 0");
-		while($c = dbassoc($pdauths)) {
-			$output .= "<option label='".$c['penname']."' value='".$c['uid']."'>".$c['penname']."</option>";
-			$pduids[] = $c['uid'];
-		}
-		$pduids = implode(",", $pduids);
-	}
-	$output .= "</select></label>
-		<input type='hidden' name='podficauthor' id='podficauthor' value='$pduids'></div>";
-
+	// start of podfic author lookup
+	$output .=  " <div class=\"search-box\">\n";
+	$output .= "        <input type=\"text\" autocomplete=\"off\" placeholder=\"Podfic Recorder\" />\n";
+	$output .= "        <div class=\"result\"></div>\n";
 
 	//end of author lookup
 	$output .= "<div><label for=\"storytext\">"._STORYTEXTTEXT.":</label>".(!$storytext ? "<span style=\"font-weight: bold; color: red\">*</span>" : "")."<br><textarea class=\"textbox\" rows=\"15\" id=\"storytext\" name=\"storytext\" cols=\"58\">".$storytext."</textarea></div>";

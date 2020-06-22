@@ -1,18 +1,21 @@
 <!-- INCLUDE BLOCK : header -->
 			<div class="gb-full">
-				<div class="gb-full">{welcome}</div>
-		        <div class="gb-full"><h1><span>{news_title}</span></h1>
-							<div align="center">{newsarchive}</div> {news_content} <br /></div>
-						</div>
-					</div>
-				<div class="gb-50">
-		    	<div align="center"><h5>{featured_title}</h5><br/>{featured_content}</div>
-				</div>
-				<div class="gb-50">
-					<div align="center"><h5>{info_title}</h5><br/>{info_content}</div>
-					<br/><br/><hr class="style2"><br/><br/>
-					<div align="center"><h5>{recent_title}</h5><br/>{recent_content}</div>
+				<div align="center">
+					<br/>
+					{welcome}
+					<br/><br/>
 				</div>
 			</div>
-
-	<!-- INCLUDE BLOCK : footer -->
+			<br/><br/><br/>
+			<div class="gb-full">
+				<hr class="style3">
+				<h2>{news_title}</h2>
+				{news_content}
+				<div align="center">
+					<div id="main-navigation">
+						<li id="main-navigation">{newsarchive}</li>
+						<br/><br/>
+					</div>
+				</div>
+			</div>
+<!-- INCLUDE BLOCK : footer -->

@@ -62,7 +62,7 @@ define ("_FSTORY", "Feature");
 define ("_GO", "Go");
 define ("_HALFSTAR", "half-star");
 define ("_HASPODFIC", "Has Podfic");
-define ("_PDSTORY", "Podfic");
+define ("_PSTORY", "Podfic");
 define ("_HIDE", "Hide");
 define ("_JAVASCRIPTOFF", "You must have javascript enabled for this form to work properly."); // Modified for version 3.0
 define ("_LIKE", "like");
@@ -236,8 +236,6 @@ define ("_AUTHORALERTNOTE", "One of your favorite authors at $sitename has poste
 on $sitename, and edit your profile.");  // Modified 2-3-10 to add reminder for turning off alerts
 define ("_CHAPTERNOTES", "Chapter Notes");
 define ("_CHAPTERTITLE", "Chapter Title");
-define ("_PODFICLINK", "Podfic Link");
-define ("_PODFICAUTHOR", "Podfic Author");
 define ("_COAUTHORS", "Co-Authors");
 define ("_COMPLETE", "Complete");
 define ("_CURRENT", "Current");

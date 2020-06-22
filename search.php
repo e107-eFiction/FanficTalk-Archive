@@ -49,7 +49,7 @@ if(isset($_POST['submit']) || isset($_GET['offset'])) {
 	$output .= "<div id=\"pagetitle\">"._RESULTS."</div>";
 	$query = array();
 	$countquery = array();
-	$scountquery = array();
+	$scountquery = array();	
 	if($searchtype == "fulltext") {
 		$query = "SELECT stories.*, "._PENNAMEFIELD." as penname, UNIX_TIMESTAMP(stories.date) as date, UNIX_TIMESTAMP(stories.updated) as updated FROM "._AUTHORTABLE.", ".TABLEPREFIX."fanfiction_stories as stories, ".TABLEPREFIX."fanfiction_chapters as chapter WHERE chapter.storytext LIKE '%$searchterm%' AND chapter.sid = stories.sid AND stories.uid = "._UIDFIELD;
 		$countquery = "SELECT count(stories.sid) FROM ".TABLEPREFIX."fanfiction_stories as stories, ".TABLEPREFIX."fanfiction_chapters as chapter WHERE chapter.storytext LIKE '%$searchterm%' AND chapter.sid = stories.sid GROUP BY stories.sid";
@@ -57,7 +57,7 @@ if(isset($_POST['submit']) || isset($_GET['offset'])) {
 		search($query, $countquery);
 		$tpl->assign("output", $output);
 		$tpl->printToScreen();
-		dbclose( );
+		dbclose( );			
 		exit( );
 	}
 	if($searchterm && strlen($searchterm) < 3) {
@@ -87,7 +87,7 @@ if(isset($_POST['submit']) || isset($_GET['offset'])) {
 				search($query, $countquery);
 				$tpl->assign("output", $output);
 				$tpl->printToScreen();
-				dbclose( );
+				dbclose( );			
 				exit( );
 			}
 			else {
@@ -171,12 +171,6 @@ if(isset($_POST['submit']) || isset($_GET['offset'])) {
 		$query[] = "stories.completed = '1'";
 		$countquery[] = "stories.completed = '1'";
 	}
-	//podfic search
-	if(isset($_REQUEST['podfic'])) {
-		$query[] = "stories.haspodfic = '1'";
-		$countquery[] = "stories.haspodfic = '1'";
-	}
-
 	$classin = array( );
 	$classex = array( );
 	foreach($classtypelist as $id => $vars) {
@@ -216,7 +210,7 @@ if(isset($_POST['submit']) || isset($_GET['offset'])) {
 	$wordlow = isset($_REQUEST['wordlow']) && isNumber($_REQUEST['wordlow']) ? $_REQUEST['wordlow'] : "-500";
 	$wordhigh = isset($_REQUEST['wordhigh']) && isNumber($_REQUEST['wordhigh']) ? $_REQUEST['wordhigh'] : "1000000";
 	if($wordlow != "-500") $wordcount = "stories.wordcount > ".$wordlow;
-	if($wordhigh != "1000000")
+	if($wordhigh != "1000000") 
 	{
 		if($wordcount) $wordcount .= " AND stories.wordcount < ".$wordhigh;
 		else $wordcount = "stories.wordcount < ".$wordhigh;
@@ -313,7 +307,7 @@ else {
 					 <select name=\"exclass_".$type['classtype_id']."[]\"  id=\"exclass_".$type['classtype_id']."\"  style=\"width: 95%;\" multiple size=\"5\">$select</select></div>
 				</div>";
 		}
-		$output .= "</div><label for=\"completed\">"._COMPLETEONLY.":</label> <input type=\"checkbox\" class=\"checkbox\" id=\"completed\" name=\"completed\" value=\"ON\"><label for=\"podfic\">"._HASPODFIC.":</label> <input type=\"checkbox\" class=\"checkbox\" id=\"podfic\" name=\"podfic\" value=\"ON\"><label for=\"wordlow\">"._WORDCOUNT.":</label> <select size=\"1\" id=\"wordlow\" name=\"wordlow\">
+		$output .= "</div><label for=\"completed\">"._COMPLETEONLY.":</label> <input type=\"checkbox\" class=\"checkbox\" id=\"completed\" name=\"completed\" value=\"ON\"><label for=\"wordlow\">"._WORDCOUNT.":</label> <select size=\"1\" id=\"wordlow\" name=\"wordlow\">
   <option value='-500'>&lt; 500</option>
   <option>1000</option>
   <option>5000</option>
@@ -330,7 +324,7 @@ else {
   <option>1000</option>
   <option value='-500'>&lt; 500</option>
   </select><br /><br /><label for=\"searchterm\">"._SEARCHTERM.": </label><INPUT type=\"text\" class=\"textbox\" name=\"searchterm\" id=\"searchterm\" size=\"20\">
-
+  
   <label for=\"sortorder\">"._SORT.":</label> <select name=\"sortorder\" id=\"sortorder\"><option value=\"alpha\">"._ALPHA."</option><option value=\"update\">"._MOSTRECENT."</option></select>";
 	$codequery = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_codeblocks WHERE code_type = 'searchform'");
 	while($code = dbassoc($codequery)) {

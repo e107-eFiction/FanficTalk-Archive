@@ -10,7 +10,7 @@
 				<br/>
 				<b>Rating:</b> {rating} &middot; {completed} <span class label="Story_Type">{Story_Type}</span><br/>
 				{numreviews} {reviews} &middot; {score} likes &middot; {count} reads
-			</div><br/><br/>
+			</div><br/>
 		<blockquote2>{summary}</blockquote2><br/><br/></div>
 	</div>
 <div class="gb-50">

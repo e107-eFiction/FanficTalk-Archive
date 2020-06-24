@@ -635,7 +635,8 @@ li > a:only-child:after { content: ''; }
 			}
 
 		h5 {
-			font-size: 12pt;
+
+			font-size: 13pt;
 		}
 
 		h6 {

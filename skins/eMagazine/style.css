@@ -27,6 +27,7 @@ body {
 	font-family: 'Roboto', sans-serif;
 	font-size: 10.5pt;
 	letter-spacing: .25px;
+	padding: 19px;
 	text-align: center;
 	}
 
@@ -458,6 +459,7 @@ li > a:only-child:after {
 	padding: 16px;
 	}
 
+
 /*---------------------------------------------------------------------
    Categories
 ------------------------------------------------------------------------*/
@@ -631,11 +633,28 @@ a#currentpage {
  RESPONSIVE
 ------------------------------------------------------------------------*/
 
-@media all and (max-width : 825px) {
+@media handheld, only screen and (max-width : 825px) {
 
 body {
+	font-size: 14pt;
 	margin-left: 5%;
 	margin-right: 5%;
+}
+
+h3 {
+	font-size: 14pt;
+	}
+
+h5 {
+	font-size: 13pt;
+}
+
+h6 {
+	font-size: 13pt;
+}
+
+h7 {
+	font-size: 13pt;
 }
 
 nav {
@@ -726,9 +745,25 @@ hr.style5 {
 	@media screen and ( max-width: 825px )  {
 
 	body {
-		font-size: 13pt;
+		font-size: 14pt;
 		margin-left: 5%;
 		margin-right: 5%;
+	}
+	
+	h3 {
+		font-size: 14pt;
+		}
+
+	h5 {
+		font-size: 13pt;
+	}
+
+	h6 {
+		font-size: 13pt;
+	}
+
+	h7 {
+		font-size: 13pt;
 	}
 
 	nav {

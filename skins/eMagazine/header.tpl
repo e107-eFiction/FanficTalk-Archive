@@ -69,11 +69,11 @@
 				<div id="header">
 						<br/><br/>
 						<div align="center"><img src="images/hpft-logo-small.png"></div><br />
-						<div id="sitename">HPFT ARCHIVE</div>
+						<div id="sitename">{sitename}</div>
 						<div id="siteslogan">{slogan}</div><br/>
 				</div>
 			</div>
 		</div>
 		<hr class="style1">
-		<div class="gb-full">
+		<div class="gb-100 content">
 <!-- END BLOCK : header -->

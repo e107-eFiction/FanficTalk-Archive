@@ -10,7 +10,7 @@
 				<br/>
 				<b>Rating:</b> {rating} &middot; {completed} <span class label="Story_Type">{Story_Type}</span><br/>
 				{numreviews} {reviews} &middot; {score} likes &middot; {count} reads
-			</div><br/><br/>
+			</div><br/>
 		<blockquote2>{summary}</blockquote2><br/><br/></div>
 	</div>
 <div class="gb-50">
@@ -34,7 +34,7 @@
 <div class="gb-full">
 		<div align="center"><span class label="Series"><b>Series:</b> {serieslinks}</span></div>
 		<div align="center">	<b>Published:</b> {published} &middot; <b>Updated:</b> {updated}</div>
-		<div align="center">{addtofaves} &middot; {tracker} {last_read}<br/></div>
+		<div align="center">{addtofaves} {tracker} {last_read}<br/></div>
 		<div align="center">{adminlinks}</div>
 	<!-- START BLOCK : storynotes -->
 	<blockquote>{storynotes}</blockquote>

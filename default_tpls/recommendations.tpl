@@ -41,7 +41,7 @@
       <br/>
   		<div align="center"><b>Published:</b> {published} &middot; <b>Updated:</b> {updated}</div>
       <div align="center"><h7>{last_read}</h7></div>
-      <div align="center"><h7>{addtofaves}</h7> &middot; <h7>{tracker}</h7></div>
+      <div align="center"><h7>{addtofaves}</h7> <h7>{tracker}</h7></div>
       <div align="center">{adminlinks}</div>
       <br/>
       <hr class="style2">

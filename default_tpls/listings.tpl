@@ -83,7 +83,6 @@
       <br/>
       <hr class="style2">
   </div>
-  <br/>
 </div>
 <!-- END BLOCK : storyblock -->
 {pagelinks}

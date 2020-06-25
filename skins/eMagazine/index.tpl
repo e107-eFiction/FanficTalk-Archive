@@ -1,6 +1,7 @@
 <!-- INCLUDE BLOCK : header -->
 			<div class="gb-full">
-				<div align="center">{welcome}</div>
+				<div align="center">{welcome}<br/><br/><br/></div>
+				<hr class="style2">
 		        <div class="gb-full"><h1><span>{news_title}</span></h1>
 							<div align="center">{newsarchive}</div> {news_content} <br /></div>
 						</div>

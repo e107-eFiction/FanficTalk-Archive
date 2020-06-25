@@ -2,7 +2,7 @@
 <div id="profile">
 <!-- INCLUDE BLOCK : profile -->
 {adminoptions}
-<div id="sort">{sort}</div>
+<div align="center"><div id="sort">{sort}</div></div><br/>
 </div>
 	<div id="tabs">
 <!-- START BLOCK : paneltabs -->

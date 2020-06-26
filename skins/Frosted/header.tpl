@@ -1,11 +1,11 @@
 <!-- START BLOCK : header -->
 <body>
 	<nav>
-				<label for="drop" class="toggle"><div align="center"><h5>Menu</h5></div></label>
+				<label for="drop" class="toggle"><div align="center"><h5>Menu  <img src="images/arrow-red.png"></h5></div></label>
 				<input type="checkbox" id="drop" />
 						<ul class="menu">
-								<li><a href="index.php"><h5>Archive</h5></a></li>
-								<li><a href="https://www.hpfanfictalk.com/forums"><h5>Forums</h5></a></li>
+								<li><a href="index.php"><h5><div align="center">Archive</div></h5></a></li>
+								<li><a href="https://www.hpfanfictalk.com/forums"><h5><div align="center">Forums</div></h5></a></li>
 								<li>
 										<label for="drop-2" class="toggle"><h5>Account  <img src="images/arrow-red.png"></h5></label>
 										<a href=""><h5>Account <img src="images/arrow-red.png"></h5></a>
@@ -76,4 +76,5 @@
 		</div>
 		<hr class="style1">
 		<div class="gb-100 content">
+					<hr class="style5">
 <!-- END BLOCK : header -->

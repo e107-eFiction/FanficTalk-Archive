@@ -1,0 +1,903 @@
+/*
+		Skin Name: eMagazine (responsive)
+		Skin Download: http://artphilia.de
+		Description: This is a grid based responsive layout.
+		Author: Nadia Volkrodt
+		Author E-Mail: nadia@artphilia.de
+*/
+
+
+/* import fonts */
+@import url(<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">:400,300,300italic,400italic,600,600italic,700,700italic|Fredericka+the+Great:400);
+@import url(https://use.fontawesome.com/releases/v5.3.1/css/all.css);
+
+/* import basic settings, IE-fixes and grids */
+@import url(base.css);
+
+/*---------------------------------------------------------------------
+   Basic styles
+------------------------------------------------------------------------*/
+html, body {
+	height: 100%;
+	}
+
+body {
+	background-color: #000102;
+	color: #e7fbfa;
+	font-family: 'Roboto', sans-serif;
+	font-size: 10.5pt;
+	letter-spacing: .25px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1250px;
+	text-align: center;
+	}
+
+table {
+	text-align: justify;
+	}
+
+tr:nth-child(odd) {
+	background-color: transparent;
+	padding: 6px;
+	}
+
+tr:nth-child(even), td:nth-child(even) {
+	background-color: transparent;
+	padding: 6px;
+	}
+
+ul li {
+	list-style-type: none;
+	}
+
+a, a:active, a:visited {
+	color: #cae6fa;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 550;
+	padding: 1px 3px;
+	text-decoration: none;
+	text-transform: none;
+	-webkit-transition: .5s;
+	-moz-transition: .5s;
+	transition: .5s;
+	}
+
+a:hover {
+	background-color: #000102;
+	color: #1fb8b1;
+	text-decoration: none;
+	}
+
+h1 {
+	background-color: #000102;
+	color: #1fb8b1;
+	font-family: 'Roboto', sans-serif;
+	font-size: 21pt;
+	font-style: normal;
+	font-weight: 525;
+	letter-spacing: 1px;
+	padding: 10px;
+	text-align: center;
+	text-transform: uppercase;
+	}
+
+h2, #pagetitle, .sectionheader {
+	background-color: transparent;
+	color: #cae6fa;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14pt;
+	font-weight: 550;
+	padding: 10px;
+	text-align: center;
+	}
+
+h3 {
+	background-color: transparent;
+	color: #1791b1;
+	font-family: 'Roboto', sans-serif;
+	font-size: 13pt;
+	font-weight: 500;
+	margin: 0;
+	padding: 7px 0;
+	text-align: center;
+	}
+
+h4 {
+	color: #e1dede;
+	font-family: 'Roboto', sans-serif;
+	font-size: 16pt;
+	font-weight: normal;
+	padding: 10px 0;
+}
+
+h5 {
+	color: #127bb0;
+	display:block;
+	font-family: 'Roboto', sans-serif;
+	font-size: 10pt;
+	font-weight: 550;
+	text-transform: uppercase;
+}
+
+h6 {
+	color: #e1dede;
+	display:block;
+	font-family: 'Roboto', sans-serif;
+	font-size: 10pt;
+	font-weight: 500;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	-webkit-transition: 0s;
+	-moz-transition: 0s;
+	transition: 0s;
+}
+
+h6:hover {
+	color: #127bb0;
+	text-transform: uppercase;
+}
+
+h7 {
+	color: #1fb8b1;
+	font-family: 'Roboto', sans-serif;
+	font-size: 11pt;
+}
+
+/*---------------------------------------------------------------------
+   General page alignment and width
+------------------------------------------------------------------------*/
+
+#header {
+	background: #000102;
+	margin: 0 auto;
+	padding: 20px 0px 0px 0px;
+	}
+
+.container {
+	background-color: #000102;
+	padding: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.content {
+	font-style: normal;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 30px;
+	text-align: left;
+	max-width: 1250px;
+	}
+
+.sidebar {
+	background-color: #000102;
+	font-style: normal;
+	padding: 12px;
+	text-align: justify;
+}
+
+.sidebar:border {
+		border: 0;
+		width: 2px;
+		background: -webkit-gradient(linear, 0 0, 100% 0, from(rgba(0,0,0,0)), color-stop(0.5, #127bb0), to(rgba(0,0,0,0)));
+		background: -webkit-linear-gradient(left, rgba(0,0,0,0), #127bb0, rgba(0,0,0,0));
+		background: -moz-linear-gradient(left, rgba(0,0,0,0), #127bb0, rgba(0,0,0,0));
+		background: -o-linear-gradient(left, rgba(0,0,0,0), #127bb0, rgba(0,0,0,0));
+		background: linear-gradient(left, rgba(0,0,0,0), #127bb0, rgba(0,0,0,0));
+		transform: rotate(90deg);
+	}
+
+.footer {
+	margin-top: 10px;
+	padding: 10px;
+	text-align: center;
+	}
+
+i {
+	font-family: 'Roboto', sans-serif;
+	}
+
+.label, b, label {
+	color: #1fb8b1;
+	font-weight: 450;
+	}
+
+hr.style1 {
+	border: 0;
+	height: 2px;
+	background: -webkit-gradient(linear, 0 0, 100% 0, from(rgba(0,0,0,0)), color-stop(0.5, #127bb0), to(rgba(0,0,0,0)));
+	background: -webkit-linear-gradient(left, rgba(0,0,0,0), #127bb0, rgba(0,0,0,0));
+	background: -moz-linear-gradient(left, rgba(0,0,0,0), #127bb0, rgba(0,0,0,0));
+	background: -o-linear-gradient(left, rgba(0,0,0,0), #127bb0, rgba(0,0,0,0));
+	background: linear-gradient(left, rgba(0,0,0,0), #127bb0, rgba(0,0,0,0));
+	}
+
+hr.style2 {
+	border: 0;
+	height: 1px;
+	margin: 8px 0;
+	background: -webkit-gradient(linear, 0 0, 100% 0, from(rgba(0,0,0,0)), color-stop(0.5, #ffcd50), to(rgba(0,0,0,0)));
+	background: -webkit-linear-gradient(left, rgba(0,0,0,0), #cae6fa, rgba(0,0,0,0));
+	background: -moz-linear-gradient(left, rgba(0,0,0,0), #cae6fa, rgba(0,0,0,0));
+	background: -o-linear-gradient(left, rgba(0,0,0,0), #cae6fa, rgba(0,0,0,0));
+	background: linear-gradient(left, rgba(0,0,0,0), #cae6fa, rgba(0,0,0,0));
+	}
+
+hr.style3 {
+	border: 0;
+	height: 1.5px;
+	margin: 8px 0;
+	background: -webkit-gradient(linear, 0 0, 100% 0, from(rgba(0,0,0,0)), color-stop(0.5, #ffcd50), to(rgba(0,0,0,0)));
+	background: -webkit-linear-gradient(left, rgba(0,0,0,0), #1fb8b1, rgba(0,0,0,0));
+	background: -moz-linear-gradient(left, rgba(0,0,0,0), #1fb8b1, rgba(0,0,0,0));
+	background: -o-linear-gradient(left, rgba(0,0,0,0), #1fb8b1, rgba(0,0,0,0));
+	background: linear-gradient(left, rgba(0,0,0,0), #1fb8b1, rgba(0,0,0,0));
+	}
+
+hr.style4 {
+	border: 0;
+	height: 0px;
+}
+
+hr.style5 {
+	border: 0;
+	height: 2px;
+	background: -webkit-gradient(linear, 0 0, 100% 0, from(rgba(0,0,0,0)), color-stop(0.5, #127bb0), to(rgba(0,0,0,0)));
+	background: -webkit-linear-gradient(left, rgba(0,0,0,0), #127bb0, rgba(0,0,0,0));
+	background: -moz-linear-gradient(left, rgba(0,0,0,0), #127bb0, rgba(0,0,0,0));
+	background: -o-linear-gradient(left, rgba(0,0,0,0), #127bb0, rgba(0,0,0,0));
+	background: linear-gradient(left, rgba(0,0,0,0), #127bb0, rgba(0,0,0,0));
+}
+
+input, textarea, select {
+	background-color: #000102;
+	border-radius: 4px;
+	color: #cae6fa;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	margin: 2px;
+	padding: 2px 6px;
+	vertical-align: middle;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	}
+
+.button, .button a {
+	background-color: transparent;
+	border-radius: 4px;
+	color: #e1dede;
+	cursor: pointer;
+	margin: 0 auto;
+	text-align: center;
+	text-transform: uppercase;
+	padding: 2px 6px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	}
+
+blockquote {
+	border-radius: 10px;
+	border-right: 3px solid #1fb8b1;
+	border-left: 3px solid #1fb8b1;
+	margin: 10px auto;
+	padding: 25px;
+	width: 75%;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	}
+
+/*---------------------------------------------------------------------
+	  MENU
+------------------------------------------------------------------------*/
+
+.toggle,
+[id^=drop] {
+	display: none;
+	}
+
+nav {
+	display: inline-block;
+	font-family: 'Roboto', sans-serif;
+	padding: 0;
+	position: relative;
+	width: 100%;
+	}
+
+nav:after {
+	clear:both;
+	content:"";
+	display:table;
+	}
+
+nav ul {
+	background-color: #000102;
+	padding:4px 2px;
+	text-align: center;
+	}
+
+nav ul li {
+	border-bottom: 2px solid transparent;
+	display:inline-table;
+	margin: 5px 3px;
+	text-align: left;
+	}
+
+nav ul li:hover {
+	background-color: #000102;
+	}
+
+nav a {
+	display:block;
+	font-family: 'Roboto', sans-serif;
+	font-size: 10pt;
+	font-weight: 500;
+	letter-spacing: 1px;
+	padding: 8px 16px;
+	text-transform: uppercase;
+	-webkit-transition: 0s;
+	-moz-transition: 0s;
+	transition: 0s;
+	}
+
+nav a:hover {
+	color: #127bb0;
+	text-transform: uppercase;
+}
+
+nav ul li ul li:hover {
+	background: #000102
+	}
+
+nav ul ul {
+	display: none;
+	position: absolute;
+	top: 38px;
+	}
+
+nav ul li:hover > ul {
+	background-color: #000102;
+	display:inherit;
+	}
+
+nav ul ul li {
+	background: #000102;
+	display:list-item;
+	position: relative;
+	}
+
+.login li {
+	border-bottom: 2px solid transparent;
+	display: block;
+	margin: 0 3px;
+	padding: 8px 16px;
+}
+
+li > a:after {
+	content:
+	}
+li > a:only-child:after {
+	content: '';
+	}
+
+#main-navigation {
+	float: center;
+	text-align: center;
+	padding: 15px 0px;
+	width: 100%;
+	}
+
+#main-navigation ul {
+	padding: 10px 2px;
+	text-align: center;
+	}
+
+#main-navigation li {
+	background-color: #127bb0;
+	display: inline;
+	float: center;
+	margin: 0 3px;
+	padding: 4px 8px;
+	}
+
+#main-navigation li:hover {
+	background-color: #000102;
+	padding: 4px 8px;
+	}
+
+#main-navigation a {
+	color: #1fb8b1;
+	font-family: 'Roboto', sans-serif;
+	font-size: 10pt;
+	font-weight: 600;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+	}
+
+/*---------------------------------------------------------------------
+  Style of story list
+------------------------------------------------------------------------*/
+
+.even, .odd, .comment {
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+	padding: 5px;
+	}
+
+.even:hover, .odd:hover {
+	background-color: transparent;
+	}
+
+/*---------------------------------------------------------------------
+   News
+------------------------------------------------------------------------*/
+
+#newsarchive, #sortform, .respond {
+	background-color: #000102;
+	text-align: center;
+	}
+
+#newsbox {
+	background-color: #000102;
+	margin: 0 auto;
+	padding: 16px;
+	text-align: center;
+	}
+
+.newscom {
+	background-color: #000102;
+	font-weight: normal;
+  font-family: 'Roboto', sans-serif;
+  font-size: 10pt;
+	margin: 0;
+	padding: 16px;
+	text-align: right;
+	}
+
+.newssig {
+	background-color: #000102;
+	font-family: 'Roboto', sans-serif;
+	font-size: 9pt;
+	font-style: italic;
+	padding: 16px;
+	}
+
+
+/*---------------------------------------------------------------------
+   Categories
+------------------------------------------------------------------------*/
+
+.category {
+	font-size: 10pt;
+	font-weight: 450;
+	margin: 0 auto;
+	text-align: left;
+	width: 75%;
+	}
+
+.category a {
+	font-size: 10pt;
+	font-weight: 500;
+}
+
+.category a:hover {
+	color: #127bb0;
+}
+
+.catimg {
+	float: left;
+	padding: 3px 6px 3px 0;
+	}
+
+.cat_description {
+	padding: 5px;
+	text-align: left;
+	}
+
+/*---------------------------------------------------------------------
+  Page links
+------------------------------------------------------------------------*/
+
+#pagelinks {
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
+	padding: 1em;
+	text-align: center;
+	width: 100%;
+	}
+
+#pagelinks a {
+	font-weight: normal;
+	text-decoration: none;
+	text-transform: none;
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+	}
+
+#pagelinks a:hover {
+	background-color: transparent;
+	text-decoration: none;
+	}
+
+a#currentpage {
+	background-color: transparent;
+	color: #127bb0;
+	}
+
+/*---------------------------------------------------------------------
+   Misc Styles, used in multiple places throughout the page
+------------------------------------------------------------------------*/
+
+#alphabet {
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
+	padding: 5px;
+	text-align: center;
+	}
+
+#jumpmenu {
+	text-align: right;
+	}
+
+#story {
+	padding: 50px 10px;
+	text-align: justify;
+	}
+
+#login {
+	margin: 0;
+	}
+
+#columncontainer {
+	text-align: justify;
+	width: 90%;
+}
+
+.column, #columncontainer a {
+	font-family: 'Roboto', sans-serif;
+	font-size: 18px;
+	}
+
+.copyright {
+	font-family: 'Roboto', sans-serif;
+	font-size: 9pt;
+	padding: 5px 0;
+	text-transform: uppercase;
+}
+
+/*---------------------------------------------------------------------
+  MENU
+------------------------------------------------------------------------*/
+
+#menu {
+	margin: 4px 0;
+	width: 100%;
+	}
+
+#menu ul {
+	background-color: #000102;
+	padding: 4px 2px;
+	text-align: center;
+	}
+
+#menu li {
+	display: inline-block;
+	margin: 0 3px;
+	padding: 8px 16px;
+	}
+
+#menu li:hover {
+	background: #1fb8b1;
+	padding: 8px 16px;
+	}
+
+#menu a {
+	color: #127bb0;
+	font-family: 'Roboto', sans-serif;
+	font-size: 11pt;
+	font-weight: 600;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	-webkit-transition: 0s;
+	-moz-transition: 0s;
+	transition: 0s;
+	}
+
+#menu a:hover {
+	color: #127bb0;
+}
+
+/*---------------------------------------------------------------------
+  SITE NAME / SLOGAN
+------------------------------------------------------------------------*/
+
+#sitename {
+	color: #1fb8b1;
+	font-family: 'Roboto', sans-serif;
+	font-size: 30pt;
+	font-weight: 550;
+	padding: 12px 0px 7px 0px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+#siteslogan {
+	color: #cae6fa;
+	font-family: 'Roboto', sans-serif;
+	font-size: 15pt;
+	font-weight: 500;
+	padding-bottom: 6px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+/*---------------------------------------------------------------------
+ RESPONSIVE
+------------------------------------------------------------------------*/
+
+@media only screen and (min-device-width: 768px) and (max-width : 1024px) {
+
+	body {
+		font-size: 13pt;
+		padding: 0;
+		width: 100%;
+	}
+
+	h3 {
+		font-size: 13pt;
+		}
+
+	h5 {
+		font-size: 13pt;
+		text-align: center;
+	}
+
+	h6 {
+		font-size: 12pt;
+		padding: 10px;
+		text-align: center;
+	}
+
+	h7 {
+		font-size: 13pt;
+	}
+
+	#header {
+		border-left: transparent;
+		border-right: transparent;
+	}
+
+	.content {
+		border-left: transparent;
+		border-right: transparent;
+		padding: 20px;
+		}
+
+	nav {
+		margin-top: 5px;
+		width: 100%;
+	}
+
+	.toggle + a,
+	.menu {
+		background-color: #000102;
+		display: none;
+		padding: 8px 16px;
+		width: 100%;
+	}
+
+	.toggle {
+		background-color: #000102;
+		border:none;
+		display: block;
+		font-size:11px;
+		padding: 8px 16px;
+		text-align: left;
+		text-decoration:none;
+		width: 100%;
+	}
+
+	.toggle:hover {
+		background-color: #000102;
+	}
+
+	[id^=drop]:checked + ul {
+		background-color: #000102;
+		display: block;
+	}
+
+	nav ul li {
+		display: block;
+		width: 100%;
+		}
+
+	nav ul ul .toggle,
+	nav ul ul a {
+		margin: -2px;
+		padding: 0px;
+	}
+
+	nav ul ul ul a {
+		padding: 0 30px;
+	}
+
+	nav a:hover,
+		nav ul ul ul a {
+			background-color: #000102;
+			color: #127bb0;
+		}
+
+	nav ul li ul li .toggle,
+	nav ul ul a,
+	nav ul ul ul a{
+		font-size:17px;
+		padding: 0;
+	}
+
+
+	nav ul li ul li .toggle,
+	nav ul ul a {
+		background-color: #000102;
+	}
+
+	nav ul ul {
+		float: none;
+		position:static;
+	}
+
+	nav ul ul li:hover > ul,
+	nav ul li:hover > ul {
+		background-color: #000102
+		border-bottom: 2.5px solid #000102;
+		display: none;
+	}
+
+	nav ul ul li {
+		background-color: #000102;
+		display: block;
+		width: 100%;
+	}
+
+	nav ul ul ul li {
+		position: static;
+	}
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 767px)  {
+
+	body {
+		font-size: 13pt;
+		padding: 0;
+		width: 100%;
+	}
+
+	h3 {
+		font-size: 13pt;
+		}
+
+	h5 {
+		font-size: 13pt;
+		text-align: center;
+	}
+
+	h6 {
+		color: #df4d3c;
+		font-size: 12pt;
+		padding: 10px;
+		text-align: center;
+	}
+
+	h7 {
+		font-size: 13pt;
+	}
+
+	#header {
+		border-left: transparent;
+		border-right: transparent;
+	}
+
+	.content {
+		border-left: transparent;
+		border-right: transparent;
+		padding: 20px;
+		}
+
+	nav {
+		margin-top: 5px;
+	}
+
+	nav a {
+		padding: 8px 16px;
+	}
+
+	.toggle + a,
+	.menu {
+		background-color: #000102;
+		display: none;
+		padding: 4px 8px;
+		width: 100%;
+	}
+
+	.toggle {
+		background-color: #000102;
+		border:none;
+		display: block;
+		font-size:11px;
+		padding:4px 8px;
+		text-align: left;
+		text-decoration:none;
+	}
+
+	.toggle:hover {
+		background-color: #000102;
+	}
+
+	[id^=drop]:checked + ul {
+		background-color: #000102;
+		display: block;
+	}
+
+	nav ul li {
+		display: block;
+		width: 100%;
+		}
+
+	nav ul ul .toggle,
+	nav ul ul a {
+		margin: -2px;
+		padding: 0px;
+	}
+
+	nav ul ul ul a {
+		padding: 0 30px;
+	}
+
+	nav a:hover,
+		nav ul ul ul a {
+			background-color: #000102;
+		}
+
+	nav ul li ul li .toggle,
+	nav ul ul a,
+	nav ul ul ul a{
+		color:#df4d3c;
+		font-size:17px;
+		padding: 0;
+	}
+
+
+	nav ul li ul li .toggle,
+	nav ul ul a {
+		background-color: #000102;
+	}
+
+	nav ul ul {
+		color: #df4d3c;
+		float: none;
+		position:static;
+	}
+
+	nav ul ul li:hover > ul,
+	nav ul li:hover > ul {
+		background-color: #000102
+		border-bottom: 2.5px solid #000102;
+		display: none;
+	}
+
+	nav ul ul li {
+		background-color: #000102;
+		display: block;
+		width: 100%;
+	}
+
+	nav ul ul ul li {
+		position: static;
+	}
+}

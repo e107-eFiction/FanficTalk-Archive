@@ -11,7 +11,8 @@
 	<br/><br/>{footer}<br/><br/>
 	{skinchange_content}
 </div>
-</div> <!-- closing content grid -->
+
+ <!-- closing content grid -->
 <!-- END BLOCK : footer -->
 </body>
 </html>

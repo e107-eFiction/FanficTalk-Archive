@@ -26,13 +26,14 @@ $blocks["info"]["status"] = '1';
 		Links to home, recent, authors, categories,titles,series,search,top tens, browse by, help, contact us, and the login info. */
 $blocks["menu"]["status"] = '1';
 $blocks["menu"]["content"] = array (
-  0 => 'recent',
-  1 => 'authors',
-  2 => 'titles',
-  3 => 'catslink',
-  4 => 'browse',
-  5 => 'help',
-  6 => 'contact us');
+  0	=>	'home',
+  1 => 	'recent',
+  2 => 	'authors',
+  3 => 	'titles',
+  4 => 	'catslink',
+  5 => 	'browse',
+  6 => 	'help',
+  7 => 	'contact us');
 $blocks["menu"]["style"] = 0;
 
 

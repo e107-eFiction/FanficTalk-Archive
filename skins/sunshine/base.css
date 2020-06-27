@@ -1,4 +1,4 @@
-/*
+/* 
 RESPONSIVE GRID LAYOUT
 created by http://artphilia.de
  */
@@ -48,8 +48,7 @@ created by http://artphilia.de
 }
 
 .gb-80 {
-	margin: 0 3%;
-	width: 74%;
+	width: 80%;
 }
 
 .gb-70 {
@@ -61,13 +60,10 @@ created by http://artphilia.de
 }
 
 .gb-50, .gb-half, .gb-2qrt {
-	margin: 0 2%;
-	padding: 15px;
-	width: 46%;
+	width: 50%;
 }
 
 .gb-40 {
-	padding: 10px;
 	width: 40%;
 }
 
@@ -116,7 +112,7 @@ created by http://artphilia.de
 	padding: 6px;
 }
 
-[class*="gb-"] {
+[class*="gb-"] { 
 	display: block;
 	float: none;
 	padding: 0;
@@ -127,6 +123,6 @@ created by http://artphilia.de
 @media screen and ( max-width: 567px )  {
 .screen-micro,
 	.screen-micro > [class*="gb-"] {
-	display: none;
+	display: none; 	
 	}
 }

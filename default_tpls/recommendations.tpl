@@ -23,7 +23,7 @@
   	<hr class="style2">
   	<b>Story Length:</b> {numchapters} chapters ({wordcount} words)<br/>
   	<hr class="style2">
-  	<span class label="Forum_House"><b>HPFT Forum House:</b> {Forum_House}</span><br/>
+  	<span class label="Forum_House"><b> Forum House:</b> {Forum_House}</span><br/>
     <hr class="style2">
   </div>
   <div class="gb-50">

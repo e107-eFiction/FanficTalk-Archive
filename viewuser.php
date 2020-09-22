@@ -37,7 +37,17 @@ $tpl->assignInclude( "footer", "./$skindir/footer.tpl" );
 if(file_exists("$skindir/profile.tpl")) $tpl->assignInclude("profile", "$skindir/profile.tpl");
 else $tpl->assignInclude("profile", "./default_tpls/profile.tpl");
 include("includes/pagesetup.php");	
-// If uid isn't a number kill the script with an error message.  The only way this happens is a hacker.
+
+//added by branwen
+// If uid equals an author's penname, rewrite to the ID
+if(empty($uid)&&isset($_REQUEST['uid']))
+{
+	$authorquery = dbquery("SELECT "._UIDFIELD." as uid FROM "._AUTHORTABLE." WHERE "._PENNAMEFIELD." = '".escapestring($_REQUEST['uid'])."' LIMIT 1");
+	list($tempuid) = dbrow($authorquery);
+	if(isNumber($tempuid)&&$tempuid>0) $uid = $tempuid;
+}
+//end added by branwen
+
 if(empty($uid)) {
 	if(!isMEMBER) accessDenied( );
 	else $uid = USERUID;

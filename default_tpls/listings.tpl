@@ -57,6 +57,7 @@
   	<hr class="style2">
   	<span class label="type"><b>Story Type:</b> {type}</span><br/>
   	<hr class="style2">
+
   	<span class label="groups"><b>FFT Groups:</b> {groups}
   </div>
   <div class="gb-50">

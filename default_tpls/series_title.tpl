@@ -1,34 +1,38 @@
 <!-- START BLOCK : series -->
 
 <div id="pagetitle">{pagetitle}</div>
-<div align="center">
-  {numreviews} {reviews} &middot {score} likes
-  <br/>
-  <span class="label">{numstories} stories</span>
-</div><br/>
-<div align="center"><blockquote>{summary}</blockquote></div><br /><br/>
-<div class="gb-50">
-  <b>Fandoms:</b> {category}</span><br/>
-  <hr class="style2">
-  <span class label="Characters"><b>Characters:</b> {characters}</span><br/>
-  <hr class="style2">
-  <span class label="Pairings"><b>Pairings:</b> {Pairings}</span><br/>
+<div align="center">{category}</div>
+<div class="content"><div align="center"><blockquote2>{summary}</blockquote><br /><br/>
 </div>
 <div class="gb-50">
-  <span class label="Genre"><b>Genre:</b> {Genre}</span><br/>
-  <hr class="style2">
-  <span class label="Themes"><b>Themes:</b> {themes}</span><br/>
-  <hr class="style2">
-  <span class label="Inclusivity"><b>Inclusivity:</b> {inclusivity}</span><br/>
+	<span class label="characters"><b>Characters:</b> {characters} {pairings}</span><br/>
+	<hr class="style2">
+	<span class label="pairings"><b>Pairings:</b> {pairings}</span><br/>
+	<hr class="style2">
+	<span class label="representation"><b>Representation:</b> {representation}</span><br/>
+	<hr class="style2">
+	<span class label="type"><b>Story Type:</b> {type}</span><br/>
+	<hr class="style2">
+	<span class label="groups"><b>FFT Groups:</b> {groups}
 </div>
+<div class="gb-50">
+	<span class label="advisories"><b>Rating and Advisories (required):</b> {rating} ({advisories})</span>
+	<hr class="style2">
+	<span class label="warnings"><b>Content Warnings (optional):</b> {advisories}</span>
+	<hr class="style2">
+	<span class label="genre"><b>Genre:</b> {genre}</span><br/>
+	<hr class="style2">
+	<span class label="tropes"><b>Tropes:</b> {tropes}</span><br/></div>
 <div class="gb-full">
-  <br/>
-  <div align="center"><b>Series Type:</b> {open} {comment} {roundrobin}<br/>
-    <span class="label">{adminoptions}{addtofaves}{addtoseries}<br />
+    <div align="center"><span class="label">Parent Series:</span> {parentseries}<br /></div>
+		<div align="center"><b>Published:</b> {published} &middot; <b>Updated:</b> {updated} &middot; <b>Words:</b> {wordcount} &middot; <b>Chapters:</b> {numchapters} &middot; <b>Reviews:</b> {numreviews} &middot; <b>Likes:</b> {score} &middot; <b>Reads:</b> {count}</div><br/>
+		<div align="center"><span class label="Series"><b>Series:</b> {serieslinks}</span></div>
+		<div align="center">{addtofaves} {tracker} {last_read}<br/></div>
+		<div align="center">{adminlinks}</div></div></div>
       <div class="jumpmenu">{jumpmenu}</div>
       <br/>
-      <hr class="style2">
   </div>
+  <hr class="style2">
 </div>
 
 {stories}

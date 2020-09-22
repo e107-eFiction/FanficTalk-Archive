@@ -13,8 +13,6 @@
 	<hr class="style2">
 	<span class label="representation"><b>Representation:</b> {representation}</span><br/>
 	<hr class="style2">
-	<span class label="type"><b>Story Type:</b> {type}</span><br/>
-	<hr class="style2">
 	<span class label="groups"><b>FFT Groups:</b> {groups}
 </div>
 <div class="gb-50">
@@ -24,7 +22,10 @@
 	<hr class="style2">
 	<span class label="genre"><b>Genre:</b> {genre}</span><br/>
 	<hr class="style2">
-	<span class label="tropes"><b>Tropes:</b> {tropes}</span><br/></div>
+	<span class label="tropes"><b>Tropes:</b> {tropes}</span><br/>
+	<hr class="style2">
+	<span class label="type"><b>Story Type:</b> {type}</span><br/>
+</div></div>
 <div class="gb-full">
 		<div align="center">	<b>Published:</b> {published} &middot; <b>Updated:</b> {updated} &middot; <b>Words:</b> {wordcount} &middot; <b>Chapters:</b> {numchapters} &middot; <b>Reviews:</b> {numreviews} &middot; <b>Likes:</b> {score} &middot; <b>Reads:</b> {count}</div><br/>
 		<div align="center"><span class label="Series"><b>Series:</b> {serieslinks}</span></div>
@@ -55,9 +56,6 @@
   	<hr class="style2">
   	<span class label="representation"><b>Representation:</b> {representation}</span><br/>
   	<hr class="style2">
-  	<span class label="type"><b>Story Type:</b> {type}</span><br/>
-  	<hr class="style2">
-
   	<span class label="groups"><b>FFT Groups:</b> {groups}
   </div>
   <div class="gb-50">
@@ -67,7 +65,10 @@
   	<hr class="style2">
   	<span class label="genre"><b>Genre:</b> {genre}</span><br/>
   	<hr class="style2">
-  	<span class label="tropes"><b>Tropes:</b> {tropes}</span><br/></div></div>
+  	<span class label="tropes"><b>Tropes:</b> {tropes}</span><br/>
+		<hr class="style2">
+		<span class label="type"><b>Story Type:</b> {type}</span><br/>
+	</div></div>
   <div class="gb-full">
   		<div align="center">	<b>Published:</b> {published} &middot; <b>Updated:</b> {updated} &middot; <b>Words:</b> {wordcount} &middot; <b>Chapters:</b> {numchapters} &middot; <b>Reviews:</b> {numreviews} &middot; <b>Likes:</b> {score} &middot; <b>Reads:</b> {count}</div><br/>
   		<div align="center"><span class label="Series"><b>Series:</b> {serieslinks}</span></div>

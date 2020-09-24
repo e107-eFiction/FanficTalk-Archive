@@ -5,7 +5,7 @@
 <div class="content"><div align="center"><blockquote2>{summary}</blockquote><br /><br/>
 </div>
 <div class="gb-50">
-	<span class label="characters"><b>Characters:</b> {characters} {pairings}</span><br/>
+	<span class label="characters"><b>Characters:</b> {characters}</span><br/>
 	<hr class="style2">
 	<span class label="pairings"><b>Pairings:</b> {pairings}</span><br/>
 	<hr class="style2">

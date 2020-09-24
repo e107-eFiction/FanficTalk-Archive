@@ -7,7 +7,7 @@
 <div class="content"><span class="label">Summary: </span>{summary}<br />
 <span class="label">Parent Series:</span> {parentseries}<br />
 <div class="gb-50">
-	<span class label="characters"><b>Characters:</b> {characters} {pairings}</span><br/>
+	<span class label="characters"><b>Characters:</b> {characters}</span><br/>
 	<hr class="style2">
 	<span class label="pairings"><b>Pairings:</b> {pairings}</span><br/>
 	<hr class="style2">
@@ -50,7 +50,7 @@
   	<br/>
   </div>
   <div class="gb-50">
-  	<span class label="characters"><b>Characters:</b> {characters} {pairings}</span><br/>
+  	<span class label="characters"><b>Characters:</b> {characters}</span><br/>
   	<hr class="style2">
   	<span class label="pairings"><b>Pairings:</b> {pairings}</span><br/>
   	<hr class="style2">

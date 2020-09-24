@@ -26,7 +26,7 @@
 <div class="gb-50">
 	<span class label="advisories"><b>Rating and Advisories (required):</b> {rating} ({advisories})</span>
 	<hr class="style2">
-	<span class label="warnings"><b>Content Warnings (optional):</b> {advisories}</span>
+	<span class label="warnings"><b>Content Warnings (optional):</b> {waarnings}</span>
 	<hr class="style2">
 	<span class label="genre"><b>Genre:</b> {genre}</span><br/>
 	<hr class="style2">

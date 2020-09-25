@@ -5,7 +5,7 @@
 				<input type="checkbox" id="drop" />
 						<ul class="menu">
 								<li><a href="index.php"><h5>Archive</h5></a></li>
-								<li><a href="https://www.hpfanfictalk.com/forums"><h5>Forums</h5></a></li>
+								<li><a href="https://www.fanfictalk.com/forums"><h5>Forums</h5></a></li>
 								<li>
 										<label for="drop-2" class="toggle"><h5>Account  <img src="images/arrow-white.png"></h5></label>
 										<a href=""><h5>Account <img src="images/arrow-white.png"></h5></a>
@@ -33,8 +33,8 @@
 										<a href=""><h5>Podfics <img src="images/arrow-white.png"></h5></a>
 										<input type="checkbox" id="drop-3"/>
 										<ul>
-												<li><a href="https://hpfanfictalk.com/topic/5844-published-podfics/" title="Listen" id="current"><h6>Listen</h6></a></li>
-												<li><a href="https://hpfanfictalk.com/forum/304-wireless-wizarding-network/" title="Request" id="current"><h6>Request a Podfic</h6></a></li>
+												<li><a href="https://fanfictalk.com/topic/5844-published-podfics/" title="Listen" id="current"><h6>Listen</h6></a></li>
+												<li><a href="https://fanfictalk.com/forum/304-wireless-wizarding-network/" title="Request" id="current"><h6>Request a Podfic</h6></a></li>
 										</ul>
 								</li>
 								<li>

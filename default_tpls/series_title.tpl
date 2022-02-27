@@ -10,8 +10,6 @@
 	<span class label="pairings"><b>Pairings:</b> {pairings}</span><br/>
 	<hr class="style2">
 	<span class label="representation"><b>Representation:</b> {representation}</span><br/>
-	<hr class="style2">
-	<span class label="groups"><b>FFT Groups:</b> {groups}
 </div>
 <div class="gb-50">
 	<span class label="advisories"><b>Rating and Advisories (required):</b> {rating} ({advisories})</span>

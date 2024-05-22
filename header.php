@@ -28,14 +28,12 @@ if(isset($_GET['benchmark'])) {
 	$start = ((float)$usec + (float)$sec);
 }
 $headerSent = false;
-if(get_magic_quotes_gpc()){
-	foreach($_POST as $var => $val) {
-		$_POST[$var] = is_array( $val ) ? array_map( 'stripslashes', $val ) : stripslashes( $val );
-	}
-	foreach($_GET as $var => $val) {
-		$_GET[$var] = is_array( $val ) ? array_map( 'stripslashes', $val ) : stripslashes( $val );
-	}
-}
+
+// Defines the character set for your language/location
+define ("_CHARSET", "utf-8");
+
+//default values to avoid ajax issue when notice error are on
+$allowed_tags = '';
 
 // Prevent possible XSS attacks via $_GET.
 foreach ($_GET as $v) {
@@ -59,18 +57,24 @@ if(ini_get('register_globals')) {
 	foreach($arrayList as $k => $v) {
 		unset($GLOBALS[$k]);
 	}
-}
-
+}                   
+ 
 Header('Cache-Control: private, no-cache, must-revalidate, max_age=0, post-check=0, pre-check=0');
 header ("Pragma: no-cache"); 
 header ("Expires: 0"); 
+header("Content-Type: text/html; charset="._CHARSET);
 
 // Locate config.php and set the basedir path
 $folder_level = "";
 while (!file_exists($folder_level."header.php")) { $folder_level .= "../"; }
 if(!defined("_BASEDIR")) define("_BASEDIR", $folder_level);
 
-@ include_once(_BASEDIR."config.php");
+if (file_exists(_BASEDIR . "config.php"))
+{
+	include_once(_BASEDIR . "config.php");
+	include_once(_BASEDIR . "includes/dbfunctions.php");
+}
+
 if(empty($sitekey)) {
 	header("Location: install/install.php");
 	exit( );
@@ -78,6 +82,10 @@ if(empty($sitekey)) {
 if(isset($skin)) $globalskin = $skin; 
 $settingsresults = dbquery("SELECT * FROM ".$settingsprefix."fanfiction_settings WHERE sitekey = '".$sitekey."'");
 $settings = dbassoc($settingsresults);
+if(is_null($settings)) {
+	die(" <b>Your settings issue</b><br /> Please check your sitekey and then setting table. Your settings are empty. ");	
+}
+
 if(!defined("SITEKEY")) define("SITEKEY", $settings['sitekey']);
 unset($settings['sitekey']);
 if(!defined("TABLEPREFIX")) define("TABLEPREFIX", $settings['tableprefix']);
@@ -85,6 +93,7 @@ unset($settings['tableprefix']);
 define("STORIESPATH", $settings['storiespath']);
 unset($settings['storiespath']);
 foreach($settings as $var => $val) {
+	if (is_NULL($val)) $val = '';
 	$$var = stripslashes($val);
 	$settings[$var] = htmlspecialchars($val);
 }
@@ -100,10 +109,10 @@ if(isset($globalskin)) $skin = $globalskin;
 
 if(isset($_GET['action'])) $action = strip_tags($_GET['action']);
 else $action = false;
-
+ 
 if(file_exists(_BASEDIR."languages/{$language}.php")) include (_BASEDIR."languages/{$language}.php");
 else include (_BASEDIR."languages/en.php");
-
+ 
 include_once(_BASEDIR."includes/queries.php");
 include_once(_BASEDIR."includes/corefunctions.php");
 
@@ -128,7 +137,7 @@ if(isset($_SERVER['PHP_SELF'])) $_SERVER['PHP_SELF'] = htmlspecialchars(descript
 if(isset($PHP_SELF)) $PHP_SELF = htmlspecialchars(descript($PHP_SELF), ENT_QUOTES);
 
 // Set these variables to start.
-$agecontsent = false; $viewed = false; 
+$agecontsent = false; $viewed = array(); 
 
 require_once("includes/get_session_vars.php");
 
@@ -160,13 +169,27 @@ if($maintenance && !isADMIN && basename($_SERVER['PHP_SELF']) != "maintenance.ph
 	exit( );
 }
 
-$blockquery = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_blocks");
-while($block = dbassoc($blockquery)) {
-	$blocks[$block['block_name']] = unserialize($block['block_variables']);
+$blockquery = dbquery("SELECT * FROM " . TABLEPREFIX . "fanfiction_blocks");
+while ($block = dbassoc($blockquery))
+{
+
+	if (!empty($block['block_variables']))
+	{
+		
+		$block_vars = @unserialize($block['block_variables']);
+		if ($block_vars)
+		{
+			$blocks[$block['block_name']] = $block_vars;
+		}
+		else {
+		 	// print_r($block);
+		}
+	}
 	$blocks[$block['block_name']]['title'] = $block['block_title'];
 	$blocks[$block['block_name']]['file'] = $block['block_file'];
 	$blocks[$block['block_name']]['status'] = $block['block_status'];
 }
+ 
 
 // This session variable is used to track the story views
 if(isset($_SESSION[SITEKEY."_viewed"])) $viewed = $_SESSION[SITEKEY."_viewed"];
@@ -174,14 +197,14 @@ if(isset($_SESSION[SITEKEY."_viewed"])) $viewed = $_SESSION[SITEKEY."_viewed"];
 if(isset($_GET['ageconsent'])) $_SESSION[SITEKEY."_ageconsent"] = 1;
 if(isset($_GET['warning'])) $_SESSION[SITEKEY."_warned"][$_GET['warning']] = 1;
 
-if(file_exists("languages/{$language}.php")) require_once ("languages/{$language}.php");
-else require_once ("languages/en.php");
+
 if(is_dir(_BASEDIR."skins/$siteskin")) $skindir = _BASEDIR."skins/$siteskin";
 else if(is_dir(_BASEDIR."skins/".$settings['skin'])) $skindir = _BASEDIR."skins/".$defaultskin;
 else $skindir = _BASEDIR."default_tpls";
 if(USERUID) {
 	$prefs = dbquery("SELECT sortby, storyindex, tinyMCE FROM ".TABLEPREFIX."fanfiction_authorprefs WHERE uid = '".USERUID."'");
-	if(dbnumrows($prefs)) list($defaultsort, $displayindex, $tinyMCE) = dbrow($prefs);
+	if(dbnumrows($prefs)) list($defaultsort, $displayindex, $tinyMCEAuthor) = dbrow($prefs);
+	if(!$tinyMCEAuthor) $tinyMCE = 0;
 }
 if(isset($_REQUEST['sort'])) $defaultsort = $_REQUEST['sort'] == "update" ? 1 : 0;
 define("_ORDERBY", " ORDER BY ".($defaultsort == 1 ? "updated DESC" : "stories.title ASC"));
@@ -204,7 +227,7 @@ if($current == "viewstory"){
 		$filename = basename($titleinfo.".html");
 		$ie = strpos("msie", strtolower($_SERVER['HTTP_USER_AGENT'])) !== false ? true : false;
 		if ($ie) $filename = rawurlencode($filename);
-		header("Content-Disposition: inline; filename=\"".$titleinfo."\"");
+		//header("Content-Disposition: inline; filename=\"".$titleinfo."\"");
  	}
 }
 if($current == "viewuser" && isNumber($uid)) {
@@ -212,65 +235,43 @@ if($current == "viewuser" && isNumber($uid)) {
 	list($penname) = dbrow($author);
 	$titleinfo = "$sitename :: $penname";
 }
-echo _DOCTYPE."<html><head>";
+echo _DOCTYPE."<html lang={$language}><head>";
+echo "<meta charset='utf-8' />";
 if(!isset($titleinfo)) $titleinfo = "$sitename :: $slogan";
 if(isset($metaDesc)) echo "<meta name='description' content='$metaDesc'>";
-echo "<title>$titleinfo</title>
-<meta http-equiv=\"Content-Type\" content=\"text/html; charset="._CHARSET."\">";
-if(!isset($_GET['action']) || $_GET['action'] != "printable") {
-echo "<script language=\"javascript\" type=\"text/javascript\" src=\""._BASEDIR."includes/javascript.js\"></script>
-<link rel=\"alternate\" type=\"application/rss+xml\" title=\"$sitename RSS Feed\" href=\""._BASEDIR."rss.php\">";
-if(!empty($tinyMCE)) {
-	echo "<script language=\"javascript\" type=\"text/javascript\" src=\""._BASEDIR."tinymce/jscripts/tiny_mce/tiny_mce.js\"></script>
-	<script language=\"javascript\" type=\"text/javascript\"><!--";
-	$tinymessage = dbquery("SELECT message_text FROM ".TABLEPREFIX."fanfiction_messages WHERE message_name = 'tinyMCE' LIMIT 1");
-	list($tinysettings) = dbrow($tinymessage);
-	if(!empty($tinysettings) && $current != "adminarea") {
-		echo $tinysettings;
-	}
-	else {
-		echo "
-	tinyMCE.init({ 
-		theme: 'advanced',
-		height: '250',
-		language: '$language',
-		convert_urls: 'false',
-		mode: 'textareas',
-		extended_valid_elements: 'a[name|href|target|title]',
-		plugins: 'advhr,advimage,advlink,searchreplace,contextmenu,preview,fullscreen,paste".($current == "adminarea" ? ",codeprotect" : "")."',
-		theme_advanced_buttons1_add: 'fontsizeselect',
-		theme_advanced_buttons2_add: 'separator,pasteword,pastetext',
-		theme_advanced_buttons3_add_before: 'tablecontrols,separator',
-		theme_advanced_buttons3_add: 'advhr',
-		theme_advanced_toolbar_align: 'center',
-		theme_advanced_statusbar_location: 'bottom',
-		theme_advanced_path: 'false',
-		editor_deselector: 'mceNoEditor',
-";
-		if(USERUID) 
-			echo "		external_image_list_url : '".STORIESPATH."/".USERUID."/images/imagelist.js',";
-		echo "
-		theme_advanced_resizing: true,".($current == "adminarea" ? "\n\t\tentity_encoding: 'raw'" : "\n\t\tinvalid_elements: 'script,object,applet,iframe'")."
-   });
-";
-	}
-	echo "
-var tinyMCEmode = true;
-	function toogleEditorMode(id) {
-		var elm = document.getElementById(id);
+echo "<title>$titleinfo</title>";
 
-		if (tinyMCE.getInstanceById(id) == null)
-			tinyMCE.execCommand('mceAddControl', false, id);
-		else
-			tinyMCE.execCommand('mceRemoveControl', false, id);
-	}
-";
-echo " --></script>";
+// ---------- Favicon ---------
+if (file_exists(_BASEDIR."favicon.ico")) 
+{
+	echo "<link rel='icon' href='"._BASEDIR."favicon.ico' type='image/x-icon' />\n<link rel='shortcut icon' href='"._BASEDIR."favicon.ico' type='image/xicon' />\n";
 }
+ 
+//A document must not include both a “meta” element with an “http-equiv” attribute whose value is “content-type”, and a “meta” element with a “charset” attribute.
+//echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset="._CHARSET."\">";
+if (!isset($_GET['action']) || $_GET['action'] != "printable")
+{
+	echo "<script  src=\"" . _BASEDIR . "includes/javascript.js\"></script>
+<link rel=\"alternate\" type=\"application/rss+xml\" title=\"$sitename RSS Feed\" href=\"" . _BASEDIR . "rss.php\">";
+}
+
+if (!isset($_GET['action']) || $_GET['action'] != "printable")
+{
+	if (!empty($tinyMCE))
+	{
+		if($tinyMCE == 1) {
+			echo "<script src=\"" . _BASEDIR . "tinymce/jscripts/tiny_mce/tiny_mce.js\"></script>";
+			include(_BASEDIR . "tinymce/init.php");
+		}
+		else {
+			echo "<script src=\"" . _BASEDIR . "tinymce4/js/tinymce/tinymce.min.js\"></script>";
+			include(_BASEDIR . "tinymce4/init.php");		
+		}
+	}
 }
 if(isset($displayform) && $displayform == 1) {
-echo "<script language=\"javascript\" type=\"text/javascript\" src=\""._BASEDIR."includes/xmlhttp.js\"></script>";
-echo "<script language=\"javascript\" type=\"text/javascript\">
+echo "<script src=\""._BASEDIR."includes/xmlhttp.js\"></script>";
+echo "<script>
 lang = new Array( );
 
 lang['Back2Cats'] = '"._BACK2CATS."';
@@ -303,32 +304,14 @@ $x = 0;
 */
 echo "</script>";
 }
-if (isset($tokeninput) && $tokeninput == 1) {
-  echo "<script type=\"text/javascript\" src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js\"></script>";
-  echo "<script type=\"text/javascript\" src=\"tokeninput/jquery.tokeninput.js\"></script>";
-  echo "<script type=\"text/javascript\">";
-  echo "$(document).ready(function () {
-          $(\"input.autocomplete\").each(function (idx, elem) {
-            var jqElem = $(elem);
-            var tokenInputOptions = get_token_input_options(jqElem);
-            var url = jqElem.attr('autocomplete_url');
-            var dynamicUrl = jqElem.attr('autocomplete_dynamic_url');
-            if (dynamicUrl) {
-              url = eval(dynamicUrl);
-            }
-            jqElem.tokenInput(url, tokenInputOptions);
-          });
-        });";
-  echo "</script>";
-}
 if(file_exists("extra_header.php")) include_once("extra_header.php");
 if(file_exists("$skindir/extra_header.php")) include_once("$skindir/extra_header.php");
 if(!$displaycolumns) $displaycolumns = 1;
 $colwidth = floor(100/$displaycolumns);
 if(!empty($_GET['action']) && $_GET['action'] == "printable") {
-	if(file_exists("$skindir/printable.css")) echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$skindir/printable.css\">";
-	else echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"default_tpls/printable.css\">";
-	echo "<script type='text/javascript'>
+	if(file_exists("$skindir/printable.css")) echo "<link rel=\"stylesheet\"  href=\"$skindir/printable.css\">";
+	else echo "<link rel=\"stylesheet\"  href=\"default_tpls/printable.css\">";
+	echo "<script>
 <!--
 if (window.print) {
     window.print() ;  
@@ -341,8 +324,8 @@ document.body.insertAdjacentHTML('beforeEnd', WebBrowser);
 </script>";
 }
 else {
-echo "<style type=\"text/css\">
-#columncontainer { margin: 1em auto; width: auto;}
+echo "<style>
+#columncontainer { margin: 1em auto; width: auto; padding: 5%;}
 #browseblock, #memberblock { width: 100%; padding: 0; margin: 0; float: left; border: 0px solid transparent; }
 .column { float: left; width: ".($colwidth - 1)."%; }
 html>body .column { width: $colwidth%; }
@@ -350,7 +333,7 @@ html>body .column { width: $colwidth%; }
 #settingsform { margin: 0; padding: 0; border: none; }
 #settingsform FORM { width: 100%; margin: 0 10%; }
 #settingsform LABEL { float: left; display: block; width: 30%; text-align: right; padding-right: 10px; clear: left; }
-#settingsform DIV { margin: 1ex auto; clear: both;}
+#settingsform DIV { clear: both;}
 #settingsform .fieldset SPAN { float: left; display: block; width: 30%; text-align: right; padding-right: 10px; clear: left;}
 #settingsform .fieldset LABEL { float: none; width: auto; display: inline; text-align: left; clear: none; }
 #settingsform { float: left; margin: 1ex 10%; }
@@ -414,7 +397,9 @@ a.pophelp:hover span{ /*the span will display just on :hover state*/
 }
 
 </style>
-<link rel=\"stylesheet\" type=\"text/css\" href='$skindir/style.css'>";
+<link rel='stylesheet' type='text/css' href='$skindir/style.css' /> \n
+<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+";
 }
 echo "</head>";
 $headerSent = true;

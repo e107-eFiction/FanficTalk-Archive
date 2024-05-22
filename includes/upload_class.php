@@ -38,7 +38,7 @@ class file_upload {
 	var $message = array();
 	var $create_directory = true;
 	
-	function file_upload() {
+	function __construct() {
 		$this->language = "en"; // choice of en, nl, es
 		$this->rename_file = false;
 		$this->ext_string = "";
@@ -185,7 +185,7 @@ class file_upload {
 		$delete = @unlink($file); 
 		clearstatcache();
 		if (@file_exists($file)) { 
-			$filesys = eregi_replace("/","\\",$file); 
+			$filesys = str_replace("/","\\",$file); 
 			$delete = @system("del $filesys");
 			clearstatcache();
 			if (@file_exists($file)) { 

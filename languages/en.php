@@ -1,16 +1,17 @@
 <?php
-// Defines the character set for your language/location
+ 
+if(!isset($action) OR is_null($action)) $action = "";
 
-define ("_CHARSET", "ISO-8859-1");
 
 // Defines the doc type.  Most people will not need to change this.
-define ("_DOCTYPE", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">");
+define ("_DOCTYPE", "<!doctype html>");
 
 // Your alphabet list.  If you need other than single characters be sure to enclose the character entity in quotes.  For example: "&#338;"
 define ("_OTHER", "Other");
 $alphabet = array( 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', _OTHER );
 
 // General...used in many pages.
+
 
 define ("_ACTIONSUCCESSFUL", "The action was successful.");
 define ("_ACTIONCANCELLED", "The requested action was cancelled.");
@@ -48,7 +49,7 @@ define ("_CHAPTERS", "Chapters");
 define ("_CHARACTERS", "Characters");
 define ("_CHOOSECAT", "Choose a Category");
 define ("_CONFIRMDELETE", "Are you sure you want to delete this?");
-define ("_COAUTHORSEARCH", "Type in the first few letters of the person's penname.  The first ten matches will appear in a list.  Click on the person's name to select them.");
+define ("_COAUTHORSEARCH", "Type in the first few letters of the person's penname.  The first ten matches will appear in a list.  Click on the person's name to select them as a co-author.");
 define ("_DELETE", "Delete");
 define ("_DISLIKE", "dislike");
 define ("_DOWN", "down arrow");

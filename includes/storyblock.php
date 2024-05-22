@@ -90,7 +90,7 @@ if(!defined("_CHARSET")) exit( );
 	$tpl->assign("characters", ($stories['charid'] ? charlist($stories['charid']) : _NONE));
 	
 	$tpl->assign("category",  $stories['catid'] == '-1' || !$stories['catid'] ? _ORPHAN : catlist($stories['catid']));
-	$tpl->assign("completed"   , ($stories['completed'] ? Completed : Incomplete));
+	$tpl->assign("completed"   , ($stories['completed'] ? "Completed" : "Incomplete"));
 	$tpl->assign("roundrobin"   , ($stories['rr'] ?  (!empty($roundrobin) ? $roundrobin : "<img src=\"images/roundrobin.gif\" alt=\""._ROUNDROBIN."\">") : "") );
 	$tpl->assign("ratingpics"   , ratingpics($stories['rating']) );
 	$tpl->assign("reviews"   , ($reviewsallowed ? "<a href=\""._BASEDIR."reviews.php?type=ST&amp;item=".$stories['sid']."\">"._REVIEWS."</a>" : "") );

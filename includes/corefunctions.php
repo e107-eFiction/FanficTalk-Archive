@@ -567,4 +567,12 @@ function search($storyquery, $countquery, $pagelink = "search.php?", $pagetitle 
 	$tpl->gotoBlock("_ROOT");
 	return $numrows;
 }
+
+// This function replaces escaped newlines with html <br /> tags
+function fixup_newlines($string)
+{
+	$string = str_replace(array("\\r\\n", "\\n\\r", "\\r", "\\n"), "<br />", $string);
+	return $string;
+}
+
 ?>

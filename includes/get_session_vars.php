@@ -27,7 +27,7 @@ if(!defined("_CHARSET")) exit( );
 // To bridge to another program replace (or add to) this information with the bridge to your other script.  See examples in the includes/bridges/ folder.
 if (!empty($_COOKIE[$sitekey."_useruid"])) {
 	$userdata = dbassoc(dbquery("SELECT ap.*, "._UIDFIELD." as uid, "._PENNAMEFIELD." as penname, "._EMAILFIELD." as email, "._PASSWORDFIELD." as password FROM "._AUTHORTABLE." LEFT JOIN ".TABLEPREFIX."fanfiction_authorprefs as ap ON ap.uid = "._UIDFIELD." WHERE "._UIDFIELD." = '".$_COOKIE[$sitekey."_useruid"]."'"));
-	if($userdata && $userdata['level'] != -1 && $_COOKIE[$sitekey.'_salt'] == md5($userdata['email']+$userdata['password'])) {
+	if($userdata && $userdata['level'] != -1 && $_COOKIE[$sitekey.'_salt'] == md5($userdata['email'] . $userdata['password'])) {
 		define("USERUID", $userdata['uid']);
 		define("USERPENNAME", $userdata['penname']);
 		// the following line fixes missing authorpref rows
@@ -38,14 +38,14 @@ if (!empty($_COOKIE[$sitekey."_useruid"])) {
 		define("uLEVEL", $userdata['level']);
 		define("isADMIN", uLEVEL > 0 ? true : false);
 		define("isMEMBER", true);
-		if(EMPTY($_SESSION[$sitekey."_agecontsent"])) $ageconsent = $userdata['ageconsent'];
-		else $ageconsent = $_SESSION[$sitekey."_agecontsent"];
+		if(EMPTY($_SESSION[$sitekey."_ageconsent"])) $ageconsent = $userdata['ageconsent'];
+		else $ageconsent = $_SESSION[$sitekey."_ageconsent"];
 	}
 }
 if(!empty($_SESSION[$sitekey."_useruid"]) && !defined("USERUID")) {
 	$userdata = dbassoc(dbquery("SELECT ap.*, "._UIDFIELD." as uid, "._PENNAMEFIELD." as penname, "._EMAILFIELD." as email, "._PASSWORDFIELD." as password FROM "._AUTHORTABLE." LEFT JOIN ".TABLEPREFIX."fanfiction_authorprefs as ap ON ap.uid = "._UIDFIELD." WHERE "._UIDFIELD." = '".$_SESSION[$sitekey."_useruid"]."'"));
-	if($userdata && $userdata['level'] != -1 && $_SESSION[$sitekey.'_salt'] == md5($userdata['email']+$userdata['password'])) {
-		define("USERUID", $userdata['uid']);
+	if($userdata && $userdata['level'] != -1 && $_SESSION[$sitekey.'_salt'] == md5($userdata['email'] . $userdata['password'])) {
+		define("USERUID", $userdata['uid']);        
 		define("USERPENNAME", $userdata['penname']);
 		// the following line fixes missing authorpref rows
 		if(empty($userdata['userskin'] )) dbquery("INSERT INTO ".TABLEPREFIX."fanfiction_authorprefs(uid, userskin, storyindex, sortby, tinyMCE) VALUES('".$userdata['uid']."', '$defaultskin', '$displayindex', '$defaultsort', '$tinyMCE')");
@@ -55,8 +55,8 @@ if(!empty($_SESSION[$sitekey."_useruid"]) && !defined("USERUID")) {
 		define("uLEVEL", $userdata['level']);
 		define("isADMIN", uLEVEL > 0 ? true : false);
 		define("isMEMBER", true);
-		if(!isset($_SESSION[$sitekey."_agecontsent"])) $ageconsent = $userdata['ageconsent'];
-		else $ageconsent = $_SESSION[$sitekey."_agecontsent"];
+		if(!isset($_SESSION[$sitekey."_ageconsent"])) $ageconsent = $userdata['ageconsent'];
+		else $ageconsent = $_SESSION[$sitekey."_ageconsent"];
 	}
 }
 if(!defined("USERUID")) define("USERUID", 0);

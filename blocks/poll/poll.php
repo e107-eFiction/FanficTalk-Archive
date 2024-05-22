@@ -24,9 +24,10 @@ global $language;
 if(file_exists(_BASEDIR."blocks/poll/{$language}.php")) include_once(_BASEDIR."blocks/poll/{$language}.php");
 else include_once(_BASEDIR."blocks/poll/en.php");
 $content = "";
-$pollquery = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_poll WHERE poll_end IS NULL OR poll_end = '0000-00-00 00:00:00' ORDER BY poll_id DESC LIMIT 1");
+$pollopts = array();
+$pollquery = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_poll WHERE poll_end IS NULL OR poll_end = 0 ORDER BY poll_id DESC LIMIT 1");
 if($pollquery) $currentpoll = dbassoc($pollquery);
-
+ 
 if(isset($_POST['cast_vote'])) {
 	$poll = isset($_POST['poll_id']) && isNumber($_POST['poll_id']) ? $_POST['poll_id'] : false;
 	$opt = isset($_POST['opt']) && isNumber($_POST['opt']) ? $_POST['opt'] : false;

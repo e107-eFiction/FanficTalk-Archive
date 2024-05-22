@@ -34,13 +34,13 @@ dbquery("CREATE TABLE IF NOT EXISTS `".TABLEPREFIX."fanfiction_poll_votes` (
   `vote_poll` int(11) NOT NULL default '0',
   PRIMARY KEY  (`vote_id`),
   KEY `vote_user` (`vote_user`,`vote_poll`)
-) TYPE=MyISAM;") ;
-dbquery("CREATE TABLE IF NOT EXISTS `".TABLEPREFIX."fanfiction_poll` (
+) ENGINE=MyISAM;") ;
+dbquery("CREATE TABLE IF NOT EXISTS `".TABLEPREFIX. "fanfiction_poll` (
 `poll_id` INT NOT NULL AUTO_INCREMENT ,
 `poll_question` VARCHAR( 250 ) NOT NULL ,
 `poll_opts` TEXT NOT NULL ,
-`poll_start` DATETIME NOT NULL ,
-`poll_end` DATETIME NULL ,
+`poll_start` int(10) unsigned NOT NULL default '0',
+`poll_end` int(10) unsigned NOT NULL default '0',
 `poll_results` VARCHAR( 250 ) NULL ,
 PRIMARY KEY ( `poll_id` ))");
 ?>

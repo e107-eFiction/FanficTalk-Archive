@@ -28,8 +28,9 @@ if(!defined("_CHARSET")) exit( );
 
 
 function sendemail($to_name,$to_email,$from_name,$from_email,$subject,$message,$type="plain",$cc="",$bcc="") {
-
-	global $language, $smtp_host, $smtp_username, $smtp_password;
+                 
+	global $language, $smtp_host, $smtp_username, $smtp_password, $siteemail;     
+   
 	// Check for hackers and spammers and bad input
 	if(!isset($_SERVER['HTTP_USER_AGENT'])) return false;
 	$badStrings = array("Content-Type:", "MIME-Version:", "Content-Transfer-Encoding:", "bcc:", "cc:");
@@ -49,16 +50,16 @@ function sendemail($to_name,$to_email,$from_name,$from_email,$subject,$message,$
 	$subject = descript(strip_tags($subject));
 	$message = descript($message);
 	// End paranoia
-
+ 
 	// Try to determine the right $type setting
  	if(strpos($message, "<br>") || strpos($message, "</p>") || strpos($message, "<br />") || strpos($message, "<br>") || strpos($message, "<a href")) $type = "html";
 	
-	require_once(_BASEDIR."includes/phpmailer_include.php");
-	$mail = new PHPMailer( );
-	if(file_exists("languages/mailer/phpmailer.lang-".$language.".php"))
-		$mail->SetLanguage($language, "language/mailer/");
+	require_once(_BASEDIR."includes/PHPMailerAutoload.php");
+	$mail = new PHPMailer;
+	if(file_exists(_BASEDIR."languages/mailer/phpmailer.lang-".$language.".php"))
+		$mail->SetLanguage($language, _BASEDIR."languages/mailer/");
 	else 
-		$mail->SetLanguage("en", "language/mailer/");
+		$mail->SetLanguage("en", _BASEDIR."languages/mailer/");
 
 	if(!$smtp_host) {
 		$mail->IsMail( );
@@ -71,7 +72,7 @@ function sendemail($to_name,$to_email,$from_name,$from_email,$subject,$message,$
 		$mail->Password = $smtp_password;
 	}
 	$mail->CharSet = _CHARSET;
-	$mail->From = $from_email;
+	$mail->From = $siteemail;
 	$mail->FromName = $from_name;
 	$mail->AddAddress($to_email, $to_name);
 	$mail->AddReplyTo($from_email, $from_name);
@@ -99,7 +100,7 @@ function sendemail($to_name,$to_email,$from_name,$from_email,$subject,$message,$
 		$mail->ErrorInfo;
 		$mail->ClearAllRecipients();
 		$mail->ClearReplyTos();
-		return false;
+		return $mail->ErrorInfo;
 	} else {
 		$mail->ClearAllRecipients(); 
 		$mail->ClearReplyTos();

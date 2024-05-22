@@ -26,6 +26,7 @@
 		if(!defined("_LOGINCHECK")) exit( );
 		define("_BASEDIR", "");
 		include_once("config.php");
+		include(_BASEDIR . "includes/dbfunctions.php");
 		$settings = dbquery("SELECT tableprefix, maintenance, sitekey, debug FROM ".$settingsprefix."fanfiction_settings WHERE sitekey = '".$sitekey."'");
 		list($tableprefix, $maintenance, $sitekey, $debug) = dbrow($settings);
 		$tempdebug = $debug;
@@ -67,11 +68,11 @@
 		if($passwd['password'] == $encryptedpassword) {
 			if(isset($_POST['cookiecheck'])) {
 				setcookie($sitekey."_useruid",$passwd['uid'], time()+60*60*24*30, "/");
-				setcookie($sitekey."_salt", md5($passwd['email']+$encryptedpassword),  time()+60*60*24*30, "/");
+				setcookie($sitekey."_salt", md5($passwd['email'] . $encryptedpassword),  time()+60*60*24*30, "/");
 			}
 			if(!isset($_SESSION)) session_start( );
 			$_SESSION[$sitekey."_useruid"] = $passwd['uid'];
-			$_SESSION[$sitekey."_salt"] = md5($passwd['email']+$encryptedpassword);
+			$_SESSION[$sitekey."_salt"] = md5($passwd['email'] . $encryptedpassword);
 			$logincode = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_codeblocks WHERE code_type = 'login'");
 			while($code = dbassoc($logincode)) {
 				eval($code['code_text']);
@@ -93,7 +94,10 @@
 		}
 		$debug = $tempdebug;
 	}
-	else if(!isMEMBER) {
+	else {
+		require_once("header.php");
+		if(!isMEMBER) {
+		
 		$output .= "<div id=\"pagetitle\">"._MEMBERLOGIN."</div>";
 		$output .= "<div style=\"width: 250px; margin: 0 auto; text-align: center;\"><form method=\"POST\" enctype=\"multipart/form-data\" action=\"user.php?action=login".(isset($_GET['sid']) && isNumber($_GET['sid']) ? "&amp;sid=".$_GET['sid'] : "")."\">
 		<div class=\"label\" style=\"float: left;  width: 30%; text-align: right;\"><label for=\"penname\">"._PENNAME.":</label></div><INPUT type=\"text\" class=\"textbox\" name=\"penname\" id=\"penname\"><br />
@@ -107,6 +111,12 @@
 			if($link['link_access'] == 2 && !isADMIN) continue;
 			$pagelinks[$link['link_name']] = array("id" => $link['link_id'], "text" => $link['link_text'], "url" => _BASEDIR.$link['link_url'], "link" => "<a href=\"".$link['link_url']."\" title=\"".$link['link_text']."\"".($link['link_target'] ? " target=\"_blank\"" : "").($current == $link['link_name'] ? " id=\"current\"" : "").">".$link['link_text']."</a>");
 		}
-		$output .= "<div style='text-align: center;'>".$pagelinks['register']['link']." | ".$pagelinks['lostpassword']['link']."</div>";
+		$output .= "<div style='text-align: center;'>";
+		if(isset($pagelinks['register'])) {
+			$output .= $pagelinks['register']['link']." | ";
+		}
+		$output .= $pagelinks['lostpassword']['link']."</div>";
+		 
 	}
+}
 ?>

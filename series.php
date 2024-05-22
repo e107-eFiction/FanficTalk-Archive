@@ -121,7 +121,7 @@ if($add == "series" || ($action == "add" && !$add) || $action == "edit") {
 				if($logging && $admin) {
 					$seriesinfo = dbquery("SELECT title, uid FROM ".TABLEPREFIX."fanfiction_series WHERE seriesid = '$seriesid'");
 					list($title, $uid) = dbrow($seriesinfo);
-					if($uid != USERUID) dbquery("INSERT INTO ".TABLEPREFIX."fanfiction_log (`log_action`, `log_uid`, `log_ip`, `log_type`) VALUES('".escapestring(sprintf(_LOG_ADMIN_EDIT_SERIES, USERPENNAME, USERUID, $title, $seriesid))."', '".USERUID."', INET_ATON('".$_SERVER['REMOTE_ADDR']."'), 'ED')");
+					if($uid != USERUID) dbquery("INSERT INTO ".TABLEPREFIX."fanfiction_log (`log_action`, `log_uid`, `log_ip`, `log_type`, `log_timestamp`) VALUES('".escapestring(sprintf(_LOG_ADMIN_EDIT_SERIES, USERPENNAME, USERUID, $title, $seriesid))."', '".USERUID. "', INET6_ATON('".$_SERVER['REMOTE_ADDR']."'), 'ED', " . time() . ")");
 				}
 				$output = write_message(_ACTIONSUCCESSFUL."<br />"._BACK2ACCT);
 			}
@@ -139,12 +139,12 @@ if($add == "series" || ($action == "add" && !$add) || $action == "edit") {
 		}
 	}
 	else {
-	$output = "<div id=\"pagetitle\">".($action == "edit" ? _EDITSERIES : $add == "stories" ? _ADD2SERIES : _ADDSERIES)."</div>
+	$output = "<div id=\"pagetitle\">".($action == "edit" ? _EDITSERIES : ($add == "stories" ? _ADD2SERIES : _ADDSERIES))."</div>
 <form METHOD=\"POST\" style='width: 90%; margin: 0 auto;' name=\"form\" action=\"series.php?action=$action&amp;add=".(!empty($add) ? $add : "series").(!empty($seriesid) ? "&amp;seriesid=$seriesid" : "")."\">";
 	if($action == "edit" && !isset($POST['submit'])) {
 		$seriesquery = dbquery(_SERIESQUERY." AND seriesid = '$seriesid' LIMIT 1");
 		$series = dbassoc($seriesquery);
-		//$series = array_map("stripslashes", $series);
+		$series = array_map("stripslashes", $series);
 		$owner = $series['uid'];
 		$output .= "<input type=\"hidden\" name=\"seriesid\" value=\"$seriesid\">";
 	}
@@ -251,15 +251,15 @@ if($add == "stories") {
 		$output .= write_message(_ACTIONSUCCESSFUL);
 	}
 	else {
-		$output = "<div id=\"pagetitle\">".($action == "edit" ? _EDITSERIES : $add == "stories" ? _ADD2SERIES : _ADDSERIES)."</div>
+		$output = "<div id=\"pagetitle\">".($action == "edit" ? _EDITSERIES : ($add == "stories" ? _ADD2SERIES : _ADDSERIES))."</div>
 			<form METHOD=\"POST\" style='width: 90%; margin: 0 auto;' name=\"form\" action=\"series.php?action=$action&amp;add=".(!empty($add) ? $add : "series").(!empty($seriesid) ? "&amp;seriesid=$seriesid" : "")."\">";
 		$output .= "<input type=\"hidden\" name=\"seriesid\" value=\"$seriesid\">";
 		$series = dbquery("SELECT title, uid, isopen FROM ".TABLEPREFIX."fanfiction_series WHERE seriesid = '$seriesid' LIMIT 1");
 		list($title, $owner) = dbrow($series);	
 		$output .= "<div class='sectionheader'>"._SERIES.": ".stripslashes($title)."</div>";
 		if(($admin || USERUID == $owner ) && isset($_GET['stories']) && $_GET['stories'] == "others") {
-			if($let == _OTHER) $letter= "author.penname REGEXP '^[^a-z]'";
-			else $letter = "author.penname LIKE '$let%'";
+			if($let == _OTHER) $letter= _PENNAMEFIELD." REGEXP '^[^a-z]'";
+			else $letter = _PENNAMEFIELD." LIKE '$let%'";
 			$pagelink = "series.php?action=$action&amp;add=stories&amp;stories=others&amp;seriesid=$seriesid&amp;";
 			$authorlink = "<a href=\"series.php?action=$action&amp;add=stories&amp;seriesid=$seriesid&amp;stories=";
 			$countquery = _MEMBERCOUNT." WHERE ap.stories > 0".(isset($letter) ? " AND $letter" : "");

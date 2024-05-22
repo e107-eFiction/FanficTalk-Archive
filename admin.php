@@ -28,6 +28,8 @@ $disableTiny = true;
 
 include ("header.php");
 
+
+
 //make a new TemplatePower object
 if(file_exists("$skindir/default.tpl")) $tpl = new TemplatePower( "$skindir/default.tpl" );
 else $tpl = new TemplatePower("default_tpls/default.tpl");
@@ -68,13 +70,18 @@ else include_once("languages/en_admin.php");
 		if (file_exists("install"))
 			$output .= write_error(_SECURITYDELETE);
 		$adminnotices = "";
-		$countquery = dbquery("SELECT COUNT(DISTINCT chapid) FROM ".TABLEPREFIX."fanfiction_chapters WHERE validated =0");
+		$countquery = dbquery("SELECT COUNT(DISTINCT chapid) FROM ".TABLEPREFIX."fanfiction_chapters WHERE validated < 1");
 		list($count) = dbrow($countquery);
 		if($count) $adminnotices .= write_message(sprintf(_QUEUECOUNT, $count));
 		$codequery = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_codeblocks WHERE code_type = 'adminnotices'");
 		while($code = dbassoc($codequery)) {
 			eval($code['code_text']);
 		}
+
+		$output .= write_message("Actual time: ". time() );
+		$output .= write_message("Date format: " . $dateformat);
+		$output .= write_message(date("$dateformat", time())); 	
+ 
 		$output .= write_message($adminnotices);
 		$output .= write_message(_RUNNINGVERSION);
 	}	

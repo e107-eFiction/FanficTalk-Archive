@@ -51,7 +51,7 @@ if(isset($_POST['submit']) || isset($_GET['offset'])) {
 	$countquery = array();
 	$scountquery = array();	
 	if($searchtype == "fulltext") {
-		$query = "SELECT stories.*, "._PENNAMEFIELD." as penname, UNIX_TIMESTAMP(stories.date) as date, UNIX_TIMESTAMP(stories.updated) as updated FROM "._AUTHORTABLE.", ".TABLEPREFIX."fanfiction_stories as stories, ".TABLEPREFIX."fanfiction_chapters as chapter WHERE chapter.storytext LIKE '%$searchterm%' AND chapter.sid = stories.sid AND stories.uid = "._UIDFIELD;
+		$query = "SELECT stories.*, "._PENNAMEFIELD." as penname, stories.date as date, stories.updated as updated FROM "._AUTHORTABLE.", ".TABLEPREFIX."fanfiction_stories as stories, ".TABLEPREFIX."fanfiction_chapters as chapter WHERE chapter.storytext LIKE '%$searchterm%' AND chapter.sid = stories.sid AND stories.uid = "._UIDFIELD;
 		$countquery = "SELECT count(stories.sid) FROM ".TABLEPREFIX."fanfiction_stories as stories, ".TABLEPREFIX."fanfiction_chapters as chapter WHERE chapter.storytext LIKE '%$searchterm%' AND chapter.sid = stories.sid GROUP BY stories.sid";
 		$query .= " "._ORDERBY;
 		search($query, $countquery);
@@ -82,7 +82,7 @@ if(isset($_POST['submit']) || isset($_GET['offset'])) {
 			}
 			if(count($authorlist) > 0) {
 				$authors = implode(",",$authorlist);
-				$query = "SELECT stories.*, "._PENNAMEFIELD." as penname, UNIX_TIMESTAMP(stories.date) as date, UNIX_TIMESTAMP(stories.updated) as updated FROM ("._AUTHORTABLE.", ".TABLEPREFIX."fanfiction_stories as stories) LEFT JOIN ".TABLEPREFIX."fanfiction_coauthors as coauth ON coauth.sid = stories.sid WHERE "._UIDFIELD." = stories.uid AND stories.validated > 0 AND (FIND_IN_SET(stories.uid, '$authors') > 0 OR FIND_IN_SET(coauth.uid, '$authors') > 0) ";
+				$query = "SELECT stories.*, "._PENNAMEFIELD." as penname, stories.date as date, stories.updated as updated FROM ("._AUTHORTABLE.", ".TABLEPREFIX."fanfiction_stories as stories) LEFT JOIN ".TABLEPREFIX."fanfiction_coauthors as coauth ON coauth.sid = stories.sid WHERE "._UIDFIELD." = stories.uid AND stories.validated > 0 AND (FIND_IN_SET(stories.uid, '$authors') > 0 OR FIND_IN_SET(coauth.uid, '$authors') > 0) ";
 				$countquery = "SELECT COUNT(stories.sid) FROM ".TABLEPREFIX."fanfiction_stories as stories LEFT JOIN ".TABLEPREFIX."fanfiction_coauthors as coauth ON coauth.sid = stories.sid WHERE stories.validated > 0 AND (FIND_IN_SET(stories.uid, '$authors') > 0 OR FIND_IN_SET(coauth.uid, '$authors') > 0)";
 				search($query, $countquery);
 				$tpl->assign("output", $output);
@@ -265,7 +265,7 @@ else {
 		<div style=\"font-size: 8pt; text-align: right;\"><a href=\"search.php?searchtype=advanced\">"._ADVANCED."</a></div></div></form></div>";
 	}
 	else {
-		$output .= "<div id=\"pagetitle\">"._ADVANCED."</div><div>
+		$output .= "<div id=\"pagetitle\">"._ADVANCED. "</div><div>
 			<form method=\"POST\" name=\"form\" enctype=\"multipart/form-data\" action=\"search.php?searchtype=advanced\">
 			<div class=\"tblborder\" style=\"width: 90%; margin: 0 auto; padding: 10px;\">";
 		if($multiplecats) {
@@ -292,7 +292,6 @@ else {
 			$output .= "</select></div>";
 		}
 		$output .= "<div style=\"clear: both;\">&nbsp;</div>";
-		$output .= " <div style=\"text-align: center;\">"._MULTIPLESELECT."</div>";
 		$result = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_classtypes ORDER BY classtype_name");
 		while($type = dbassoc($result)) {
 			$result2 = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_classes WHERE class_type = '".$type['classtype_id']."' ORDER BY class_name");

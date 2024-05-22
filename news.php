@@ -53,7 +53,7 @@ if($nid) {
 		$insert = dbquery("DELETE FROM ".TABLEPREFIX."fanfiction_comments WHERE cid = '$cid'");
 		if($insert) dbquery("UPDATE ".TABLEPREFIX."fanfiction_news SET comments = comments - 1 WHERE nid = '$nid' LIMIT 1");
 	}
-	$newsquery = dbquery("SELECT n.*, UNIX_TIMESTAMP(n.time) as date FROM ".TABLEPREFIX."fanfiction_news as n WHERE n.nid = '$nid' LIMIT 1");
+	$newsquery = dbquery("SELECT n.*, n.time as date FROM ".TABLEPREFIX."fanfiction_news as n WHERE n.nid = '$nid' LIMIT 1");
 	$stories = dbassoc($newsquery);
 	if(file_exists("./$skindir/newsbox.tpl"))
 		$news = new TemplatePower( "./$skindir/newsbox.tpl" );
@@ -79,7 +79,7 @@ if($nid) {
 	$cquery = dbquery("SELECT COUNT(cid) FROM ".TABLEPREFIX."fanfiction_comments WHERE nid = '$nid'");
 	list($ccount) = dbrow($cquery);
 	if($ccount) {
-		$query2 = dbquery("SELECT c.*, "._PENNAMEFIELD." as penname, UNIX_TIMESTAMP(c.time) as date FROM ".TABLEPREFIX."fanfiction_comments as c LEFT JOIN "._AUTHORTABLE." ON c.uid = "._UIDFIELD." WHERE c.nid = '$nid' ORDER BY time LIMIT $offset, $itemsperpage");
+		$query2 = dbquery("SELECT c.*, "._PENNAMEFIELD." as penname, c.time as date FROM ".TABLEPREFIX."fanfiction_comments as c LEFT JOIN "._AUTHORTABLE." ON c.uid = "._UIDFIELD." WHERE c.nid = '$nid' ORDER BY time LIMIT $offset, $itemsperpage");
 		$output .= "<div class=\"sectionheader\">"._COMMENTS."</div>";
 		if(file_exists("$skindir/comments.tpl")) $c = new TemplatePower( "$skindir/comments.tpl" );
 		else $c = new TemplatePower( "default_tpls/comments.tpl" );
@@ -90,7 +90,7 @@ if($nid) {
 			$c->assign("comment", format_story($comments['comment']));
 			$c->assign("uname", $comments['penname']);
 			$c->assign("date", date("$dateformat $timeformat", $comments['date']));
-			if(isADMIN && uLevel < 4)
+			if(isADMIN && uLEVEL < 4)
 				$c->assign("adminoptions", "<div class='adminoptions'><span class='label'>"._ADMINOPTIONS.":</span> [<a href=\"news.php?action=newsstory&amp;edit=".$comments['cid']."&amp;nid=$nid\">"._EDIT."</a>] [<a href=\"news.php?action=newsstory&amp;cid=".$comments['cid']."&amp;del=1&amp;nid=$nid\">"._DELETE."</a>]</div>");
 			$c->assign("oddeven", ($count % 2 ? "odd" : "even"));
 			$count++;
@@ -121,7 +121,7 @@ else {
 	$news->prepare( );
 	$cquery = dbquery("SELECT count(nid) FROM ".TABLEPREFIX."fanfiction_news");
 	list($count) = dbrow($cquery);
-	$newsquery = dbquery("SELECT n.*, UNIX_TIMESTAMP(n.time) as date FROM ".TABLEPREFIX."fanfiction_news as n ORDER BY n.time DESC LIMIT $offset, $itemsperpage");
+	$newsquery = dbquery("SELECT n.*, n.time as date FROM ".TABLEPREFIX."fanfiction_news as n ORDER BY n.time DESC LIMIT $offset, $itemsperpage");
 	$counter = 0;
 	while($stories = dbassoc($newsquery)) {
 
@@ -137,7 +137,7 @@ else {
 		$news->assign("skindir", $skindir);
 		if($newscomments)
 			$news->assign("newscomments", "<a href=\"news.php?action=newsstory&amp;nid=".$stories['nid']."\">".$stories['comments']." "._COMMENTS."</a>");
-		if(isADMIN && uLevel < 4) 
+		if(isADMIN && uLEVEL < 4) 
 			$news->assign("adminoptions", "<a href=\"admin.php?action=news&amp;form=".$stories['nid']."\">"._EDIT."</a> | <a href=\"admin.php?action=news&amp;delete=".$stories['nid']."\">"._DELETE."</a>");
 		$news->assign("oddeven", ($counter % 2 ? "even" : "odd"));
 		$counter++;

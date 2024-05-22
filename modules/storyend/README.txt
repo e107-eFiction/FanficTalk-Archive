@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------
-// Copyright (c) 2007-2010 by Tammy Keefer
-// Story End Module developed for eFiction 3.x
-// http://efiction.hugosnebula.com/
+// Copyright (c) 2007 by Tammy Keefer
+// Also Like Module developed for eFiction 3.0
+// // http://efiction.hugosnebula.com/
 // ----------------------------------------------------------------------
 // LICENSE
 //
@@ -18,15 +18,12 @@
 // To read the license please visit http://www.gnu.org/copyleft/gpl.html
 // ----------------------------------------------------------------------
 
-This little module will let you add the following information to your story files by 
-including {storyend} in your viewstory.tpl and/or storyindex.tpl.  A default 
-storyend.tpl is included in these files. The appearance of this is controlled by the 
-storyend.tpl via the following variables:
+This little module will let you add the following variables to your storyindex.tpl
 
 {theend} -
 
 Displays "The End." or "The End...Maybe." depending on whether or not the story is marked
-complete.  This text may be changed via the languages files.
+complete.
 
 {authorcount} -
 

@@ -28,6 +28,9 @@ $tpl->assignInclude( "header", "$skindir/header.tpl" );
 $tpl->assignInclude( "footer", "$skindir/footer.tpl" );
 include(_BASEDIR."includes/pagesetup.php");
 include_once(_BASEDIR."languages/".$language."_admin.php");
+if (file_exists("languages/" . $language . ".php")) include_once("languages/" . $language . ".php");
+else include_once("languages/en.php");
+
 if(!isADMIN) accessDenied( );
 $confirm = isset($_GET['confirm']) ? $_GET['confirm'] : false;
 if($confirm == "yes") {

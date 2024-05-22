@@ -24,13 +24,23 @@ define("_SE_FAVOF", "This story is a favorite of %d members.");
 define("_SE_ALSOLIKE", "Members who liked %1\$s also liked <a href='"._BASEDIR."browse.php?type=alsolike&sid=%2\$d'>%3\$d other stories</a>.");
 define("_SE_BROWSE", "Members who liked %s also liked these stories.");
 define("_THEEND", "The End.");
-define("_THEENDMAYBE", "to be continued...");
+define("_THEENDMAYBE", "To Be Continued...");
 define("_AUTHORCOUNT", "%s is the author of %d other stories.");
-define("_AL_BROWSE", "Members Who Liked %s Also Liked");
+define("_AL_BROWSE", "Members who liked %s also liked");
 define("_SE_INSERIES", "This story is part of the series, %s.");
 define("_SE_SERIES_PREVST", "The previous story in the series is %s.");
 define("_SE_SERIES_NEXTST", "The next story in the series is %s.");
 define("_SE_SERIES_PREVSE", "The previous series of stories in this series is %s.");
 define("_SE_SERIES_NEXTSE", "The next series of stories in this series is %s.");
+
+if(!defined("_UNINSTALLWARNING")) {
+    define("_UNINSTALLWARNING", "<strong>Warning!</strong> No data will be deleted from the database!");
+}
+
+if (!defined("_STORYENDADMIN"))
+{
+    define("_STORYENDADMIN", "<strong>Module Administration</strong> Display settings ");
+}
+
 
 ?>

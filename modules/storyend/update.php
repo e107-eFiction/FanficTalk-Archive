@@ -39,7 +39,7 @@ $confirm = isset($_GET['confirm']) ? $_GET['confirm'] : false;
 include("version.php");
 list($currentVersion) = dbrow(dbquery("SELECT version FROM ".TABLEPREFIX."fanfiction_modules WHERE name = 'Story End' LIMIT 1"));
 $ver = explode(".", $currentVersion);
-if(empty($currentVersion ) || $ver[1] < 6) {
+if(empty($currentVersion ) || $ver[1] < 4) {
 if($confirm == "yes") {
 	if($ver[1] < 2) {
 		list($codeblocks) = dbrow(dbquery("SELECT COUNT(code_module) FROM ".TABLEPREFIX."fanfiction_codeblocks WHERE code_module = 'storyend'"));
@@ -47,8 +47,16 @@ if($confirm == "yes") {
 			dbquery("INSERT INTO `".TABLEPREFIX."fanfiction_codeblocks` (`code_text`, `code_type`, `code_module`) VALUES ( 'include(_BASEDIR.\"modules/storyend/storyend.php\");', 'storyindex', 'storyend')");
 			dbquery("INSERT INTO `".TABLEPREFIX."fanfiction_codeblocks` (`code_text`, `code_type`, `code_module`) VALUES ( 'include(_BASEDIR.\"modules/storyend/storyend.php\");', 'printstory', 'storyend')");
 		}
+	    dbquery("UPDATE " . TABLEPREFIX . "fanfiction_modules SET version = '1.3' WHERE name = 'Story End' LIMIT 1");
 	}
-	dbquery("UPDATE ".TABLEPREFIX."fanfiction_modules SET version = '1.6' WHERE name = 'Story End' LIMIT 1");
+	elseif ($ver[1] < 4)
+	{
+
+		$check = dbassoc(dbquery("SHOW COLUMNS FROM " . TABLEPREFIX . "fanfiction_settings LIKE 'storyend'"));
+		if (!$check) dbquery("ALTER TABLE `" . TABLEPREFIX . "fanfiction_settings` ADD `storyend` TEXT NOT NULL default ''");
+
+		dbquery("UPDATE " . TABLEPREFIX . "fanfiction_modules SET version = '1.4' WHERE name = 'Story End' LIMIT 1");
+	}
 	$output = write_message(_ACTIONSUCCESSFUL);
 }
 else if($confirm == "no") {

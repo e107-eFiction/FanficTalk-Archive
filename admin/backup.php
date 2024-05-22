@@ -6,6 +6,8 @@
 // Based on eFiction 1.1
 // Copyright (C) 2003 by Rebecca Smallwood.
 // http://efiction.sourceforge.net/
+//
+// Size fix / UTF-8 feature 2016-05-18
 // ----------------------------------------------------------------------
 // LICENSE
 //
@@ -21,7 +23,7 @@
 //
 // To read the license please visit http://www.gnu.org/copyleft/gpl.html
 // ----------------------------------------------------------------------
-
+define("_CHARSET", "utf-8");
 define("_BASEDIR", "../");
 include("../config.php");
 
@@ -40,7 +42,7 @@ include("../languages/".$language.".php");
 include("../languages/".$language."_admin.php");
 $file_name = str_replace(" ", "_", $sitename).date("m-d-Y").".sql";
 Header("Content-type: application/octet-stream");
-Header("Content-Disposition: attachment; filename='$file_name'");
+Header("Content-Disposition: attachment; filename=" . $file_name . "");
 
 session_start( );
 require_once("../includes/queries.php");
@@ -51,34 +53,32 @@ if(!isADMIN) die( );
 
 // Database backup
 function datadump ($table) {
-    $result .= "# Dump of $table \r\n";
-    $result .= "# Dump DATE : " . date("d-M-Y") ."\r\n\r\n";
+    echo "# Dump of $table \r\n";
+    echo "# Dump DATE : " . date("d-M-Y") ."\r\n\r\n";
 
     $tabledata = dbquery("SELECT * FROM $table");
 
 	while($t = dbassoc($tabledata)) {
-		$result .= "INSERT INTO ".$table." ";
+		echo "INSERT INTO ".$table." ";
 		$row = array( );
 		foreach($t AS $field => $value) {			
 			$value = escapestring($value);
-			$value = ereg_replace("\n","\\n",$value);
+			$value = str_replace("\n","\\n",$value);
 			if (isset($value)) $row[$field] = "\"$value\"";
 			else $row[$field] = "\"\"";
 		}   
-		$result .= "VALUES(".implode(", ", $row).");\r\n";
+		echo "VALUES(".implode(", ", $row).");\r\n";
 	}
-	return $result . "\r\n\r\n\r\n";
+	echo "\r\n\r\n\r\n";
 }
 
 	$alltables = dbquery("SHOW TABLES");
-	$content = "";
+
 	while ($table = dbassoc($alltables)) {
-		foreach ($table as $db => $tablename) {
-			$content .= datadump($tablename);
-		}
+			datadump(current($table));
 	}
-	echo $content;
- 	if($logging) dbquery("INSERT INTO ".TABLEPREFIX."fanfiction_log (`log_action`, `log_uid`, `log_ip`, `log_type`) VALUES('".escapestring(sprintf(_LOG_BACKUP, USERPENNAME, USERUID))."', '".USERUID."', INET_ATON('".$_SERVER['REMOTE_ADDR']."'), 'AM')");
+
+ 	if($logging) dbquery("INSERT INTO ".TABLEPREFIX."fanfiction_log (`log_action`, `log_uid`, `log_ip`, `log_type`, `log_timestamp`) VALUES('".escapestring(sprintf(_LOG_BACKUP, USERPENNAME, USERUID))."', '".USERUID. "', INET6_ATON('".$_SERVER['REMOTE_ADDR']."'), 'AM', " . time() . ")");
 	exit( );
 
 ?>

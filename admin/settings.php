@@ -86,8 +86,8 @@ if(isset($_POST['submit'])) {
 			$sitename = escapestring(descript(strip_tags($_POST['newsitename'])));
 			$slogan = escapestring(descript(strip_tags($_POST['newslogan'])));
 			$url = escapestring(descript(strip_tags($_POST['newsiteurl'])));
-			// if the http:// is missing add it.
-			if(substr($url, 0, 7) != "http://") $url = "http://".$url;
+			// if the https:// is missing add it.
+			if(substr($url, 0, 8) != "https://" && substr($url, 0, 7) != "http://") $url = "https://".$url;
 			// we also want to check for a trailing slash.
 			if(substr($url, -1, 1) == "/") $url = substr($url, 0, strlen($url) - 1);
 			$tableprefix = escapestring(descript(strip_tags($_POST['newtableprefix'])));
@@ -105,7 +105,7 @@ if(isset($_POST['submit'])) {
 		$submissionsoff = $_POST['newsubmissionsoff'] == 1 ? 1 : 0;
 		$autovalidate = $_POST['newautovalidate'] == 1 ? 1 : 0;
 		$coauthallowed = $_POST['newcoauthallowed'] == 1 ? 1 : 0;
-		$store = !empty($_POST['newstore']) ? $_POST['newstore'] == "files" ? "files" : "mysql" : $store;
+		$store = !empty($_POST['newstore']) ? ($_POST['newstore'] == "files" ? "files" : "mysql" ) : $store;
 		$storiespath = descript($_POST['newstoriespath']);
 		$minwords = isNumber($_POST['newminwords']) ? $_POST['newminwords'] : 0;
 		$maxwords = isNumber($_POST['newmaxwords']) ? $_POST['newmaxwords'] : 0;
@@ -123,7 +123,7 @@ if(isset($_POST['submit'])) {
 
 	}
 	else if($sect == "sitesettings") {
-		$tinyMCE = $_POST['newtinyMCE'] == 1 ? 1 : 0;
+		$tinyMCE = ($_POST['newtinyMCE'] == 1  OR $_POST['newtinyMCE'] == 2) ? $_POST['newtinyMCE'] : 0;
 		$allowed_tags = $_POST['newallowed_tags'];
 		$favorites = $_POST['newfavorites'] == 1 ? 1 : 0;
 		$multiplecats = $_POST['newmultiplecats'] == 1 ? 1 : 0;
@@ -178,8 +178,10 @@ if(isset($_POST['submit'])) {
 }
 	$settingsresults = dbquery("SELECT * FROM ".$settingsprefix."fanfiction_settings WHERE sitekey ='".SITEKEY."'");
 	$settings = dbassoc($settingsresults);
+ 
 	foreach($settings as $var => $val) {
-		$$var = stripslashes($val);
+		if(is_NULL($val)) $val = '';
+		$$var = stripslashes($val );
 	}
 
 	$output .= "<form method='POST' class='tblborder' style='' enctype='multipart/form-data' action='".($action == "settings" ? "admin.php?action=settings" : $_SERVER['PHP_SELF']."?step=".$_GET['step'])."&amp;sect=$sect'>";
@@ -289,9 +291,10 @@ if(isset($_POST['submit'])) {
 		$output .= "<h2>"._SITESETTINGS."</h2>
 		<table class='acp'>
 			<tr>
-				<td><label for='newtinyMCE'>"._USETINYMCE.": </label></td><td><select name='newtinyMCE'>
-				<option value='1'".($tinyMCE ? " selected" : "").">"._YES."</option>
-				<option value='0'".(!$tinyMCE ? " selected" : "").">"._NO."</option>
+				<td><label for='newtinyMCE'>"._USETINYMCE. ": </label></td><td><select name='newtinyMCE'>
+				<option value=\"2\"" . ($tinyMCE == 2 ? " selected" : "") . ">TinyMce4</option>
+				<option value=\"1\"" . ($tinyMCE == 1 ? " selected" : "") . ">TinyMce3</option>
+				<option value=\"0\"" . (!$tinyMCE ? " selected" : "") . ">" . _NO . "</option>
 				</select> <a href='#' class='pophelp'>[?]<span>"._HELP_TINYMCE." "._TINYMCENOTE."</span></a></td>
 			</tr>
 			<tr>

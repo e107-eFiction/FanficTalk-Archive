@@ -24,7 +24,7 @@
 
 if(!defined("_CHARSET")) exit( );
 
-$logtypes = array("RG" => _NEWREG, "ED" => _ADMINEDIT, "DL" => _ADMINDELETE, "VS" => _VALIDATESTORY, "LP"=> _LOSTPASSWORD, "BL" => _BADLOGIN, "RE" => "Reviews", "AM" => "Admin Maintenance", "EB" => _EDITBIO);
+$logtypes = array("RG" => _NEWREG, "ED" => _ADMINEDIT, "DL" => _ADMINDELETE, "VS" => _VALIDATESTORY, "LP"=> _LOSTPASSWORD, "BL" => _BADLOGIN, "RE" => "Reviews", "AM" => "Admin Maintenance", "EB" => "Edit Bio");
 $typequery = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_codeblocks WHERE code_type = 'logtype'");
 while($code = dbassoc($typequery)) {
 	eval($code['code_text']);
@@ -46,7 +46,7 @@ $output .= "</select></form></div>";
 $countquery = dbquery("SELECT COUNT(log_id) FROM ".TABLEPREFIX."fanfiction_log".($type ? " WHERE log_type = '$type'" : ""));
 list($count) = dbrow($countquery);
 if($count > 0) {
-	$result = dbquery("SELECT log_action, INET_NTOA(log_ip) as log_ip, UNIX_TIMESTAMP(log_timestamp) as log_timestamp FROM ".TABLEPREFIX."fanfiction_log".($type ? " WHERE log_type = '$type'" : "")." ORDER BY log_timestamp DESC LIMIT $offset, $itemsperpage");
+	$result = dbquery("SELECT log_action, INET6_NTOA(log_ip) as log_ip,  log_timestamp as log_timestamp FROM ".TABLEPREFIX."fanfiction_log".($type ? " WHERE log_type = '$type'" : "")." ORDER BY log_timestamp DESC LIMIT $offset, $itemsperpage");
 	$output .= "<table class=\"tblborder\" cellspacing=\"0\" cellpadding=\"3\" style=\"width: 90%; margin: 0 auto;\"><tr class=\"tblborder\"><th>"._ACTION."</th><th>"._IP."</th><th>"._DATE."</th></tr>";
 	while ($item = dbassoc($result)) {
 			$output .= "<tr class=\"tblborder\">

@@ -32,7 +32,9 @@ function save_blocks( $blocks ) {
 		foreach($value as $var=>$val) {
 			if($var != "name" && $var != "title" && $var != "file" && $var != "status") $blockvars[$var] = $val;
 		}
-		dbquery("UPDATE ".TABLEPREFIX."fanfiction_blocks SET block_name = '$block', block_title = '".escapestring($value['title'])."', block_file = '".$value['file']."', block_status = '".$value['status']."', block_variables =  '".(isset($blockvars) ? addslashes(serialize($blockvars)) : "")."' WHERE block_name = '$block'");
+		$tmp_title = isset($value['title']) ? escapestring($value['title']) : "";
+		$tmp_file  = isset($value['file']) ?  $value['file'] : "";
+		dbquery("UPDATE ".TABLEPREFIX."fanfiction_blocks SET block_name = '$block', block_title = '". $tmp_title."', block_file = '". $tmp_file."', block_status = '".$value['status']."', block_variables =  '".(isset($blockvars) ? addslashes(serialize($blockvars)) : "")."' WHERE block_name = '$block'");
 	}
 }
 if(isset($_GET['admin'])) $admin = $_GET['admin'];
@@ -49,13 +51,17 @@ $content = "";
 		else return _ERROR;
 		save_blocks( $blocks );
 	}
+
 	if(isset($_POST['submit']) && empty($admin)) {
 		$x = 1;
+ 
 		while(isset($_POST[$x])) {
 			// activate inactive blocks.
 			if(isset($blocks[$_POST[$x]])) {
-				$blocks[$_POST[$x]]['title'] = descript($_POST[$x."_title"]);
-				$blocks[$_POST[$x]]["status"] = $_POST[$x."_status"];
+				$tmp_title  = isset($_POST[$x . "_title"]) ? descript($_POST[$x . "_title"]) : "";
+				$tmp_status = isset($_POST[$x . "_status"]) ? descript($_POST[$x . "_status"]) : "";
+				$blocks[$_POST[$x]]['title'] = $tmp_title;
+				$blocks[$_POST[$x]]["status"] = $tmp_status;
 			}
 			$x++;	
 		}
@@ -63,11 +69,24 @@ $content = "";
 		$output .= write_message(_ACTIONSUCCESSFUL);
 	}
 // In case the skin has already overridden the block settings or we've just changed the settings.
+
 $blockquery = dbquery("SELECT * FROM ".TABLEPREFIX."fanfiction_blocks");
-while($block = dbassoc($blockquery)) {
-	$blocks[$block['block_name']] = unserialize($block['block_variables']);
+while ($block = dbassoc($blockquery))
+{
+	if ($block['block_variables'] > 0)
+	{
+		$block_vars = @unserialize($block['block_variables']);
+		if ($block_vars)
+		{
+			$blocks[$block['block_name']] = $block_vars;
+		}
+		//else
+		//{
+		//	print_r($block);
+		//}
+	}
 	$blocks[$block['block_name']]['title'] = $block['block_title'];
-	 $blocks[$block['block_name']]['file'] = $block['block_file'];
+	$blocks[$block['block_name']]['file'] = $block['block_file'];
 	$blocks[$block['block_name']]['status'] = $block['block_status'];
 }
 	unset($content);

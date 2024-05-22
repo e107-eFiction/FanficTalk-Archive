@@ -170,7 +170,7 @@ function seriesreview($thisseries) {
 	if(!isNumber($thisseries)) return;
 	$storylist = storiesInSeries($thisseries);
 	$serieslist = subseriesList($thisseries);
-$newrating = dbquery("SELECT COUNT(rating) as totalreviews FROM ".TABLEPREFIX."fanfiction_reviews 
+$newrating = dbquery("SELECT AVG(rating) as totalreviews FROM ".TABLEPREFIX."fanfiction_reviews 
 	WHERE ((item = '$thisseries' AND type = 'SE')".
 	(count($storylist) > 0 ? " OR (FIND_IN_SET(item, '".(implode(",", $storylist))."') > 0 AND type = 'ST')" : "").
 	(count($serieslist) > 0 ? " OR (FIND_IN_SET(item, '".(implode(",", $serieslist))."') > 0 AND type = 'SE')" : "").
@@ -208,7 +208,7 @@ function nl2br2($string) {
 
 // Formats the text of the story when displayed on screen.
 function format_story($text) {
-      $text = trim($text);
+      $text = trim((string)$text);
       if(strpos($text, "<br>") === false && strpos($text, "<p>") === false && strpos($text, "<br />") === false) $text = nl2br2($text);
       if(_CHARSET != "ISO-8859-1" && _CHARSET != "US-ASCII") return stripslashes($text);
       $badwordchars = array(chr(212), chr(213), chr(210), chr(211), chr(209), chr(208), chr(201), chr(145), chr(146), chr(147), chr(148), chr(151), chr(150), chr(133));
@@ -227,7 +227,7 @@ function format_email($text) {
 // Function to format a URL into a clickable link
 function format_link($text, $title = "", $target = 0) {
 	if(empty($title)) $title = $text;
-	if(strpos($text, "http://") === false) $text = "http://".$text;
+	if(strpos($text, "http://") === false && strpos($text, "https://")) $text = "https://".$text;
 	$text = "<a href='$text'".($target ? " target='_blank'" : "").">$title</a>";
 	return $text;
 }
@@ -266,14 +266,21 @@ function title_link($stories) {
 
 // Same with the author list
 function author_link($stories) {
-	if(is_array($stories['coauthors'])) {
-		$authlink[] = "<a href=\""._BASEDIR."viewuser.php?uid=".$stories['uid']."\">".$stories['penname']."</a>";
-		$coauth = dbquery("SELECT "._PENNAMEFIELD." as penname, co.uid FROM ".TABLEPREFIX."fanfiction_coauthors AS co LEFT JOIN "._AUTHORTABLE." ON co.uid = "._UIDFIELD." WHERE co.sid = '".$stories['sid']."'");
-		foreach($stories['coauthors'] AS $k => $v) {
+	
+	$authlink[] = "<a href=\"" . _BASEDIR . "viewuser.php?uid=" . $stories['uid'] . "\">" . $stories['penname'] . "</a>";
+
+	if($stories['coauthors']) {
+		
+		//not needed, why is it there?
+		//$coauth = dbquery("SELECT "._PENNAMEFIELD." as penname, co.uid FROM ".TABLEPREFIX."fanfiction_coauthors AS co 
+		//LEFT JOIN "._AUTHORTABLE." ON co.uid = "._UIDFIELD." WHERE co.sid = '".$stories['sid']."'");
+
+		foreach($stories['coauthors_array'] AS $k => $v) {
 			$authlink[] = "<a href=\""._BASEDIR."viewuser.php?uid=".$k."\">".$v."</a>";
 		}
 	}
-	return isset($authlink) ? implode(", ", $authlink) : "<a href=\""._BASEDIR."viewuser.php?uid=".$stories['uid']."\">".$stories['penname']."</a>";
+ 
+	return  implode(", ", $authlink) ;
 }
 
 // Used to truncate text (summaries in blocks for example) to a set length.  An improvement on the old version as this keeps words intact
@@ -366,7 +373,7 @@ function replace_naughty($text) {
 	$i = 0;
 	for($j = 0; $j < sizeof($words); $j++) {
 		if(strpos($words[$j], "*") === false) {
-			$replace[$i] = str_pad($words[$j]{0}, strlen($words[$j]), "*");
+			$replace[$i] = str_pad($words[$j][0], strlen($words[$j]), "*");
 			$naughtywords[$i] = '/\b('.$words[$j].'\b)|('.build_word($words[$j]).')\b/i';
 			$i++;
 		}
@@ -468,9 +475,16 @@ function ratingpics($rating) {
 			$ratingpics = ($dislike ? $dislike :"<img src=\""._BASEDIR."images/dislike.gif\" alt=\""._DISLIKED."\">");
 		else $ratingpics = "";
 	}
-	if($rating >= 0)
-		$ratingpics = "<span title=\"number of likes\"><b>".$rating."</b></span>";
+	if($ratings == "1") {
+		global $star, $halfstar;
+		if($rating > 0) {
+			for($x = 0; $x < ($rating / 2) - .5; $x++) {
+				$ratingpics .= ($star ? $star  : "<img src=\""._BASEDIR."images/star.gif\" alt=\"star\">");
+			}
+			if($rating % 2 != 0) $ratingpics .= ($halfstar ? $halfstar  : "<img src=\""._BASEDIR."images/starhalf.gif\" alt=\"half-star\">");
+		}
 		else $ratingpics = "";
+	}
 	if(!empty($ratingpics)) return "<span style='white-space: nowrap;'>$ratingpics</span>"; // the no-wrap style will keep the stars together
 	else return;
 }
@@ -518,7 +532,7 @@ function charlist($characters) {
 // Most of the pages that list stories and series use this fuction.  This handles showing the series and stories and pagination of the two together when needed
 function search($storyquery, $countquery, $pagelink = "search.php?", $pagetitle = 0) {
 	global $tpl, $new, $ratingslist, $itemsperpage, $reviewsallowed, $output, $dateformat, $current, $featured, $favorites, $retired, $ageconsent, $classtypelist, $classlist, $offset, $recentdays;
-
+     
 	$count = dbquery($countquery);
 	list($numrows) = dbrow($count);
 	if($numrows) {
@@ -534,9 +548,9 @@ function search($storyquery, $countquery, $pagelink = "search.php?", $pagetitle 
 		$tpl->gotoBlock("listings");
 		$tpl->assign("stories",  "<div class=\"sectionheader\">"._STORIES."</div>");
 		$storyquery .= " LIMIT $offset, $itemsperpage";
-		$result3 = dbquery($storyquery);
-		$count = 0;
-		while($stories = dbassoc($result3)) { 
+		$result3 = dbquery($storyquery);     
+		$count = 0;                     
+		while($stories = dbassoc($result3)) {       
 			$tpl->newBlock("storyblock");
 			include(_BASEDIR."includes/storyblock.php"); 
 		}
@@ -560,11 +574,5 @@ function search($storyquery, $countquery, $pagelink = "search.php?", $pagetitle 
 	}
 	$tpl->gotoBlock("_ROOT");
 	return $numrows;
-}
-
-// This function replaces escaped newlines with html <br /> tags
-function fixup_newlines($string) {
-    $string = str_replace(array("\\r\\n", "\\n\\r", "\\r", "\\n"), "<br />", $string);
-    return $string;
 }
 ?>

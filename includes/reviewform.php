@@ -37,11 +37,18 @@ $form .= "<br /><label for=\"review\">"._REVIEW.":</label><br />
 <textarea class=\"textbox\" name=\"review\" id=\"review\" cols=\"40\" rows=\"5\">".$review['review']."</textarea>";
 if($tinyMCE) 
 	$form .= "<div class='tinytoggle'><input type='checkbox' name='toggle' onclick=\"toogleEditorMode('review');\" checked><label for='toggle'>"._TINYMCETOGGLE."</label></div>";
-if($ratings == "2"){
-	$form .= "<div><label for=\"rating\">"._OPINION."</label> <select id=\"rating\" name=\"rating\" class=\"textbox\">
-		<option value=\"1\"".($review['rating'] == 1 ? " selected" : "").">"._LIKED."</option><option value=\"-1\"".($review['rating'] == -1 || $action == "add" ? " selected" : "").">"._NONE."</option></select></div>";
+
+if ($ratings == "3")
+{
+	$form .= "<div><label for=\"rating\">" . _OPINION . "</label> <select id=\"rating\" name=\"rating\" class=\"textbox\">
+		<option value=\"1\"" . ($review['rating'] == 1 ? " selected" : "") . ">" . _LIKED . "</option><option value=\"-1\"" . ($review['rating'] == -1 || $action == "add" ? " selected" : "") . ">" . _NONE . "</option></select></div>";
+
 }
-if($ratings == "1") {
+elseif($ratings == "2"){
+	$form .= "<div><label for=\"rating\">"._OPINION."</label> <select id=\"rating\" name=\"rating\" class=\"textbox\">
+		<option value=\"1\"".($review['rating'] == 1 ? " selected" : "").">"._LIKED."</option><option value=\"0\"".($review['reviewid'] && !$review['rating'] ? " selected" : "").">"._DISLIKED."</option><option value=\"-1\"".($review['rating'] == -1 || $action == "add" ? " selected" : "").">"._NONE."</option></select></div>";
+}
+elseif($ratings == "1") {
 	$form .= "<div><label for=\"rating\">"._REVIEWRATING.":</label> <select name=\"rating\">";
 	for($x=10; $x > 0; $x--) {
 		$form .= "<option value=\"$x\"".($review['rating'] == $x ? " selected" : "").">$x</option>";

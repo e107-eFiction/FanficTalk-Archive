@@ -269,7 +269,7 @@ function author_link($stories) {
 	
 	$authlink[] = "<a href=\"" . _BASEDIR . "viewuser.php?uid=" . $stories['uid'] . "\">" . $stories['penname'] . "</a>";
 
-	if($stories['coauthors']) {
+	if($stories['coauthors'] && $stories['coauthors_array'])  {
 		
 		//not needed, why is it there?
 		//$coauth = dbquery("SELECT "._PENNAMEFIELD." as penname, co.uid FROM ".TABLEPREFIX."fanfiction_coauthors AS co 

@@ -8,3 +8,4 @@ error_log
 includes/error_log
 
 .htaccess
+languages/sk.php

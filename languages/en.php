@@ -65,6 +65,7 @@ define ("_HALFSTAR", "half-star");
 define ("_HIDE", "Hide");
 define ("_JAVASCRIPTOFF", "You must have javascript enabled for this form to work properly."); // Modified for version 3.0
 define ("_LIKE", "like");
+if(!defined("_LIKES_NUMBER")) define("_LIKES_NUMBER", "Number of Likes");  
 define ("_LOGIN", "Log In");
 define ("_PLEASELOGIN", "Please login to access this feature.");
 define ("_MEMBER", "Member");
